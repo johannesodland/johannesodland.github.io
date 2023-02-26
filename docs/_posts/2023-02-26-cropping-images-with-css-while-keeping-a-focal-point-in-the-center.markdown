@@ -384,7 +384,7 @@ then a value of 100% will resolve to a used value of -100px.**
 You can read more about percentages on [MDN][regarding-percentages].
 
 <figure>
-    <img src="/assets/image-cropping/percentage-values.png" />
+    <img src="/assets/image-cropping/percentage-values.png" width="1000" height="250"/>
     <figcaption>
         Percentage values in `object-position` are relative to the difference between sizes of the container and the scaled image. 
         When using `object-fit: cover` a value of 100% for `object-position` will resolve to a negative value as the image is wider than the container.
@@ -425,6 +425,9 @@ Let's focus on the horizontal dimension and break down the calculation into two 
             The second part shows the container as a black outline. 
             An arrow that is half the width of the image is pointing to the left. 
             The image below is now shifted this amount to the left so that the focal point marked with a yellow circle ends up in the center of the container."
+        width="1000"
+        height="600"
+        style="width: 100%; height: auto;"
     />
     <figcaption>
         <small>Illustration: Created with the assistance of DALL·E 2</small>
