@@ -388,6 +388,7 @@ You can read more about percentages on [MDN][regarding-percentages].
         src="/assets/image-cropping/percentage-values.jpg" 
         width="1000" 
         height="600"
+        style="width: 100%; height: auto;"
         alt="An illustration that shows a box with a black outline. 
             An image is sized to fit the box while keeping the aspect ratio. 
             The image is wider than the box and is protruding on the left side. 
