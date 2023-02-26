@@ -451,7 +451,8 @@ The amount we need to move can be calculated as `0.5 * var(--container-width)`:
     <div class="wrapper">
         <div class="container">
             <img
-                src="/assets/image-cropping/fp-example.jpg"    
+                src="/assets/image-cropping/fp-example.jpg"
+                alt="A horizontal crop of one of the example images. {{imagealt2}}"
             />
         </div>
     </div>
@@ -540,7 +541,8 @@ Now we can subtract the resulting value from the value from the previous step to
 <div class="wrapper">
     <div class="container">
         <img
-            src="/assets/image-cropping/fp-example.jpg"    
+            src="/assets/image-cropping/fp-example.jpg"
+            alt="A horizontal crop of one of the example images. {{imagealt2}}"
         />
     </div>
 </div>
