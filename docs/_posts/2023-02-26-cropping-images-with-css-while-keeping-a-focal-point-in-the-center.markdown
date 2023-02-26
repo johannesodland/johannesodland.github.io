@@ -384,7 +384,15 @@ then a value of 100% will resolve to a used value of -100px.**
 You can read more about percentages on [MDN][regarding-percentages].
 
 <figure>
-    <img src="/assets/image-cropping/percentage-values.jpg" width="1000" height="250"/>
+    <img 
+        src="/assets/image-cropping/percentage-values.jpg" 
+        width="1000" 
+        height="600"
+        alt="An illustration that shows a box with a black outline. 
+            An image is sized to fit the box while keeping the aspect ratio. 
+            The image is wider than the box and is protruding on the left side. 
+            The protruding part of the image is marked with the text 100%."
+        />
     <figcaption>
         Percentage values in `object-position` are relative to the difference between sizes of the container and the scaled image. 
         When using `object-fit: cover` a value of 100% for `object-position` will resolve to a negative value as the image is wider than the container.
