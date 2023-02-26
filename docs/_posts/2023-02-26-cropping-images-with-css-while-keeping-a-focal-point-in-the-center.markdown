@@ -67,21 +67,21 @@ I've tried to describe all steps thoroughly, but if you prefer you can <a href="
     <div class="grid">
         <div class="container">
             <img
-                src="/assets/image-cropping/focus-point-resize.jpg"
+                src="/assets/image-cropping/focus-point-resize-compressed.jpg"
                 loading="lazy"
                 alt="A horizontally cropped image. {{imagealt1}}"
             />
         </div>
         <div class="container">
             <img
-                src="/assets/image-cropping/focus-point-resize.jpg"
+                src="/assets/image-cropping/focus-point-resize-compressed.jpg"
                 loading="lazy"
                 alt="A squarely cropped image.  {{imagealt1}}"
             />
         </div>
         <div class="container">
             <img
-                src="/assets/image-cropping/focus-point-resize.jpg"
+                src="/assets/image-cropping/focus-point-resize-compressed.jpg"
                 loading="lazy"
                 alt="A vertically cropped image.  {{imagealt1}}"
             />
@@ -170,7 +170,7 @@ This is not exactly what we want, but it is a step in the right direction.
 
 <figure>
 <img
-    src="/assets/image-cropping/nordlys.png"
+    src="/assets/image-cropping/nordlys.jpg"
     loading="lazy"
     style="width: 100%; aspect-ratio: 3 / 1;"
     alt="An image stretched into a 3:1 aspect ratio. {{imagealt2}}"
@@ -189,7 +189,7 @@ When we use the `cover` value, the image is scaled to fill the container while p
 
 <figure>
 <img 
-    src="/assets/image-cropping/nordlys.png" 
+    src="/assets/image-cropping/nordlys.jpg" 
     loading="lazy" 
     style="width: 100%; aspect-ratio: 3 / 1; object-fit: cover;" 
     alt="An image fitted into a 3:1 aspect ratio while maintaining the aspect ratio. 
@@ -226,7 +226,7 @@ For our example a value of `50% 62%` seems to give suitable results:
 
 <figure>
 <img 
-    src="/assets/image-cropping/nordlys.png" 
+    src="/assets/image-cropping/nordlys.jpg" 
     loading="lazy" 
     style="
         width: 100%; 
@@ -266,7 +266,7 @@ and explore a better method of calculating the `object-position` so that the foc
 
 <figure>
 <img 
-    src="/assets/image-cropping/nordlys.png" 
+    src="/assets/image-cropping/nordlys.jpg" 
     loading="lazy" 
     style="
         --crop-focus-x: 0.6;
@@ -384,7 +384,7 @@ then a value of 100% will resolve to a used value of -100px.**
 You can read more about percentages on [MDN][regarding-percentages].
 
 <figure>
-    <img src="/assets/image-cropping/percentage-values.png" width="1000" height="250"/>
+    <img src="/assets/image-cropping/percentage-values.jpg" width="1000" height="250"/>
     <figcaption>
         Percentage values in `object-position` are relative to the difference between sizes of the container and the scaled image. 
         When using `object-fit: cover` a value of 100% for `object-position` will resolve to a negative value as the image is wider than the container.
@@ -417,7 +417,7 @@ Let's focus on the horizontal dimension and break down the calculation into two 
 
 <figure>
     <img 
-        src="/assets/image-cropping/steps.png"
+        src="/assets/image-cropping/steps.jpg"
         alt="Illustration in two parts. 
             The first part shows the container as a black outline. 
             An arrow that is half the width of the container is pointing to the right. 
@@ -443,7 +443,7 @@ The amount we need to move can be calculated as `0.5 * var(--container-width)`:
     <div class="wrapper">
         <div class="container">
             <img
-                src="/assets/image-cropping/fp-example.png"    
+                src="/assets/image-cropping/fp-example.jpg"    
             />
         </div>
     </div>
@@ -532,7 +532,7 @@ Now we can subtract the resulting value from the value from the previous step to
 <div class="wrapper">
     <div class="container">
         <img
-            src="/assets/image-cropping/fp-example.png"    
+            src="/assets/image-cropping/fp-example.jpg"    
         />
     </div>
 </div>
@@ -755,28 +755,28 @@ img {
     <div class="grid">
         <div class="container">
             <img
-                src="/assets/image-cropping/focus-point-resize.jpg"
+                src="/assets/image-cropping/focus-point-resize-compressed.jpg"
                 loading="lazy"
                 alt="A horizontally cropped image. {{imagealt1}}"
             />
         </div>
         <div class="container">
             <img
-                src="/assets/image-cropping/focus-point-resize.jpg"
+                src="/assets/image-cropping/focus-point-resize-compressed.jpg"
                 loading="lazy"
                 alt="A squarely cropped image.  {{imagealt1}}"
             />
         </div>
         <div class="container">
             <img
-                src="/assets/image-cropping/focus-point-resize.jpg"
+                src="/assets/image-cropping/focus-point-resize-compressed.jpg"
                 loading="lazy"
                 alt="A vertically cropped image.  {{imagealt1}}"
             />
         </div>
         <div class="container">
             <img
-                src="/assets/image-cropping/focus-point-resize.jpg"
+                src="/assets/image-cropping/focus-point-resize-compressed.jpg"
                 loading="lazy"
                 alt="A vertically cropped image.  {{imagealt1}}"
             />
@@ -871,7 +871,7 @@ img {
     <div class="wrapper">
         <div class="container">
             <img
-                src="/assets/image-cropping/focus-point-resize.jpg"
+                src="/assets/image-cropping/focus-point-resize-compressed.jpg"
                 loading="lazy"
                 alt="alt"
             />
