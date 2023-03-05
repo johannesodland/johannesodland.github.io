@@ -127,7 +127,7 @@ I've tried to describe all steps thoroughly, but if you prefer you can <a href="
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: clamp(100%, calc(0.5 * var(--container-width) - var(--crop-focus-x) * var(--image-width)), 0%) clamp(100%, calc(0.5 * var(--container-height) - var(--crop-focus-y) * var(--image-height)), 0%);
+            object-position: clamp(100%, 0.5 * var(--container-width) - var(--crop-focus-x) * var(--image-width), 0%) clamp(100%, 0.5 * var(--container-height) - var(--crop-focus-y) * var(--image-height), 0%);
         }
     </style>
     <figcaption>
@@ -713,8 +713,8 @@ By clamping `object-position` between `100%` to `0%` we make sure the edges of t
 
 {% highlight css %}
 object-position:
-    clamp(100%, calc(0.5 * var(--container-width) - var(--crop-focus-x) * var(--image-width)), 0%)
-    clamp(100%, calc(0.5 * var(--container-height) - var(--crop-focus-y) * var(--image-height)), 0%);
+    clamp(100%, 0.5 * var(--container-width) - var(--crop-focus-x) * var(--image-width), 0%)
+    clamp(100%, 0.5 * var(--container-height) - var(--crop-focus-y) * var(--image-height), 0%);
 {% endhighlight %}
 
 **It's worth noting that we clamp from `100%` to `0%` and not the other way around. 
@@ -757,8 +757,8 @@ img {
     --image-width: calc(var(--container-width) - 100%);
     --image-height: calc(var(--container-height) - 100%);
     object-position:
-        clamp(100%, calc(0.5 * var(--container-width) - var(--crop-focus-x) * var(--image-width)), 0%)
-        clamp(100%, calc(0.5 * var(--container-height) - var(--crop-focus-y) * var(--image-height)), 0%);
+        clamp(100%, 0.5 * var(--container-width) - var(--crop-focus-x) * var(--image-width), 0%)
+        clamp(100%, 0.5 * var(--container-height) - var(--crop-focus-y) * var(--image-height), 0%);
     }
 {% endhighlight %}
 
@@ -836,7 +836,7 @@ img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: clamp(100%, calc(0.5 * var(--container-width) - var(--crop-focus-x) * var(--image-width)), 0%) clamp(100%, calc(0.5 * var(--container-height) - var(--crop-focus-y) * var(--image-height)), 0%);
+            object-position: clamp(100%, 0.5 * var(--container-width) - var(--crop-focus-x) * var(--image-width), 0%) clamp(100%, 0.5 * var(--container-height) - var(--crop-focus-y) * var(--image-height), 0%);
         }
     </style>
     <figcaption>
@@ -873,8 +873,8 @@ img {
     --image-width: calc(var(--container-width) - 100%);
     --image-height: calc(var(--container-height) - 100%);
     object-position:
-        clamp(100%, calc(0.5 * var(--container-width) - var(--crop-focus-x) * var(--image-width)), 0%)
-        clamp(100%, calc(0.5 * var(--container-height) - var(--crop-focus-y) * var(--image-height)), 0%);
+        clamp(100%, 0.5 * var(--container-width) - var(--crop-focus-x) * var(--image-width), 0%)
+        clamp(100%, 0.5 * var(--container-height) - var(--crop-focus-y) * var(--image-height), 0%);
 }
 {% endhighlight %}
 
@@ -922,8 +922,8 @@ img {
             height: 100%;
             object-fit: cover;
             object-position: 
-                clamp(100%, calc(0.5 * var(--container-width) - var(--crop-focus-x) * var(--image-width)), 0%) 
-                clamp(100%, calc(0.5 * var(--container-height) - var(--crop-focus-y) * var(--image-height)), 0%);
+                clamp(100%, 0.5 * var(--container-width) - var(--crop-focus-x) * var(--image-width), 0%) 
+                clamp(100%, 0.5 * var(--container-height) - var(--crop-focus-y) * var(--image-height), 0%);
         }
     </style>
     <figcaption>
