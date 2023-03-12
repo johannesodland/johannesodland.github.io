@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Cropping images with CSS while keeping a focal point in the center"
+title:  "Cropping Images with CSS While Keeping a Focal Point in the Center"
 date:   2023-02-26 16:00:00 +0100
 categories:
 author: Johannes Odland, rephrased with the help of ChatGPT
@@ -42,6 +42,17 @@ It is observing the house, holding something that can be perceived as a knife." 
     }
     .language-plaintext {
         white-space: nowrap;
+    }
+    .has-suport-info {
+        display: block;
+        background: floralwhite;
+        border: 2px solid lemonchiffon;
+        padding: 10px;
+    }
+    @supports selector(:has(p)) {
+        .has-suport-info {
+            display: none;
+        }
     }
 </style>
 
@@ -320,6 +331,7 @@ Below is an interactive demo where you can choose between the three values for `
             <label><input type="radio" name="focus-point-x" value="25" checked/> 0.25</label>
             <label><input type="radio" name="focus-point-x" value="50"/> 0.50</label>
             <label><input type="radio" name="focus-point-x" value="75"/> 0.75</label>
+            <div class="has-suport-info">&#9888; This demo requires support for the `:has()` relational pseudo-class.</div>
         </fieldset>
         <img
             src="/assets/image-cropping/percentages.png"
@@ -467,6 +479,7 @@ The amount we need to move can be calculated as `0.5 * var(--container-width)`:
             <input type="radio" name="left-edge-move" value="to-center" checked>
             Step 1
         </label>
+        <div class="has-suport-info">&#9888; This demo requires support for the `:has()` relational pseudo-class.</div>
     </fieldset>
 <style>
     #left-edge-to-center {
@@ -561,6 +574,7 @@ Now we can subtract the resulting value from the value from the previous step to
             <input type="radio" name="focus-point-move" value="to-focus-point" checked>
             Step 2
         </label>
+        <div class="has-suport-info">&#9888; This demo requires support for the `:has()` relational pseudo-class.</div>
     </fieldset>
 <style>
     #focus-to-center {
@@ -636,6 +650,7 @@ we can see that the focus point centered in the container:
             <label><input type="radio" name="focus-x-2" value="25" checked/> 0.25</label>
             <label><input type="radio" name="focus-x-2" value="50"/> 0.50</label>
             <label><input type="radio" name="focus-x-2" value="75"/> 0.75</label>
+            <div class="has-suport-info">&#9888; This demo requires support for the `:has()` relational pseudo-class.</div>
         </fieldset>
         <img
             src="/assets/image-cropping/percentages.png"
