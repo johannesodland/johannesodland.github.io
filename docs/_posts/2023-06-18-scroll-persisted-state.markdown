@@ -43,6 +43,7 @@ and transitions to green when scrolled to the end.
                 height: 30px;
                 border-radius: 15px;
                 overflow-x: scroll;
+                scrollbar-width: none;
                 background: red;
                 margin: 10px;
                 line-height: 20px;
@@ -63,6 +64,9 @@ and transitions to green when scrolled to the end.
                 &::after {
                     content: 'ON';
                     background: green;
+                }
+                &::-webkit-scrollbar {
+                    display: none;
                 }
             }
         }
@@ -118,6 +122,7 @@ Nevertheless, for more complex scenarios, [space-toggles][space-toggle] or [cycl
                 height: 30px;
                 border-radius: 15px;
                 overflow-x: scroll;
+                scrollbar-width: none;
                 background: red;
                 margin: 10px;
                 line-height: 20px;
@@ -142,6 +147,9 @@ Nevertheless, for more complex scenarios, [space-toggles][space-toggle] or [cycl
                 }
                 &:hover::after {
                     scroll-snap-align: end;
+                }
+                &::-webkit-scrollbar {
+                    display: none;
                 }
             }
         }
@@ -196,6 +204,7 @@ either by using [space-toggles][space-toggle] or setting properties directly in 
                 height: 30px;
                 border-radius: 15px;
                 overflow-x: scroll;
+                scrollbar-width: none;
                 background: red;
                 margin: 10px;
                 line-height: 20px;
@@ -221,6 +230,9 @@ either by using [space-toggles][space-toggle] or setting properties directly in 
                 }
                 &:hover::after {
                     scroll-snap-align: end;
+                }
+                &::-webkit-scrollbar {
+                    display: none;
                 }
             }
             .use-state {
@@ -317,6 +329,7 @@ This method allows us to manipulate the state externally, outside the confines o
                 height: 30px;
                 border-radius: 15px;
                 overflow-x: scroll;
+                scrollbar-width: none;
                 background: red;
                 margin: 10px;
                 line-height: 20px;
@@ -341,6 +354,9 @@ This method allows us to manipulate the state externally, outside the confines o
                     background: green;
                     view-timeline: --state-1 inline;
                     scroll-snap-align: var(--write-state-on) end;
+                }
+                &::-webkit-scrollbar {
+                    display: none;
                 }
             }
             .on, .off {
@@ -414,6 +430,7 @@ we can trigger the state change from another scroll-driven animation.
                 height: 30px;
                 border-radius: 15px;
                 overflow-x: scroll;
+                scrollbar-width: none;
                 background: red;
                 margin: 10px;
                 line-height: 20px;
@@ -438,6 +455,9 @@ we can trigger the state change from another scroll-driven animation.
                     background: green;
                     view-timeline: --state-1 inline;
                     scroll-snap-align: var(--write-state-on) end;
+                }
+                &::-webkit-scrollbar {
+                    display: none;
                 }
             }
             .read-and-write-state {
