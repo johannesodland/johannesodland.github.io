@@ -5,6 +5,19 @@ date:   2023-06-18 23:00:00 +0200
 categories: state scroll-snap scroll-driven-animations
 author: Johannes Odland, rephrased with the help of ChatGPT
 ---
+<style>
+    .has-support-info {
+        display: block;
+        background: floralwhite;
+        border: 2px solid lemonchiffon;
+        padding: 10px;
+    }
+    @supports (animation-timeline: view()) {
+        .has-support-info {
+            display: none;
+        }
+    }
+</style>
 While working on another article, I stumbled upon a fascinating discovery:
 a way to manipulate and read state solely through style rules using HTML and CSS.
 
@@ -111,6 +124,7 @@ For illustrative purposes, in our example, we trigger scroll-snap on hover.
 Nevertheless, for more complex scenarios, [space-toggles][space-toggle] or [cyclic-toggles][cyclic-toggles] can come in handy.
 <figure id="example-2">
     <div class="state"></div>
+    <div class="has-support-info">&#9888; This demo requires support for nesting and scroll-driven animations. Try it out in Chrome Canary.</div>
     <style>
         @scope {
             *, *::before, *::after {
@@ -185,6 +199,7 @@ either by using [space-toggles][space-toggle] or setting properties directly in 
     <div class="use-state">
         <div class="state"></div>
     </div>
+    <div class="has-support-info">&#9888; This demo requires support for nesting and scroll-driven animations. Try it out in Chrome Canary.</div>
     <style>
         @scope {
             *, *::before, *::after {
@@ -310,6 +325,7 @@ This method allows us to manipulate the state externally, outside the confines o
         <div class="on"><span>ON</span></div>
         <div class="off"><span>OFF</span></div>
     </div>
+    <div class="has-support-info">&#9888; This demo requires support for nesting and scroll-driven animations. Try it out in Chrome Canary.</div>
     <style>
         @scope {
             *, *::before, *::after {
@@ -404,6 +420,7 @@ we can trigger the state change from another scroll-driven animation.
     <div class="read-and-write-state">
         <div class="state"></div>
     </div>
+    <div class="has-support-info">&#9888; This demo requires support for nesting and scroll-driven animations. Try it out in Chrome Canary.</div>
     <style>
         @scope {
             *, *::before, *::after {
