@@ -422,8 +422,12 @@ This method allows us to manipulate the state externally, outside the confines o
 
 
 ## Trigger a state change using another scroll-timeline
-Now that we can trigger the state change from outside the state element itself, 
-we can trigger the state change from another scroll-driven animation.
+Now that we've delved into the depths of this outrageous hack and demonstrated that it's possible to trigger the state change from outside the state element itself, 
+we can even go one step further. 
+
+Yes, brace yourself — we can trigger this state change from another scroll-driven animation.
+In theory, we _could_ use this to [trigger a scroll-based animation once][scroll-animation-once] — tempting, right?
+But remember: just because you can do something, doesn't mean you should.
 
 <figure id="example-4">
     <div class="read-and-write-state">
@@ -554,3 +558,4 @@ I'm not sure this is a good idea, but I think it's a neat discovery.
 [scroll-triggered-animations]: https://www.bram.us/2023/06/15/scroll-triggered-animations/
 [css-toggles-proposal]: https://github.com/w3c/csswg-drafts/issues/6991
 [css-toggles-draft]: https://tabatkins.github.io/css-toggle/#terminology
+[scroll-animation-once]: https://github.com/w3c/csswg-drafts/issues/7478
