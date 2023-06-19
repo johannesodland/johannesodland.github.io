@@ -52,8 +52,12 @@ Specifically, the scroll container is in one state when scrolled to the start, a
 Visually, the state element takes on a red background color when the container is scrolled to the start, 
 and transitions to green when scrolled to the end.
 
+_Note: Here, our scroll position holds a binary state - at the start or at the end. 
+But with the use of multiple snap points, it's possible to switch between more than two values_
+
 <figure id="example-1">
     <div class="state"></div>
+    <div class="has-support-info">&#9888; This demo requires support for nesting and scroll-driven animations. Try it out in Chrome Canary.</div>
     <style>
         @scope {
             *, *::before, *::after {
@@ -203,6 +207,11 @@ and with the use of `timeline-scope`, we can even elevate it to the root element
 I'll use [cyclic toggles][cyclic-toggles] to read the state as I think that's neat, 
 but there are many ways to read out the state, 
 either by using [space-toggles][space-toggle] or setting properties directly in the animation keyframes. 
+
+_Note: Just as we can use multiple snap points to switch between more than two values, 
+cyclic toggles aren't restricted to binary states. 
+As [pointed out by Roman](https://front-end.social/@kizu/110567336212936745), 
+they can play really well when we have multiple possible values._
 
 <figure id="example-3">
     <div class="use-state">
