@@ -21,14 +21,23 @@ author: Johannes Odland, rephrased with the help of ChatGPT
 While working on another article, I stumbled upon a fascinating discovery:
 a way to manipulate and read state solely through style rules using HTML and CSS.
 
-The hack builds upon one realization: Scroll containers can hold state in their scroll position.
+This admittedly outrageous hack builds upon one realization: Scroll containers can hold state in their scroll position.
 This state can be set using scroll-snap, and read using scroll-driven animations.
 
 **We can use a single div with style rules to write, store and read a state.**
 
-Currently, this technique is exclusive to Chrome Canary or other browsers that support scroll-driven animation.
-Also, it's worth mentioning that its implications on accessibility or performance haven't been thoroughly assessed. 
-Therefore, while it makes for an intriguing play around, it's not quite production-ready just yet.
+**⚠️ Important Note:** This technique I'm about to describe is an experimental, admittedly outrageous hack. 
+While it's an intriguing concept and might open up new possibilities for CSS and HTML, 
+it's not recommended to use this in a production environment.
+To stress this point: this is a hack. It might never be "production-ready" as we typically understand it.
+
+It's worth noting that this technique — and the examples provided below — currently work exclusively in Chrome Canary 
+and other browsers that support scroll-driven animations.
+Also, it's important to acknowledge that the implications of this technique on accessibility and performance have not been investigated.
+Please treat it as a fascinating discovery and a basis for further exploration rather than a ready-to-go solution.
+
+**Ideally, we'd have a formalized feature akin to the proposed CSS Toggles,
+as detailed in this [GitHub issue][css-toggles-proposal] and [unofficial proposal draft][css-toggles-draft] by Tab Atkins Jr. and Miriam E. Suzanne.**
 
 Let's dive into the details.
 
@@ -543,3 +552,5 @@ I'm not sure this is a good idea, but I think it's a neat discovery.
 [cyclic-toggles]: https://kizu.dev/cyclic-toggles/
 [space-toggle]: https://lea.verou.me/2020/10/the-var-space-hack-to-toggle-multiple-values-with-one-custom-property/
 [scroll-triggered-animations]: https://www.bram.us/2023/06/15/scroll-triggered-animations/
+[css-toggles-proposal]: https://github.com/w3c/csswg-drafts/issues/6991
+[css-toggles-draft]: https://tabatkins.github.io/css-toggle/#terminology
