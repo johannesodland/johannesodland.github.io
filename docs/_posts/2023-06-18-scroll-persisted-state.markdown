@@ -213,7 +213,7 @@ they can play really well when we have multiple possible values._
     <div class="use-state">
         <div class="state"></div>
     </div>
-    <div class="has-support-info">&#9888; This demo requires support for nesting and scroll-driven animations. Try it out in Chrome Canary.</div>
+    <div class="has-support-info">&#9888; This demo requires support scroll-driven animations with timeline-scope. Try it out in Chrome Canary.</div>
     <style>
         *, *::before, *::after {
             box-sizing: border-box;
@@ -338,7 +338,7 @@ This method allows us to manipulate the state externally, outside the confines o
         <div class="on"><span>ON</span></div>
         <div class="off"><span>OFF</span></div>
     </div>
-    <div class="has-support-info">&#9888; This demo requires support for nesting and scroll-driven animations. Try it out in Chrome Canary.</div>
+    <div class="has-support-info">&#9888; This demo requires support scroll-driven animations with timeline-scope. Try it out in Chrome Canary.</div>
     <style>
         *, *::before, *::after {
             box-sizing: border-box;
@@ -437,7 +437,7 @@ But remember: just because you can do something, doesn't mean you should.
     <div class="read-and-write-state">
         <div class="state"></div>
     </div>
-    <div class="has-support-info">&#9888; This demo requires support for nesting and scroll-driven animations. Try it out in Chrome Canary.</div>
+    <div class="has-support-info">&#9888; This demo requires support scroll-driven animations with timeline-scope. Try it out in Chrome Canary.</div>
     <style>
         *, *::before, *::after {
             box-sizing: border-box;
