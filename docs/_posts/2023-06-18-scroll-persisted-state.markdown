@@ -12,7 +12,7 @@ author: Johannes Odland, rephrased with the help of ChatGPT
         border: 2px solid lemonchiffon;
         padding: 10px;
     }
-    @supports (animation-timeline: view()) {
+    @supports (animation-timeline: view()) and (timeline-scope: --some-ident) {
         .has-support-info {
             display: none;
         }
@@ -57,44 +57,42 @@ But with the use of multiple snap points, it's possible to switch between more t
 
 <figure id="example-1">
     <div class="state"></div>
-    <div class="has-support-info">&#9888; This demo requires support for nesting and scroll-driven animations. Try it out in Chrome Canary.</div>
     <style>
-        @scope {
-            *, *::before, *::after {
-                box-sizing: border-box;
-            }
-            .state {
-                display: flex;
-                width: 80px;
-                height: 30px;
-                border-radius: 15px;
-                overflow-x: scroll;
-                scrollbar-width: none;
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        #example-1 .state {
+            display: flex;
+            width: 80px;
+            height: 30px;
+            border-radius: 15px;
+            overflow-x: scroll;
+            scrollbar-width: none;
+            background: red;
+            margin: 10px;
+            line-height: 20px;
+            color: white;
+        }
+        #example-1 .state::before, 
+        #example-1 .state::after {
+                content: '';
+                display: block;
+                flex: none;
+                width: 100%;
+                height: 100%;
+                padding: 5px 10px;
+                text-align: center;
+        }
+        #example-1 .state::before {
+                content: 'Scroll →';
                 background: red;
-                margin: 10px;
-                line-height: 20px;
-                color: white;
-                &::before, &::after {
-                    content: '';
-                    display: block;
-                    flex: none;
-                    width: 100%;
-                    height: 100%;
-                    padding: 5px 10px;
-                    text-align: center;
-                }
-                &::before {
-                    content: 'Scroll →';
-                    background: red;
-                }
-                &::after {
-                    content: 'ON';
-                    background: green;
-                }
-                &::-webkit-scrollbar {
-                    display: none;
-                }
-            }
+        }
+        #example-1 .state::after {
+                content: 'ON';
+                background: green;
+        }
+        #example-1 .state::-webkit-scrollbar {
+                display: none;
         }
     </style>
     <figcaption>
@@ -137,48 +135,46 @@ For illustrative purposes, in our example, we trigger scroll-snap on hover.
 Nevertheless, for more complex scenarios, [space-toggles][space-toggle] or [cyclic-toggles][cyclic-toggles] can come in handy.
 <figure id="example-2">
     <div class="state"></div>
-    <div class="has-support-info">&#9888; This demo requires support for nesting and scroll-driven animations. Try it out in Chrome Canary.</div>
     <style>
-        @scope {
-            *, *::before, *::after {
-                box-sizing: border-box;
-            }
-            .state {
-                display: flex;
-                width: 80px;
-                height: 30px;
-                border-radius: 15px;
-                overflow-x: scroll;
-                scrollbar-width: none;
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        #example-2 .state {
+            display: flex;
+            width: 80px;
+            height: 30px;
+            border-radius: 15px;
+            overflow-x: scroll;
+            scrollbar-width: none;
+            background: red;
+            margin: 10px;
+            line-height: 20px;
+            color: white;
+            scroll-snap-type: x mandatory;
+        }
+        #example-2 .state::before, 
+        #example-2 .state::after {
+                content: '';
+                display: block;
+                flex: none;
+                width: 100%;
+                height: 100%;
+                padding: 5px 10px;
+                text-align: center;
+        }
+        #example-2 .state::before {
+                content: 'Hover';
                 background: red;
-                margin: 10px;
-                line-height: 20px;
-                color: white;
-                scroll-snap-type: x mandatory;
-                &::before, &::after {
-                    content: '';
-                    display: block;
-                    flex: none;
-                    width: 100%;
-                    height: 100%;
-                    padding: 5px 10px;
-                    text-align: center;
-                }
-                &::before {
-                    content: 'Hover';
-                    background: red;
-                }
-                &::after {
-                    content: 'ON';
-                    background: green;
-                }
-                &:hover::after {
-                    scroll-snap-align: end;
-                }
-                &::-webkit-scrollbar {
-                    display: none;
-                }
-            }
+        }
+        #example-2 .state::after {
+                content: 'ON';
+                background: green;
+        }
+        #example-2 .state:hover::after {
+                scroll-snap-align: end;
+        }
+        #example-2 .state::-webkit-scrollbar {
+                display: none;
         }
     </style>
     <figcaption>
@@ -219,68 +215,67 @@ they can play really well when we have multiple possible values._
     </div>
     <div class="has-support-info">&#9888; This demo requires support for nesting and scroll-driven animations. Try it out in Chrome Canary.</div>
     <style>
-        @scope {
-            *, *::before, *::after {
-                box-sizing: border-box;
-            }
-            @keyframes read-state {
-                contain 0% {
-                    --state: var(--state--off);
-                }
-                contain 100% {
-                    --state: var(--state--on);
-                }
-            }
-            .state {
-                display: flex;
-                width: 80px;
-                height: 30px;
-                border-radius: 15px;
-                overflow-x: scroll;
-                scrollbar-width: none;
-                background: red;
-                margin: 10px;
-                line-height: 20px;
-                color: white;
-                scroll-snap-type: x mandatory;
-                &::before, &::after {
-                    content: '';
-                    display: block;
-                    flex: none;
-                    width: 100%;
-                    height: 100%;
-                    padding: 5px 10px;
-                    text-align: center;
-                }
-                &::before {
-                    content: 'Hover';
-                    background: red;
-                }
-                &::after {
-                    content: 'ON';
-                    background: green;
-                    view-timeline: --state-1 inline;
-                }
-                &:hover::after {
-                    scroll-snap-align: end;
-                }
-                &::-webkit-scrollbar {
-                    display: none;
-                }
-            }
-            .use-state {
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        @keyframes read-state {
+            contain 0% {
                 --state: var(--state--off);
-                --state--off: var(--state, );
-                --state--on: var(--state, );
-                display: flow-root;
-                height: 100px;
-                timeline-scope: --state-1;
-                animation: read-state;
-                animation-timeline: --state-1;
-                background: 
-                    var(--state--off, pink)
-                    var(--state--on, palegreen);
             }
+            contain 100% {
+                --state: var(--state--on);
+            }
+        }
+        #example-3 .state {
+            display: flex;
+            width: 80px;
+            height: 30px;
+            border-radius: 15px;
+            overflow-x: scroll;
+            scrollbar-width: none;
+            background: red;
+            margin: 10px;
+            line-height: 20px;
+            color: white;
+            scroll-snap-type: x mandatory;
+        }
+        #example-3 .state::before,
+        #example-3 .state::after {
+            content: '';
+            display: block;
+            flex: none;
+            width: 100%;
+            height: 100%;
+            padding: 5px 10px;
+            text-align: center;
+        }
+        #example-3 .state::before {
+            content: 'Hover';
+            background: red;
+        }
+        #example-3 .state::after {
+            content: 'ON';
+            background: green;
+            view-timeline: --state-3-timeline inline;
+        }
+        #example-3 .state:hover::after {
+            scroll-snap-align: end;
+        }
+        #example-3 .state::-webkit-scrollbar {
+            display: none;
+        }
+        #example-3 .use-state {
+            --state: var(--state--off);
+            --state--off: var(--state, );
+            --state--on: var(--state, );
+            display: flow-root;
+            height: 100px;
+            timeline-scope: --state-3-timeline;
+            animation: read-state;
+            animation-timeline: --state-3-timeline;
+            background: 
+                var(--state--off, pink)
+                var(--state--on, palegreen);
         }
     </style>
     <figcaption>
@@ -301,7 +296,7 @@ they can play really well when we have multiple possible values._
 .state {
     /* ... */
     &::after {
-        view-timeline: --state-1 inline;
+        view-timeline: --state-timeline inline;
     }
 }
 
@@ -310,9 +305,9 @@ they can play really well when we have multiple possible values._
     --state--off: var(--state, );
     --state--on: var(--state, );
     height: 100px;
-    timeline-scope: --state-1;
+    timeline-scope: --state-timeline;
     animation: read-state;
-    animation-timeline: --state-1;
+    animation-timeline: --state-timeline;
     background: var(--state--off, pink) var(--state--on, palegreen);
 }
 ```
@@ -345,83 +340,83 @@ This method allows us to manipulate the state externally, outside the confines o
     </div>
     <div class="has-support-info">&#9888; This demo requires support for nesting and scroll-driven animations. Try it out in Chrome Canary.</div>
     <style>
-        @scope {
-            *, *::before, *::after {
-                box-sizing: border-box;
-            }
-            @keyframes read-state {
-                contain 0% {
-                    --state: var(--state--off);
-                }
-                contain 100% {
-                    --state: var(--state--on);
-                }
-            }
-            .state {
-                display: flex;
-                width: 80px;
-                height: 30px;
-                border-radius: 15px;
-                overflow-x: scroll;
-                scrollbar-width: none;
-                background: red;
-                margin: 10px;
-                line-height: 20px;
-                color: white;
-                scroll-snap-type: x mandatory;
-                &::before, &::after {
-                    content: '';
-                    display: block;
-                    flex: none;
-                    width: 100%;
-                    height: 100%;
-                    padding: 5px 10px;
-                    text-align: center;
-                }
-                &::before {
-                    content: 'OFF';
-                    background: red;
-                    scroll-snap-align: var(--write-state-off) start;
-                }
-                &::after {
-                    content: 'ON';
-                    background: green;
-                    view-timeline: --state-1 inline;
-                    scroll-snap-align: var(--write-state-on) end;
-                }
-                &::-webkit-scrollbar {
-                    display: none;
-                }
-            }
-            .on, .off {
-                display: grid;
-                width: 100px;
-                height: 100px;
-                margin: 10px;
-                border-radius: 5px;
-                place-content: center;
-                color: #fff;
-            }
-            .on { background: green; }
-            .off { background: red; }
-            :has(.on:hover) {
-                --write-state-on: ;
-            }
-            :has(.off:hover) {
-                --write-state-off: ;
-            }
-            .use-state {
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        @keyframes read-state {
+            contain 0% {
                 --state: var(--state--off);
-                --state--off: var(--state, );
-                --state--on: var(--state, );
-                display: flow-root;
-                timeline-scope: --state-1;
-                animation: read-state;
-                animation-timeline: --state-1;
-                background: 
-                    var(--state--off, pink)
-                    var(--state--on, palegreen);
             }
+            contain 100% {
+                --state: var(--state--on);
+            }
+        }
+        #example-4 .state {
+            display: flex;
+            width: 80px;
+            height: 30px;
+            border-radius: 15px;
+            overflow-x: scroll;
+            scrollbar-width: none;
+            background: red;
+            margin: 10px;
+            line-height: 20px;
+            color: white;
+            scroll-snap-type: x mandatory;
+        }
+        #example-4 .state::before, 
+        #example-4 .state::after {
+            content: '';
+            display: block;
+            flex: none;
+            width: 100%;
+            height: 100%;
+            padding: 5px 10px;
+            text-align: center;
+        }
+        #example-4 .state::before {
+            content: 'OFF';
+            background: red;
+            scroll-snap-align: var(--write-state-off) start;
+        }
+        #example-4 .state::after {
+            content: 'ON';
+            background: green;
+            view-timeline: --state-4-timeline inline;
+            scroll-snap-align: var(--write-state-on) end;
+        }
+        #example-4 .state::-webkit-scrollbar {
+            display: none;
+        }
+        #example-4 .on, 
+        #example-4 .off {
+            display: grid;
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            border-radius: 5px;
+            place-content: center;
+            color: #fff;
+        }
+        #example-4 .on { background: green; }
+        #example-4 .off { background: red; }
+        #example-4 :has(.on:hover) {
+            --write-state-on: ;
+        }
+        #example-4 :has(.off:hover) {
+            --write-state-off: ;
+        }
+        #example-4 .use-state {
+            --state: var(--state--off);
+            --state--off: var(--state, );
+            --state--on: var(--state, );
+            display: flow-root;
+            timeline-scope: --state-4-timeline;
+            animation: read-state;
+            animation-timeline: --state-4-timeline;
+            background: 
+                var(--state--off, pink)
+                var(--state--on, palegreen);
         }
     </style>
     <figcaption>
@@ -438,82 +433,81 @@ Yes, brace yourself — we can trigger this state change from another scroll-dri
 In theory, we _could_ use this to [trigger a scroll-based animation once][scroll-animation-once] — tempting, right?
 But remember: just because you can do something, doesn't mean you should.
 
-<figure id="example-4">
+<figure id="example-5">
     <div class="read-and-write-state">
         <div class="state"></div>
     </div>
     <div class="has-support-info">&#9888; This demo requires support for nesting and scroll-driven animations. Try it out in Chrome Canary.</div>
     <style>
-        @scope {
-            *, *::before, *::after {
-                box-sizing: border-box;
-            }
-            @keyframes read-state {
-                contain 0% {
-                    --state: var(--state--off);
-                }
-                contain 100% {
-                    --state: var(--state--on);
-                }
-            }
-            @keyframes write-state {
-                100% {
-                    --write-state-on: ;
-                }
-            }
-            .state {
-                display: flex;
-                position: sticky;
-                top: 10px;
-                width: 80px;
-                height: 30px;
-                border-radius: 15px;
-                overflow-x: scroll;
-                scrollbar-width: none;
-                background: red;
-                margin: 10px;
-                line-height: 20px;
-                color: white;
-                scroll-snap-type: x mandatory;
-                &::before, &::after {
-                    content: '';
-                    display: block;
-                    flex: none;
-                    width: 100%;
-                    height: 100%;
-                    padding: 5px 10px;
-                    text-align: center;
-                }
-                &::before {
-                    content: 'OFF';
-                    background: red;
-                    scroll-snap-align: var(--write-state-off) start;
-                }
-                &::after {
-                    content: 'ON';
-                    background: green;
-                    view-timeline: --state-1 inline;
-                    scroll-snap-align: var(--write-state-on) end;
-                }
-                &::-webkit-scrollbar {
-                    display: none;
-                }
-            }
-            .read-and-write-state {
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        @keyframes read-state {
+            contain 0% {
                 --state: var(--state--off);
-                --state--off: var(--state, );
-                --state--on: var(--state, );
-                display: grid;
-                height: 100px;
-                grid-template-rows: 200px;
-                overflow-y: scroll;
-                timeline-scope: --state-1;
-                animation: write-state, read-state;
-                animation-timeline: scroll(self block), --state-1;
-                background: 
-                    var(--state--off, pink)
-                    var(--state--on, palegreen);
             }
+            contain 100% {
+                --state: var(--state--on);
+            }
+        }
+        @keyframes write-state {
+            100% {
+                --write-state-on: ;
+            }
+        }
+        #example-5 .state {
+            display: flex;
+            position: sticky;
+            top: 10px;
+            width: 80px;
+            height: 30px;
+            border-radius: 15px;
+            overflow-x: scroll;
+            scrollbar-width: none;
+            background: red;
+            margin: 10px;
+            line-height: 20px;
+            color: white;
+            scroll-snap-type: x mandatory;
+        }
+        #example-5 .state::before, 
+        #example-5 .state::after {
+            content: '';
+            display: block;
+            flex: none;
+            width: 100%;
+            height: 100%;
+            padding: 5px 10px;
+            text-align: center;
+        }
+        #example-5 .state::before {
+            content: 'OFF';
+            background: red;
+            scroll-snap-align: var(--write-state-off) start;
+        }
+        #example-5 .state::after {
+            content: 'ON';
+            background: green;
+            view-timeline: --state-5-timeline inline;
+            scroll-snap-align: var(--write-state-on) end;
+        }
+        #example-5 .state::-webkit-scrollbar {
+            display: none;
+        }
+        #example-5 .read-and-write-state {
+            --state: var(--state--off);
+            --state--off: var(--state, );
+            --state--on: var(--state, );
+            display: grid;
+            height: 100px;
+            grid-template-rows: 200px;
+            overflow-y: scroll;
+            timeline-scope: --state-5-timeline;
+            animation: write-state, read-state;
+            animation-timeline: scroll(self block), --state-5-timeline;
+            background: 
+                var(--state--off, pink)
+                var(--state--on, palegreen);
         }
     </style>
     <figcaption>
@@ -537,9 +531,9 @@ But remember: just because you can do something, doesn't mean you should.
     height: 100px;
     grid-template-rows: 200px;
     overflow-y: scroll;
-    timeline-scope: --state-1;
+    timeline-scope: --state-timeline;
     animation: write-state, read-state;
-    animation-timeline: scroll(self block), --state-1;
+    animation-timeline: scroll(self block), --state-timeline;
     background: 
         var(--state--off, pink)
         var(--state--on, palegreen);
