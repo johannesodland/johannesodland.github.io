@@ -1,0 +1,28 @@
+{
+  "name": "johannesodland.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "build": "npx @11ty/eleventy",
+    "build-ghpages": "npx @11ty/eleventy --pathprefix=/eleventy-base-blog/",
+    "dev": "npx @11ty/eleventy --serve --quiet",
+    "format": "prettier \"**/*{.js,.ts,.css}\" --ignore-path .gitignore",
+    "format:fix": "npm run format -- --write"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johannesodland/johannesodland.github.io.git"
+  },
+  "author": "Johannes Odland",
+  "license": "UNLICENCED",
+  "bugs": {
+    "url": "https://github.com/johannesodland/johannesodland.github.io/issues"
+  },
+  "homepage": "https://github.com/johannesodland/johannesodland.github.io#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0-alpha.5",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
+    "prettier": "^3.3.3"
+  }
+}

@@ -1,0 +1,161 @@
+@font-face {
+  src:
+    url('fonts/WarblerVariable[opsz,wght].woff2') format('woff2'),
+    url('fonts/WarblerVariable[opsz,wght].woff') format('woff');
+  font-family: 'Warbler Variable';
+  font-style: normal;
+  font-weight: 400 700;
+}
+
+@font-face {
+  src:
+    url('fonts/WarblerVariable-Italic[opsz,wght].woff2') format('woff2'),
+    url('fonts/WarblerVariable-Italic[opsz,wght].woff') format('woff');
+  font-family: 'Warbler Variable';
+  font-style: italic;
+  font-weight: 400 700;
+}
+
+@font-face {
+  src:
+    url('fonts/WarblerBanner-Regular.woff2') format('woff2'),
+    url('fonts/WarblerBanner-Regular.woff') format('woff');
+  font-family: 'WarblerBanner';
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  src:
+    url('fonts/WarblerBanner-Italic.woff2') format('woff2'),
+    url('fonts/WarblerBanner-Italic.woff') format('woff');
+  font-family: 'WarblerBanner';
+  font-style: italic;
+  font-weight: 400;
+}
+
+@font-face {
+  src:
+    url('fonts/WarblerBanner-Bold.woff2') format('woff2'),
+    url('fonts/WarblerBanner-Bold.woff') format('woff');
+  font-family: 'WarblerBanner';
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  src:
+    url('fonts/WarblerBanner-BoldItalic.woff2') format('woff2'),
+    url('fonts/WarblerBanner-BoldItalic.woff') format('woff');
+  font-family: 'WarblerBanner';
+  font-style: italic;
+  font-weight: 700;
+}
+
+@font-face {
+  src:
+    url('fonts/WarblerDisplay-Regular.woff2') format('woff2'),
+    url('fonts/WarblerDisplay-Regular.woff') format('woff');
+  font-family: 'WarblerDisplay';
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  src:
+    url('fonts/WarblerDisplay-Italic.woff2') format('woff2'),
+    url('fonts/WarblerDisplay-Italic.woff') format('woff');
+  font-family: 'WarblerDisplay';
+  font-style: italic;
+  font-weight: 400;
+}
+
+@font-face {
+  src:
+    url('fonts/WarblerDisplay-Bold.woff2') format('woff2'),
+    url('fonts/WarblerDisplay-Bold.woff') format('woff');
+  font-family: 'WarblerDisplay';
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  src:
+    url('fonts/WarblerDisplay-BoldItalic.woff2') format('woff2'),
+    url('fonts/WarblerDisplay-BoldItalic.woff') format('woff');
+  font-family: 'WarblerDisplay';
+  font-style: italic;
+  font-weight: 700;
+}
+
+@font-face {
+  src:
+    url('fonts/WarblerDeck-Regular.woff2') format('woff2'),
+    url('fonts/WarblerDeck-Regular.woff') format('woff');
+  font-family: 'WarblerDeck';
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  src:
+    url('fonts/WarblerDeck-Italic.woff2') format('woff2'),
+    url('fonts/WarblerDeck-Italic.woff') format('woff');
+  font-family: 'WarblerDeck';
+  font-style: italic;
+  font-weight: 400;
+}
+
+@font-face {
+  src:
+    url('fonts/WarblerDeck-Bold.woff2') format('woff2'),
+    url('fonts/WarblerDeck-Bold.woff') format('woff');
+  font-family: 'WarblerDeck';
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  src:
+    url('fonts/WarblerDeck-BoldItalic.woff2') format('woff2'),
+    url('fonts/WarblerDeck-BoldItalic.woff') format('woff');
+  font-family: 'WarblerDeck';
+  font-style: italic;
+  font-weight: 700;
+}
+
+@font-face {
+  src:
+    url('fonts/WarblerText-Regular.woff2') format('woff2'),
+    url('fonts/WarblerText-Regular.woff') format('woff');
+  font-family: 'WarblerText';
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  src:
+    url('fonts/WarblerText-Italic.woff2') format('woff2'),
+    url('fonts/WarblerText-Italic.woff') format('woff');
+  font-family: 'WarblerText';
+  font-style: italic;
+  font-weight: 400;
+}
+
+@font-face {
+  src:
+    url('fonts/WarblerText-Bold.woff2') format('woff2'),
+    url('fonts/WarblerText-Bold.woff') format('woff');
+  font-family: 'WarblerText';
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  src:
+    url('fonts/WarblerText-BoldItalic.woff2') format('woff2'),
+    url('fonts/WarblerText-BoldItalic.woff') format('woff');
+  font-family: 'WarblerText';
+  font-style: italic;
+  font-weight: 700;
+}

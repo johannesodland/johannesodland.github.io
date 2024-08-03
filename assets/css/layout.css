@@ -1,0 +1,43 @@
+@layer layout {
+  body {
+    > :is(header, main, article, footer) {
+      max-width: 1280px;
+      margin-inline: auto;
+
+      display: grid;
+      grid-template-columns: [full-width-start]1rem[content-start text-start]1fr[text-end content-end]1rem[full-width-end];
+
+      > * {
+        grid-column: content;
+      }
+
+      > header,
+      > .content {
+        grid-column: text;
+      }
+
+      @media (width >= 720px) {
+        grid-template-columns: [full-width-start]1rem[content-start]1fr[text-start]600px[text-end]1fr[content-end]1rem[full-width-end];
+      }
+
+      @media (width > 1280px) {
+        grid-template-columns: [full-width-start content-start]1fr[text-start]600px[text-end]1fr[content-end full-width-end];
+      }
+    }
+
+    > header {
+      padding-block: 1rem;
+      border-bottom: 2px solid #888;
+      margin-bottom: 0;
+
+      &:has(h1) {
+        padding-block: 0;
+      }
+    }
+
+    > footer {
+      border-top: 1px solid #888;
+      margin-top: 4rem;
+    }
+  }
+}
