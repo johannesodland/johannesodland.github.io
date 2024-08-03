@@ -1,0 +1,186 @@
+@layer default {
+  html {
+    font-family: 'Warbler Variable', serif;
+    font-size: clamp(1.25rem, 1.25rem + (100vw - 375px) / (1600 - 375) * 4, 1.5rem);
+    line-height: 1.5;
+    font-optical-sizing: auto;
+    color: #111;
+    text-underline-offset: 0.1em;
+
+    ::selection {
+      color: #111;
+      /* background: oklch(90% 0.2 96); */
+      background: oklch(95% 0.1 96);
+    }
+  }
+
+  body {
+    background: #fffefe;
+  }
+
+  article {
+    text-wrap: pretty;
+  }
+
+  time {
+    text-align: center;
+    font-variant-caps: all-small-caps;
+    color: #444;
+  }
+
+  h1 {
+    margin-block: 2rem;
+    font-size: 2rem;
+    font-family: WarblerBanner, serif;
+    font-weight: 400;
+    text-wrap: balance;
+    text-align: center;
+    line-height: 1.25;
+
+    @media (min-width: 720px) {
+      font-size: 2.5rem;
+    }
+  }
+
+  h2 {
+    margin-block: 2rem 1rem;
+    font-family: WarblerDeck, serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    font-variant-caps: all-small-caps;
+    line-height: 1;
+    text-wrap: balance;
+  }
+
+  h3 {
+    font-family: WarblerDeck, serif;
+    font-weight: 400;
+    font-size: 1.25rem;
+    font-variant-caps: all-small-caps;
+    line-height: 1;
+    text-wrap: balance;
+  }
+
+  p {
+    margin-block: 0 1.5rem;
+  }
+
+  a {
+    color: oklch(44% 0.13 120);
+
+    &:visited {
+      color: oklch(44% 0.13 80);
+    }
+  }
+
+  figure {
+    margin: 1rem 0;
+  }
+
+  figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    line-height: 1.25;
+    color: #444;
+
+    small {
+      font-variant-caps: all-petite-caps;
+    }
+  }
+
+  pre {
+    padding: 0.2em 0.5em;
+    font-size: 0.75rem;
+
+    @media (min-width: 720px) {
+      padding: 0.5em 1em;
+
+      &:not(figure pre) {
+        margin-inline: -1em;
+      }
+    }
+  }
+
+  code {
+    padding: 0.1em 0.3em;
+    font-size-adjust: 0.4;
+  }
+
+  pre,
+  code {
+    border-radius: 3px;
+    background-color: #eee;
+  }
+
+  pre > code {
+    border: none;
+    padding: 0;
+  }
+
+  footer {
+    padding-block: 0.5rem;
+    font-size: 0.75rem;
+    color: #666;
+    gap: 0.5rem;
+
+    > * {
+      margin: 0;
+    }
+
+    > h2 {
+      font-size: 1rem;
+    }
+
+    a {
+      text-decoration: none;
+
+      &:hover {
+        font-style: italic;
+      }
+    }
+  }
+
+  .plug {
+    display: grid;
+    gap: 0.25rem;
+    margin-block: 1rem;
+    line-height: 1;
+
+    > * {
+      margin: 0;
+    }
+
+    h3 {
+      font-size: 1rem;
+      text-transform: uppercase;
+      font-variant-caps: normal;
+    }
+
+    a {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+        text-decoration-color: color-mix(in srgb, currentcolor 50%, transparent);
+      }
+    }
+
+    > p {
+      color: #666;
+      font-variant-caps: all-small-caps;
+    }
+  }
+
+  .token.selector,
+  .token.function {
+    color: oklch(50% 0.1 160);
+  }
+
+  .token.property {
+    color: oklch(50% 0.1 200);
+  }
+
+  .token.string {
+    color: oklch(50% 0.1 80);
+  }
+}

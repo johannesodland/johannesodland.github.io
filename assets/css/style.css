@@ -1,0 +1,13 @@
+.site-title {
+  font-size: calc(26 / 16 * 1rem);
+  text-decoration: none;
+
+  &,
+  &:visited {
+    color: #000000;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

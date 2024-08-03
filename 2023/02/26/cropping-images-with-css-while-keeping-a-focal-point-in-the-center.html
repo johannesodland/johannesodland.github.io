@@ -1,0 +1,908 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset=utf-8>
+      <title>Cropping Images with CSS While Keeping a Focal Point in the Center</title>
+      <style>@layer reset, default, layout;</style>
+      <link rel=stylesheet href=/assets/css/reset.css>
+      <link rel=stylesheet href=/assets/css/fonts.css>
+      <link rel=stylesheet href=/assets/css/default.css>
+      <link rel=stylesheet href=/assets/css/layout.css>
+      <link rel=stylesheet href=/assets/css/style.css>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel=canonical href="/2023/02/26/cropping-images-with-css-while-keeping-a-focal-point-in-the-center.html">
+      <link rel="me" href="https://front-end.social/@johannes">
+  </head>
+  <body>
+  
+   <header>
+      <a href="/" class="site-title">Johannes Odland</a>
+      <nav></nav>
+    </header>
+
+    <article role="main">
+      <header>
+        <time datetime="Sun Feb 26 2023 15:00:00 GMT+0000 (Coordinated Universal Time)" pubdate>
+          Feb 26, 2023
+        </time>
+        <h1>Cropping Images with CSS While Keeping a Focal Point in the Center</h1>
+      </header>
+      <div class="content"><style>
+    figure img + pre {
+        margin-top: 0;
+    }
+    fieldset {
+        border: 3px solid transparent;
+        border-radius: 3px;
+        background: linear-gradient(to right, white, white), conic-gradient(rgb(69.6% 37.4% 48%), rgb(70% 40.1% 26.2%), rgb(59.1% 47.7% 11.8%), rgb(37.6% 54.8% 27.5%), rgb(0% 57.3% 50.1%), rgb(3.82% 54.2% 68.3%), rgb(39.1% 47.4% 74.8%), rgb(58.7% 40.8% 66.7%), rgb(69.6% 37.4% 48%));
+        background: linear-gradient(to right, white, white), conic-gradient(in lch, lch(51 36.8 0), lch(51 36.8 90), lch(51 36.8 180), lch(51 36.8 270), lch(51 36.8 360));
+        background: linear-gradient(to right, white, white), conic-gradient(in oklch, oklch(0.59 0.11 0), oklch(0.59 0.11 90), oklch(0.59 0.11 180), oklch(0.59 0.11 270), oklch(0.59 0.11 360));
+        background-clip: padding-box, border-box;
+        background-origin: border-box;
+    }
+    fieldset legend {
+        background: white;
+        padding: 0 10px;
+    }
+    .language-plaintext {
+        white-space: nowrap;
+    }
+    .has-suport-info {
+        display: block;
+        background: floralwhite;
+        border: 2px solid lemonchiffon;
+        padding: 10px;
+    }
+    @supports selector(:has(p)) {
+        .has-suport-info {
+            display: none;
+        }
+    }
+</style>
+<p>Images can be an impactful part of web content,
+but providing images that fit every device, from small to large screens,
+can be quite a challenge.</p>
+<p>Fortunately, the web platform offers several solutions for adjusting images to different screen sizes,
+including resolution switching and art-direction.</p>
+<p><strong>However, there are times when cropping an image on the client side is necessary,
+especially when the image needs to fit into a dynamically sized container.</strong></p>
+<p>To crop an image effectively,
+it’s important to prioritize a specific part of the image and preserve the essential content around it.
+One way to achieve this is by identifying the image’s “focal point” – the part of the image that is most important – and cropping the image around it.</p>
+<p>In this post, I’ll walk you through my technique for cropping images with CSS while preserving the image’s focal point.</p>
+<p>I’ve tried to describe all steps thoroughly, but if you prefer you can <a href="#tldr">skip directly to the TL;DR</a>.</p>
+<figure id="hero-illustration">
+    <div class="grid">
+        <div class="container">
+            <img
+                src="/assets/image-cropping/focus-point-resize-compressed.jpg"
+                loading="lazy"
+                alt="A horizontally cropped image. The image is a digital landscape illustration. A waterfall cascades down the face of a fir clad cliff.
+The scene is lit up by green northern lights. Above the waterfall an orb is glowing in the color of the sun."
+            />
+        </div>
+        <div class="container">
+            <img
+                src="/assets/image-cropping/focus-point-resize-compressed.jpg"
+                loading="lazy"
+                alt="A squarely cropped image.  The image is a digital landscape illustration. A waterfall cascades down the face of a fir clad cliff.
+The scene is lit up by green northern lights. Above the waterfall an orb is glowing in the color of the sun."
+            />
+        </div>
+        <div class="container">
+            <img
+                src="/assets/image-cropping/focus-point-resize-compressed.jpg"
+                loading="lazy"
+                alt="A vertically cropped image.  The image is a digital landscape illustration. A waterfall cascades down the face of a fir clad cliff.
+The scene is lit up by green northern lights. Above the waterfall an orb is glowing in the color of the sun."
+            />
+        </div>
+    </div>
+    <style>
+        #hero-illustration .grid {
+            display: grid;
+            aspect-ratio: 1 / 1;
+            grid-template-rows: 1fr 1fr 1fr;
+            grid-template-areas:
+                "a a a"
+                "b b c"
+                "b b c";
+        }
+        #hero-illustration .container {
+            box-sizing: border-box;
+            container-type: size;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border: 4px solid black;
+        }
+        #hero-illustration .container:nth-child(1) {
+            grid-area: a;
+        }
+        #hero-illustration .container:nth-child(2) {
+            grid-area: b;
+        }
+        #hero-illustration .container:nth-child(3) {
+            grid-area: c;
+        }
+        #hero-illustration img {
+            --crop-focus-x: 0.32;
+            --crop-focus-y: 0.56;
+            --container-width: 100cqw;
+            --container-height: 100cqh;
+            --image-width: calc(-100% + var(--container-width));
+            --image-height: calc(-100% + var(--container-height));
+            display: block;
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: clamp(100%, 0.5 * var(--container-width) - var(--crop-focus-x) * var(--image-width), 0%) clamp(100%, 0.5 * var(--container-height) - var(--crop-focus-y) * var(--image-height), 0%);
+        }
+    </style>
+    <figcaption>
+        Image source placed into different sized containers in a grid. 
+        The image is automatically cropped while centering the focal point if possible.
+        (The focal point is the yellow sunny part above the waterfall, as you might have guessed.)
+        <br>
+        <small>Illustration: Created with the assistance of DALL·E 2</small>
+    </figcaption>
+</figure>
+<h2>Use client-side cropping sparingly</h2>
+<p>While client-side cropping can be an effective way to adapt images further for display on different screens and devices,
+it can also be a wasteful technique.
+The downside of cropping on the client is that we discard pixels that we’ve spent resources on transferring and decoding.
+As a result we end up with larger file sizes, slower load times, and a less optimal user experience overall.
+As such, it’s important to use client-side cropping sparingly and consider alternative responsive image techniques.</p>
+<p>The web platform offers a range of built-in solutions to optimize images for different screen sizes and devices,
+such as <code>srcset</code> and <code>sizes</code> attributes and the <code>&lt;picture&gt;</code> element. If you’re not familiar with these solutions MDN has a great article on <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images">providing responsive images</a>.</p>
+<!--
+While these techniques are useful, they do have limitations.
+For instance, they may not be able to handle situations
+where the image’s dimensions or aspect ratio are known upfront.
+This can occur when designing elements such as a hero image with a fixed height and dynamic width,
+or when using a viewport-sized image.
+
+In the next chapter, we’ll explore how to fit images into a dynamically sized box to address these limitations.
+We’ll build upon this technique in subsequent chapters.
+-->
+<h2>Fitting the image into specific dimensions</h2>
+<p>Let’s start by trying to fit an image into a 3 / 1 aspect ratio.
+We can do this by declaring the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio"><code>aspect-ratio</code></a> property on the image.</p>
+<p>The image will adjust by stretching to fit its dimensions.
+This is not exactly what we want, but it is a step in the right direction.</p>
+<figure>
+<img
+    src="/assets/image-cropping/nordlys.jpg"
+    loading="lazy"
+    style="width: 100%; aspect-ratio: 3 / 1;"
+    alt="An image stretched into a 3:1 aspect ratio. The image is a digital illustration of a modernistic house on the edge of a lake.
+The scene is set in the blue hour and lit up by green northern lights that reflect in the lake.
+The lights in he house are on and the silhouette of a person looking out can be seen in the middle window.
+The silhouette of a second person can be seen in the lower right of the image.
+It is observing the house, holding something that can be perceived as a knife."
+/>
+<pre class="language-css"><code class="language-css"><span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+<span class="token property">aspect-ratio</span><span class="token punctuation">:</span> 3 / 1<span class="token punctuation">;</span></code></pre>
+</figure>
+<h2>Maintaining the aspect-ratio of the image</h2>
+<p>To tell the browser how to resize the image to fit its container, we can use the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit"><code>object-fit</code></a> property.</p>
+<p>This property allows us to choose how the image should be scaled, using values like <code>contain</code>, <code>cover</code>, <code>fill</code>, <code>none</code>, or <code>scale-down</code>.
+When we use the <code>cover</code> value, the image is scaled to fill the container while preserving its natural aspect ratio.</p>
+<figure>
+<img 
+    src="/assets/image-cropping/nordlys.jpg" 
+    loading="lazy" 
+    style="width: 100%; aspect-ratio: 3 / 1; object-fit: cover;" 
+    alt="An image fitted into a 3:1 aspect ratio while maintaining the aspect ratio. 
+        The image is cropped towards the center. 
+        The image is a digital illustration of a modernistic house on the edge of a lake.
+The scene is set in the blue hour and lit up by green northern lights that reflect in the lake.
+The lights in he house are on and the silhouette of a person looking out can be seen in the middle window.
+The silhouette of a second person can be seen in the lower right of the image.
+It is observing the house, holding something that can be perceived as a knife."
+/>
+<pre class="language-css"><code class="language-css"><span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+<span class="token property">aspect-ratio</span><span class="token punctuation">:</span> 3 / 1<span class="token punctuation">;</span>
+<span class="token property">object-fit</span><span class="token punctuation">:</span> cover<span class="token punctuation">;</span></code></pre>
+</figure>
+<p>This is a step in the right direction, but there’s still an issue:
+the image is cropped towards the center, and not necessarily towards where our subject is placed.</p>
+<h2>Adjusting the position of the image</h2>
+<p>To address the issue of the image being cropped towards the center,
+we can use the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-position"><code>object-position</code></a> property in CSS to reposition the image within its container.
+Initially, we’ll hand-tune the value of this property to achieve a better crop.</p>
+<p>To ensure that the repositioning works across different screen sizes,
+we’ll use relative units like <code>&lt;percentage&gt;</code> values instead of absolute units like pixels.
+A value of <code>0%</code> aligns the start edge of the image with the start edge of the container,
+while a value of <code>100%</code> aligns the end edge of the image with the end edge of the container.</p>
+<p>When using a two value syntax with percentage values,
+the horizontal position is declared first followed by the vertical position.</p>
+<p>Let’s say, for example, that we want to reposition an image so that its subject is in the bottom left corner of the container.
+We could use a value of <code>0% 100%</code> for the <code>object-position</code> property to achieve this.</p>
+<p>For our example a value of <code>50% 62%</code> seems to give suitable results:</p>
+<figure>
+<img 
+    src="/assets/image-cropping/nordlys.jpg" 
+    loading="lazy" 
+    style="
+        width: 100%; 
+        aspect-ratio: 3 / 1; 
+        object-fit: cover; 
+        object-position: 50% 62%;" 
+    alt="An image fitted into a 3:1 aspect ratio while maintaining the aspect ratio. 
+        The image position is hand tuned to fit the house in the crop. 
+        The image is a digital illustration of a modernistic house on the edge of a lake.
+The scene is set in the blue hour and lit up by green northern lights that reflect in the lake.
+The lights in he house are on and the silhouette of a person looking out can be seen in the middle window.
+The silhouette of a second person can be seen in the lower right of the image.
+It is observing the house, holding something that can be perceived as a knife."
+/>
+<pre class="language-css"><code class="language-css"><span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+<span class="token property">aspect-ratio</span><span class="token punctuation">:</span> 3 / 1<span class="token punctuation">;</span>
+<span class="token property">object-fit</span><span class="token punctuation">:</span> cover<span class="token punctuation">;</span>
+<span class="token property">object-position</span><span class="token punctuation">:</span> 50% 62%<span class="token punctuation">;</span></code></pre>
+</figure>
+<p>Although hand-tuning the object-position property allows us to create a nice crop for the current dimensions,
+it’s not feasible to manually adjust the position for every image and every dimension.
+Instead, we need a more automated way to crop the image while preserving a focal point.</p>
+<h2>Setting a focal point</h2>
+<p>To define a custom focal point for cropping, we can declare <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties">custom properties</a> like <code>--crop-focus-x</code> and <code>--crop-focus-y</code>,
+and set these to values between 0 and 1.
+Using <code>&lt;number&gt;</code> values makes it possible to perform mathematical operations with <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/length-percentage"><code>&lt;length-percentage&gt;</code></a> values using <code>calc()</code> .</p>
+<p>For example, as the subject of our image is placed at around 60% horizontally and 60% vertically, we can set the custom properties accordingly:</p>
+<ul>
+<li><code>--crop-focus-x: 0.6</code></li>
+<li><code>--crop-focus-y: 0.6</code></li>
+</ul>
+<p>While it’s possible to use the custom focus point directly in <code>object-position</code>,
+you can see that the subject is not quite centered in the container.</p>
+<p>In the next sections we will dive into why we can’t use the custom focus point directly,
+and explore a better method of calculating the <code>object-position</code> so that the focus point is centered in the container.</p>
+<figure>
+<img 
+    src="/assets/image-cropping/nordlys.jpg" 
+    loading="lazy" 
+    style="
+        --crop-focus-x: 0.6;
+        --crop-focus-y: 0.6;
+        width: 100%; 
+        aspect-ratio: 3 / 1; 
+        object-fit: cover; 
+        object-position: calc(var(--crop-focus-x) * 100%) calc(var(--crop-focus-y) * 100%);" 
+    alt="An image fitted into a 3:1 aspect ratio while maintaining the aspect ratio. 
+        The image is positioned using a simplistic scheme. 
+        The image is a digital illustration of a modernistic house on the edge of a lake.
+The scene is set in the blue hour and lit up by green northern lights that reflect in the lake.
+The lights in he house are on and the silhouette of a person looking out can be seen in the middle window.
+The silhouette of a second person can be seen in the lower right of the image.
+It is observing the house, holding something that can be perceived as a knife."
+/>
+<pre class="language-css"><code class="language-css"><span class="token property">--crop-focus-x</span><span class="token punctuation">:</span> 0.6<span class="token punctuation">;</span>
+<span class="token property">--crop-focus-y</span><span class="token punctuation">:</span> 0.6<span class="token punctuation">;</span>
+<span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+<span class="token property">aspect-ratio</span><span class="token punctuation">:</span> 3 / 1<span class="token punctuation">;</span>
+<span class="token property">object-fit</span><span class="token punctuation">:</span> cover<span class="token punctuation">;</span>
+<span class="token property">object-position</span><span class="token punctuation">:</span> <span class="token function">calc</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--crop-focus-x<span class="token punctuation">)</span> * 100%<span class="token punctuation">)</span> <span class="token function">calc</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--crop-focus-y<span class="token punctuation">)</span> * 100%<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+</figure>
+<h2>Why focus coordinates can not be used directly</h2>
+<p>To better understand why using focus coordinates directly in <code>object-position</code> doesn’t work,
+let’s take a look at an example image with three positions marked out along the horizontal axis: <code>25%</code>, <code>50%</code>, and <code>75%</code>.</p>
+<figure>
+    <img
+        id="percentages"
+        src="/assets/image-cropping/percentages.png"
+        loading="lazy"
+        alt="An illustration with three focus points in the x axis marked out at 25%, 50% and 75% of the image width. 
+            The points are marked with dark green dots, and a short line pointing down at a text showing the percentage distance."
+        style="display: block; width: 100%; height: auto;"
+        width="1000"
+        height="250"
+    />
+</figure>
+<p>We can crop this image to a <code>1 / 1</code> aspect ratio and use the <code>--crop-focus-x</code> property to set the focus point to one of <code>0.25</code>, <code>0.5</code>, or <code>0.75</code>.
+Below is an interactive demo where you can choose between the three values for <code>--crop-focus-x</code>:</p>
+<figure>
+    <div id="percentages-illustration-1">
+        <fieldset>
+            <legend>--crop-focus-x</legend>
+            <label><input type="radio" name="focus-point-x" value="25" checked/> 0.25</label>
+            <label><input type="radio" name="focus-point-x" value="50"/> 0.50</label>
+            <label><input type="radio" name="focus-point-x" value="75"/> 0.75</label>
+            <div class="has-suport-info">&#9888; This demo requires support for the `:has()` relational pseudo-class.</div>
+        </fieldset>
+        <img
+            src="/assets/image-cropping/percentages.png"
+            loading="lazy"
+            alt="An image fitted into a 1:1 aspect ratio while maintaining the aspect ratio.
+            The image is positioned using a simplistic scheme, so that values 25% and 75% are slightly off center when chosen."
+        />
+    </div>
+    <style>
+        #percentages-illustration-1 {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        #percentages-illustration-1 label {
+            display: block;
+        }
+        #percentages-illustration-1 img {
+            --crop-focus-x: 0.25;
+            --crop-focus-y: 0.5;
+            display: block;
+            width: 33%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            object-position: calc(var(--crop-focus-x) * 100%) calc(var(--crop-focus-y) * 100%);
+            transition: object-position 350ms ease-in-out;
+        }
+        #percentages-illustration-1 fieldset:has(input[value="25"]:checked) + img{
+            --crop-focus-x: 0.25;
+        }
+        #percentages-illustration-1 fieldset:has(input[value="50"]:checked) + img{
+            --crop-focus-x: 0.50;
+        }
+        #percentages-illustration-1 fieldset:has(input[value="75"]:checked) + img{
+            --crop-focus-x: 0.75;
+        }
+    </style>
+    <figcaption>
+        `--crop-focus-x` is mapped directly to object position. 
+        It is clearly visible that the desired focus point is not positioned in the center of the container.
+    </figcaption>
+</figure>
+<p>As you can see, when the focus point is set to 25% or 75%, the cropped image is off-center and the focus point is not centered in the container.
+This is not the behavior we want.
+Ideally, the cropped image should keep the focus point in the center.
+So what’s causing this behavior?</p>
+<h2>How percentage values in object-position work</h2>
+<p>Let’s take a closer look at how percentage values in <code>object-position</code> work.
+According to the <a href="https://w3c.github.io/csswg-drafts/css-backgrounds-3/#valdef-background-position-percentage">CSS Backgrounds and Borders Module Level 3</a>,
+the horizontal offset is calculated as a percentage of the difference between the width of the container and the width of the image,
+while the vertical offset is calculated as a percentage of the difference between the height of the container and the height of the image.</p>
+<p><strong>In other words, if we have a container that is 200px wide and the image is scaled to be 300px wide,
+then a value of 100% will resolve to a used value of -100px.</strong></p>
+<p>You can read more about percentages on <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-position#regarding_percentages">MDN</a>.</p>
+<figure>
+    <img 
+        src="/assets/image-cropping/percentage-values.jpg" 
+        width="1000" 
+        height="600"
+        style="width: 100%; height: auto;"
+        alt="An illustration that shows a box with a black outline. 
+            An image is sized to fit the box while keeping the aspect ratio. 
+            The image is wider than the box and is protruding on the left side. 
+            The protruding part of the image is marked with the text 100%."
+        />
+    <figcaption>
+        Percentage values in `object-position` are relative to the difference between sizes of the container and the scaled image. 
+        When using `object-fit: cover` a value of 100% for `object-position` will resolve to a negative value as the image is wider than the container.
+        <br/>
+        <small>Illustration: Created with the assistance of DALL·E 2</small>
+    </figcaption>
+</figure>
+<p>This behavior is not a bug, but a clever feature of CSS.
+For example, <code>object-position: 0% center</code> will align the image to the left border of the container,
+while <code>object-position: 100% center</code> will align the image to the right border of the container.
+As long as the author keeps the values between <code>0%</code> and <code>100%</code>,
+it is not possible to “overshoot” the position of the image.</p>
+<p>However, using percentages directly in <code>object-position</code> won’t help us achieve our goal of centering the focus point.</p>
+<p><strong>For instance, a declaration of <code>object-position: 25% 0%</code> means that a spot that is 25% from the left of the image will be placed 25% from the container’s left <em>and not in the center</em>.</strong>
+This is not be the behavior we want, since the focus point will end up off-center as we saw in the previous section.</p>
+<p>In the next section we will address the problem of calculating <code>object-position</code> so that the focus point is kept in the center.</p>
+<h2>Centering the focal point</h2>
+<p>To center the focal point in the container,
+we need to calculate the appropriate <code>object-position</code> values.
+Let’s focus on the horizontal dimension and break down the calculation into two steps:</p>
+<ol>
+<li>Move the left edge of the image to the center of the container</li>
+<li>Then move the image to the left so that the focal point is in the center of the container</li>
+</ol>
+<figure>
+    <img 
+        src="/assets/image-cropping/steps.jpg"
+        alt="Illustration in two parts. 
+            The first part shows the container as a black outline. 
+            An arrow that is half the width of the container is pointing to the right. 
+            An image below the container is shifted this amount to the right so that the left image edge is in the center of the container.
+            The second part shows the container as a black outline. 
+            An arrow that is half the width of the image is pointing to the left. 
+            The image below is now shifted this amount to the left so that the focal point marked with a yellow circle ends up in the center of the container."
+        width="1000"
+        height="600"
+        style="width: 100%; height: auto;"
+    />
+    <figcaption>
+        <small>Illustration: Created with the assistance of DALL·E 2</small>
+    </figcaption>
+</figure>
+<h4>Step 1</h4>
+<p>First we need to move the left edge of the image to the center of the container.
+For now, we’ll assume that we know the width of the container, and store it in a custom-property called <code>--container-width</code>.
+The amount we need to move can be calculated as <code>0.5 * var(--container-width)</code>:</p>
+<figure id="left-edge-to-center">
+    <div class="wrapper">
+        <div class="container">
+            <img
+                src="/assets/image-cropping/fp-example.jpg"
+                alt="A horizontal crop of one of the example images. The image is a digital illustration of a modernistic house on the edge of a lake.
+The scene is set in the blue hour and lit up by green northern lights that reflect in the lake.
+The lights in he house are on and the silhouette of a person looking out can be seen in the middle window.
+The silhouette of a second person can be seen in the lower right of the image.
+It is observing the house, holding something that can be perceived as a knife."
+            />
+        </div>
+    </div>
+    <fieldset>
+        <legend>Use the radio buttons to navigate through the steps</legend>
+        <label>
+            <input type="radio" name="left-edge-move" value="no-move">
+            Initial position
+        </label>
+        <label>
+            <input type="radio" name="left-edge-move" value="to-center" checked>
+            Step 1
+        </label>
+        <div class="has-suport-info">&#9888; This demo requires support for the `:has()` relational pseudo-class.</div>
+    </fieldset>
+<style>
+    #left-edge-to-center {
+        --container-width: 250px;
+    }
+     #left-edge-to-center .wrapper {
+        padding: 4px;
+        overflow: clip;
+    }
+    #left-edge-to-center .container {
+        position: relative;
+        margin: 20px auto;
+        width: 250px;
+        aspect-ratio: 4 / 3;
+        outline: 4px solid black;
+    }
+    #left-edge-to-center .container::after {
+        content: '';
+        display: block;
+        position: absolute;
+        inset: 0;
+        box-shadow: 0 0 0 100vw rgba(255,255,255,0.5);
+        outline: 4px solid black;
+    }
+    #left-edge-to-center img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: var(--object-position);
+        overflow: visible;
+        transition: object-position 350ms ease-in-out;
+    }
+    #left-edge-to-center:has(input[value="no-move"]:checked) {
+        --object-position: 0% 0%
+    }
+    #left-edge-to-center:has(input[value="to-center"]:checked) {
+        --object-position: 
+            calc(0.5 * var(--container-width)) 
+            0%;
+    }
+    #left-edge-to-center fieldset {
+        margin-bottom: 5px;
+    }
+    #left-edge-to-center label {
+        white-space: nowrap;
+    }
+</style>
+<pre class="language-css"><code class="language-css"><span class="token property">--container-width</span><span class="token punctuation">:</span> 250px<span class="token punctuation">;</span>
+<span class="token property">object-position</span><span class="token punctuation">:</span> <span class="token function">calc</span><span class="token punctuation">(</span>0.5 * <span class="token function">var</span><span class="token punctuation">(</span>--container-width<span class="token punctuation">)</span><span class="token punctuation">)</span> 0%<span class="token punctuation">;</span></code></pre>
+</figure>
+<h4>Step 2</h4>
+<p>Next, we need to move the image to the left so that the focal point is centered in the container.
+To do this, we need to know the distance between the left edge of the image and the focal point.
+We can calculate this distance by using the <code>--crop-focus-x</code> custom property and multiplying it by the width of the scaled image.
+But first we need to figure out the size of the scaled image.</p>
+<p>Remember how 100% corresponded to the amount difference between the image size and the container size?
+<strong>To find the width of the scaled image, we can simply subtract 100% from the container size:</strong></p>
+<pre class="language-css"><code class="language-css"><span class="token property">--image-width</span><span class="token punctuation">:</span> <span class="token function">calc</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--container-width<span class="token punctuation">)</span> - 100%<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>To find the distance from the left edge of the image to the focal point, we simply multiply <code>--crop-focus-x</code> with <code>--image-width</code>.
+Now we can subtract the resulting value from the value from the previous step to calculate the appropriate <code>object-position</code>:</p>
+<figure id="focus-to-center">
+<div class="wrapper">
+    <div class="container">
+        <img
+            src="/assets/image-cropping/fp-example.jpg"
+            alt="A horizontal crop of one of the example images. The image is a digital illustration of a modernistic house on the edge of a lake.
+The scene is set in the blue hour and lit up by green northern lights that reflect in the lake.
+The lights in he house are on and the silhouette of a person looking out can be seen in the middle window.
+The silhouette of a second person can be seen in the lower right of the image.
+It is observing the house, holding something that can be perceived as a knife."
+        />
+    </div>
+</div>
+<fieldset>
+        <legend>Use the radio buttons to navigate through the steps</legend>
+        <label>
+            <input type="radio" name="focus-point-move" value="no-move">
+            Initial position
+        </label>
+        <label>
+            <input type="radio" name="focus-point-move" value="to-center" checked>
+            Step 1
+        </label>
+        <label>
+            <input type="radio" name="focus-point-move" value="to-focus-point" checked>
+            Step 2
+        </label>
+        <div class="has-suport-info">&#9888; This demo requires support for the `:has()` relational pseudo-class.</div>
+    </fieldset>
+<style>
+    #focus-to-center {
+        --crop-focus-x: 0.6;
+        --container-width: 250px;
+        --image-width: calc(var(--container-width) - 100%);
+    }
+    #focus-to-center .wrapper {
+        padding: 4px;
+        overflow: clip;
+    }
+    #focus-to-center .container {
+        position: relative;
+        margin: 20px auto;
+        width: 250px;
+        aspect-ratio: 4 / 3;
+        outline: 4px solid black;
+    }
+    #focus-to-center .container::after {
+        content: '';
+        display: block;
+        position: absolute;
+        inset: 0;
+        box-shadow: 0 0 0 100vw rgba(255,255,255,0.5);
+        outline: 4px solid black;
+    }
+    #focus-to-center img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: var(--object-position);
+        overflow: visible;
+        transition: object-position 350ms ease-in-out;
+    }
+    #focus-to-center:has(input[value="no-move"]:checked) {
+        --object-position: 0% 0%
+    }
+    #focus-to-center:has(input[value="to-center"]:checked) {
+        --object-position: 
+            calc(0.5 * var(--container-width)) 
+            0%;
+    }
+    #focus-to-center:has(input[value="to-focus-point"]:checked) {
+        --object-position: 
+            calc(0.5 * var(--container-width) - var(--crop-focus-x) * var(--image-width))
+            0%;
+    }
+    #focus-to-center fieldset {
+        margin-bottom: 5px;
+    }
+    #focus-to-center label {
+        white-space: nowrap;
+    }
+</style>
+<pre class="language-css"><code class="language-css"><span class="token property">--container-width</span><span class="token punctuation">:</span> 250px<span class="token punctuation">;</span>
+<span class="token property">--image-width</span><span class="token punctuation">:</span> <span class="token function">calc</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--container-width<span class="token punctuation">)</span> - 100%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token property">--crop-focus-x</span><span class="token punctuation">:</span> 0.6<span class="token punctuation">;</span>
+<span class="token property">object-position</span><span class="token punctuation">:</span> <span class="token function">calc</span><span class="token punctuation">(</span>0.5 * <span class="token function">var</span><span class="token punctuation">(</span>--container-width<span class="token punctuation">)</span> - <span class="token function">var</span><span class="token punctuation">(</span>--crop-focus-x<span class="token punctuation">)</span> * <span class="token function">var</span><span class="token punctuation">(</span>--image-width<span class="token punctuation">)</span><span class="token punctuation">)</span> 0%<span class="token punctuation">;</span></code></pre>
+</figure>
+<p>After updating the example from the previous section with the new calculation,
+we can see that the focus point centered in the container:</p>
+<figure>
+    <div id="percentages-illustration-2">
+        <fieldset>
+            <legend>--crop-focus-x</legend>
+            <label><input type="radio" name="focus-x-2" value="25" checked/> 0.25</label>
+            <label><input type="radio" name="focus-x-2" value="50"/> 0.50</label>
+            <label><input type="radio" name="focus-x-2" value="75"/> 0.75</label>
+            <div class="has-suport-info">&#9888; This demo requires support for the `:has()` relational pseudo-class.</div>
+        </fieldset>
+        <img
+            src="/assets/image-cropping/percentages.png"
+            loading="lazy"
+            alt="An image fitted into a 3:1 aspect ratio while maintaining the aspect ratio.
+            The image is positioned using a simplistic scheme.
+            The image is a digital illustration of a modernistic house on the edge of a lake.
+The scene is set in the blue hour and lit up by green northern lights that reflect in the lake.
+The lights in he house are on and the silhouette of a person looking out can be seen in the middle window.
+The silhouette of a second person can be seen in the lower right of the image.
+It is observing the house, holding something that can be perceived as a knife."
+        />
+    </div>
+    <style>
+        #percentages-illustration-2 {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        #percentages-illustration-2 label {
+            display: block;
+        }
+        #percentages-illustration-2 img {
+            --crop-focus-x: 0.25;
+            --crop-focus-y: 0.5;
+            --container-width: 250px;
+            --container-height: 250px;
+            --image-width: calc(-100% + var(--container-width));
+            --image-height: calc(-100% + var(--container-height));
+            display: block;
+            width: var(--container-width);
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            object-position: calc(0.5 * var(--container-width) - var(--crop-focus-x) * var(--image-width)) calc(0.5 * var(--container-height) - var(--crop-focus-y) * var(--image-height));
+            transition: object-position 350ms ease-in-out;
+        }
+        #percentages-illustration-2 fieldset:has(input[value="25"]:checked) + img {
+            --crop-focus-x: 0.25;
+        }
+        #percentages-illustration-2 fieldset:has(input[value="50"]:checked) + img {
+            --crop-focus-x: 0.50;
+        }
+        #percentages-illustration-2 fieldset:has(input[value="75"]:checked) + img {
+            --crop-focus-x: 0.75;
+        }
+    </style>
+    <figcaption>
+       <em>object-position</em> is now calculated as a function of <em>--container-width</em>, <em>--image-width</em> and <em>--crop-focus-x</em>.
+        The points should be centered in the container when selected.
+        <br/>
+        <small>Illustration: Created with the assistance of DALL·E 2</small>
+    </figcaption>
+</figure>
+<p>These two steps ensure that the focal point is centered horizontally in the container.
+To center the focal point vertically, we can follow the same steps, but use <code>--crop-focus-y</code>, <code>--container-height</code> and <code>--image-height</code> instead.
+With these calculations, the focal point is centered both horizontally and vertically in the container.</p>
+<pre class="language-css"><code class="language-css"><span class="token property">--crop-focus-x</span><span class="token punctuation">:</span> 0.6<span class="token punctuation">;</span>
+<span class="token property">--crop-focus-y</span><span class="token punctuation">:</span> 0.5<span class="token punctuation">;</span>
+<span class="token property">--container-width</span><span class="token punctuation">:</span> 250px<span class="token punctuation">;</span>
+<span class="token property">--container-height</span><span class="token punctuation">:</span> 250px<span class="token punctuation">;</span>
+<span class="token property">--image-width</span><span class="token punctuation">:</span> <span class="token function">calc</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--container-width<span class="token punctuation">)</span> - 100%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token property">--image-height</span><span class="token punctuation">:</span> <span class="token function">calc</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--container-height<span class="token punctuation">)</span> - 100%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token property">object-position</span><span class="token punctuation">:</span> <span class="token function">calc</span><span class="token punctuation">(</span>0.5 _ <span class="token function">var</span><span class="token punctuation">(</span>--container-width<span class="token punctuation">)</span> - <span class="token function">var</span><span class="token punctuation">(</span>--crop-focus-x<span class="token punctuation">)</span> _ <span class="token function">var</span><span class="token punctuation">(</span>--image-width<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token function">calc</span><span class="token punctuation">(</span>0.5 _ <span class="token function">var</span><span class="token punctuation">(</span>--container-height<span class="token punctuation">)</span> - <span class="token function">var</span><span class="token punctuation">(</span>--crop-focus-y<span class="token punctuation">)</span> _ <span class="token function">var</span><span class="token punctuation">(</span>--image-height<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<h2>Preventing image edges from entering the container</h2>
+<p>When using focus points close to the edges,
+we may run into the problem of the image edges entering the container.
+To prevent this we can clamp the values of <code>object-position</code> between <code>100%</code> and <code>0%</code> using <code>clamp()</code>.</p>
+<p>For example, if we set <code>--crop-focus-x</code> to <code>0.0</code> the left edge will move all the way to the center of the container.
+By clamping <code>object-position</code> between <code>100%</code> to <code>0%</code> we make sure the edges of the image doesn’t pass edges of the container.</p>
+<pre class="language-css"><code class="language-css"><span class="token property">object-position</span><span class="token punctuation">:</span> <span class="token function">clamp</span><span class="token punctuation">(</span>
+    100%<span class="token punctuation">,</span>
+    0.5 _ <span class="token function">var</span><span class="token punctuation">(</span>--container-width<span class="token punctuation">)</span> - <span class="token function">var</span><span class="token punctuation">(</span>--crop-focus-x<span class="token punctuation">)</span> _ <span class="token function">var</span><span class="token punctuation">(</span>--image-width<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    0%
+  <span class="token punctuation">)</span>
+  <span class="token function">clamp</span><span class="token punctuation">(</span>100%<span class="token punctuation">,</span> 0.5 _ <span class="token function">var</span><span class="token punctuation">(</span>--container-height<span class="token punctuation">)</span> - <span class="token function">var</span><span class="token punctuation">(</span>--crop-focus-y<span class="token punctuation">)</span> _ <span class="token function">var</span><span class="token punctuation">(</span>--image-height<span class="token punctuation">)</span><span class="token punctuation">,</span> 0%<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p><strong>It’s worth noting that we clamp from <code>100%</code> to <code>0%</code> and not the other way around.
+This is because <code>100%</code> is a negative value representing the difference between the container width and the image width.</strong></p>
+<p>For example, if our container was 100px wide and our image 200px wide, then <code>100%</code> would resolve to <code>-100px</code>.
+By clamping between <code>100%</code> and <code>0%</code> we effectively keep the value between <code>-100px</code> and <code>0px</code>.
+If we clamped between <code>0%</code> and <code>100%</code> we would clamp between a minimum value of <code>0px</code> and a maximum value of <code>-100px</code>.
+Then the value would always be <code>0px</code> and the image would always be aligned to the left edge of the container,
+no matter where we put the focus point.</p>
+<h2>Container queries</h2>
+<p>Previously, we assumed we already knew how big our container was.
+This is fairly reasonable when the container is sized with media queries or according to some known dimension such as the viewport.</p>
+<p>However, there are many cases where we can not reliably know the dimensions of the container upfront.
+For example, when the container is put in a grid or a flexbox, it might be resized based on the surrounding content.</p>
+<p>Until now, there hasn’t really been a way to reliably know the dimensions of our container. But that has changed recently.</p>
+<p>After Firefox 110 was released, all the major browser now support <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Container_Queries">container queries</a>.
+Container queries lets us define a <strong>containment context</strong> on an element, so that we can query the dimension of that context later.</p>
+<p>If we put our image into another element we can make this element a containment context by setting <code>container-type</code> to <code>size</code>.
+Then we can use <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Container_Queries#container_query_length_units">container query length units</a> to get the dimensions of our container:</p>
+<pre class="language-css"><code class="language-css"><span class="token selector">.container</span> <span class="token punctuation">{</span>
+  <span class="token property">container-type</span><span class="token punctuation">:</span> size<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">img</span> <span class="token punctuation">{</span>
+  <span class="token property">--crop-focus-x</span><span class="token punctuation">:</span> 0.6<span class="token punctuation">;</span>
+  <span class="token property">--crop-focus-y</span><span class="token punctuation">:</span> 0.5<span class="token punctuation">;</span>
+  <span class="token property">--container-width</span><span class="token punctuation">:</span> 100cqw<span class="token punctuation">;</span>
+  <span class="token property">--container-height</span><span class="token punctuation">:</span> 100cqh<span class="token punctuation">;</span>
+  <span class="token property">--image-width</span><span class="token punctuation">:</span> <span class="token function">calc</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--container-width<span class="token punctuation">)</span> - 100%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">--image-height</span><span class="token punctuation">:</span> <span class="token function">calc</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--container-height<span class="token punctuation">)</span> - 100%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">object-position</span><span class="token punctuation">:</span> <span class="token function">clamp</span><span class="token punctuation">(</span>
+      100%<span class="token punctuation">,</span>
+      0.5 _ <span class="token function">var</span><span class="token punctuation">(</span>--container-width<span class="token punctuation">)</span> - <span class="token function">var</span><span class="token punctuation">(</span>--crop-focus-x<span class="token punctuation">)</span> _ <span class="token function">var</span><span class="token punctuation">(</span>--image-width<span class="token punctuation">)</span><span class="token punctuation">,</span>
+      0%
+    <span class="token punctuation">)</span>
+    <span class="token function">clamp</span><span class="token punctuation">(</span>100%<span class="token punctuation">,</span> 0.5 _ <span class="token function">var</span><span class="token punctuation">(</span>--container-height<span class="token punctuation">)</span> - <span class="token function">var</span><span class="token punctuation">(</span>--crop-focus-y<span class="token punctuation">)</span> _ <span class="token function">var</span><span class="token punctuation">(</span>--image-height<span class="token punctuation">)</span><span class="token punctuation">,</span> 0%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<figure id="cqu-illustration">
+    <div class="grid">
+        <div class="container">
+            <img
+                src="/assets/image-cropping/focus-point-resize-compressed.jpg"
+                loading="lazy"
+                alt="A horizontally cropped image. The image is a digital landscape illustration. A waterfall cascades down the face of a fir clad cliff.
+The scene is lit up by green northern lights. Above the waterfall an orb is glowing in the color of the sun."
+            />
+        </div>
+        <div class="container">
+            <img
+                src="/assets/image-cropping/focus-point-resize-compressed.jpg"
+                loading="lazy"
+                alt="A squarely cropped image.  The image is a digital landscape illustration. A waterfall cascades down the face of a fir clad cliff.
+The scene is lit up by green northern lights. Above the waterfall an orb is glowing in the color of the sun."
+            />
+        </div>
+        <div class="container">
+            <img
+                src="/assets/image-cropping/focus-point-resize-compressed.jpg"
+                loading="lazy"
+                alt="A vertically cropped image.  The image is a digital landscape illustration. A waterfall cascades down the face of a fir clad cliff.
+The scene is lit up by green northern lights. Above the waterfall an orb is glowing in the color of the sun."
+            />
+        </div>
+        <div class="container">
+            <img
+                src="/assets/image-cropping/focus-point-resize-compressed.jpg"
+                loading="lazy"
+                alt="A vertically cropped image.  The image is a digital landscape illustration. A waterfall cascades down the face of a fir clad cliff.
+The scene is lit up by green northern lights. Above the waterfall an orb is glowing in the color of the sun."
+            />
+        </div>
+    </div>
+    <style>
+        #cqu-illustration .grid {
+            display: grid;
+            aspect-ratio: 4 / 3;
+            grid-template-rows: 1fr 1fr 1fr;
+            grid-template-areas:
+                "a b b b"
+                "a c c d"
+                "a c c d";
+        }
+        #cqu-illustration .container {
+            box-sizing: border-box;
+            container-type: size;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border: 4px solid black;
+        }
+        #cqu-illustration .container:nth-child(1) {
+            grid-area: a;
+        }
+        #cqu-illustration .container:nth-child(2) {
+            grid-area: b;
+        }
+        #cqu-illustration .container:nth-child(3) {
+            grid-area: c;
+        }
+        #cqu-illustration .container:nth-child(4) {
+            grid-area: d;
+        }
+        #cqu-illustration img {
+            --crop-focus-x: 0.32;
+            --crop-focus-y: 0.56;
+            --container-width: 100cqw;
+            --container-height: 100cqh;
+            --image-width: calc(-100% + var(--container-width));
+            --image-height: calc(-100% + var(--container-height));
+            display: block;
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: clamp(100%, 0.5 * var(--container-width) - var(--crop-focus-x) * var(--image-width), 0%) clamp(100%, 0.5 * var(--container-height) - var(--crop-focus-y) * var(--image-height), 0%);
+        }
+    </style>
+    <figcaption>
+        The final cropping solution demonstrated by placing the images into different sized grid areas.
+        <br>
+        <small>Illustration: Created with the assistance of DALL·E 2</small>
+    </figcaption>
+</figure>
+<h2 id="tldr">TL;DR</h2>
+<p>In case you found the above sections to tedious, and just want the solution I’ve summarized it here:</p>
+<ol>
+<li>Declare the desired focus point with <code>--crop-focus-x</code> and <code>--crop-focus-y</code>.</li>
+<li>Use <code>object-fit: cover</code> to scale and crop the image to fit the container dimensions while maintaining its aspect ratio..</li>
+<li>Figure out the container size and store it as <code>--container-width</code> and <code>--container-height</code>. Use container query length units if necessary.</li>
+<li>Use the container width to calculate the size of the resized image by setting <code>--image-width: calc(var(--container-width) - 100%)</code> and <code>--image-height: calc(var(--container-height) - 100%)</code>.</li>
+<li>Figure out the length from the edge of the image to the focus point by multiplying <code>--crop-focus-x</code> with <code>--image-width</code>. Do the same for the vertical dimension.</li>
+<li>The position can now be calculated as <code>0.5 * var(--container-width) - var(--crop-focus-x) * var(--image-width)</code>.</li>
+<li>Clamp the final position between <code>100%</code> and <code>0%</code> so that the edges of the image are not moved into the container.</li>
+</ol>
+<p><em>Make sure you only use client-side cropping as a progressive enhancement,
+and that images are still usable in browsers where new technology like ´container queries´ are not supported yet.</em></p>
+<pre class="language-css"><code class="language-css"><span class="token selector">.container</span> <span class="token punctuation">{</span>
+  <span class="token property">container-type</span><span class="token punctuation">:</span> size<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">img</span> <span class="token punctuation">{</span>
+  <span class="token property">--crop-focus-x</span><span class="token punctuation">:</span> 0.6<span class="token punctuation">;</span>
+  <span class="token property">--crop-focus-y</span><span class="token punctuation">:</span> 0.5<span class="token punctuation">;</span>
+  <span class="token property">--container-width</span><span class="token punctuation">:</span> 100cqw<span class="token punctuation">;</span>
+  <span class="token property">--container-height</span><span class="token punctuation">:</span> 100cqh<span class="token punctuation">;</span>
+  <span class="token property">--image-width</span><span class="token punctuation">:</span> <span class="token function">calc</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--container-width<span class="token punctuation">)</span> - 100%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">--image-height</span><span class="token punctuation">:</span> <span class="token function">calc</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--container-height<span class="token punctuation">)</span> - 100%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">object-position</span><span class="token punctuation">:</span> <span class="token function">clamp</span><span class="token punctuation">(</span>
+      100%<span class="token punctuation">,</span>
+      0.5 * <span class="token function">var</span><span class="token punctuation">(</span>--container-width<span class="token punctuation">)</span> - <span class="token function">var</span><span class="token punctuation">(</span>--crop-focus-x<span class="token punctuation">)</span> * <span class="token function">var</span><span class="token punctuation">(</span>--image-width<span class="token punctuation">)</span><span class="token punctuation">,</span>
+      0%
+    <span class="token punctuation">)</span>
+    <span class="token function">clamp</span><span class="token punctuation">(</span>100%<span class="token punctuation">,</span> 0.5 * <span class="token function">var</span><span class="token punctuation">(</span>--container-height<span class="token punctuation">)</span> - <span class="token function">var</span><span class="token punctuation">(</span>--crop-focus-y<span class="token punctuation">)</span> * <span class="token function">var</span><span class="token punctuation">(</span>--image-height<span class="token punctuation">)</span><span class="token punctuation">,</span> 0%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<figure id="percentages-illustration-3">
+    <div class="wrapper">
+        <div class="container">
+            <img
+                src="/assets/image-cropping/focus-point-resize-compressed.jpg"
+                loading="lazy"
+                alt="alt"
+            />
+        </div>
+    </div>
+    <style>
+        #percentages-illustration-3 .wrapper {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        #percentages-illustration-3 .container {
+            box-sizing: border-box;
+            container-type: size;
+            width: 100%;
+            height: 100%;
+            min-width: 30px;
+            min-height: 30px;
+            max-width: 100%;
+            max-height: 100%;
+            border: 4px solid black;
+            overflow: hidden;
+            resize: both;
+        }
+        #percentages-illustration-3 img {
+            --crop-focus-x: 0.32;
+            --crop-focus-y: 0.56;
+            --container-width: 100cqw;
+            --container-height: 100cqh;
+            --image-width: calc(var(--container-width) - 100%);
+            --image-height: calc(var(--container-height) - 100%);
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 
+                clamp(100%, 0.5 * var(--container-width) - var(--crop-focus-x) * var(--image-width), 0%) 
+                clamp(100%, 0.5 * var(--container-height) - var(--crop-focus-y) * var(--image-height), 0%);
+        }
+    </style>
+    <figcaption>
+        Final cropping solution using container units and object-position. 
+        Resize the image by dragging the handle in the lower right corner of the image.
+        (This example currently doesn’t work in Safari as <em>resize</em> is disabled when the element has a child size container.)
+        <br/>
+        <small>Illustration: Created with the assistance of DALL·E 2</small>
+    </figcaption>
+</figure>
+</div>
+    </article>
+  
+    <footer>
+      <h2>Johannes Odland</h2>
+      <p>Infrequent posts about CSS and other frontend stuff.</p>
+      <ul>
+        <li><a href="https://front-end.social/@johannes">Mastodon</a></li>
+        <li><a href="https://github.com/johannesodland">Github</a></li>
+      </ul>
+      <p>Built with <a href="https://www.11ty.dev">Eleventy</a>.</p>
+    </footer>
+  </body>
+</html>
