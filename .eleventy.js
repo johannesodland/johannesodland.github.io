@@ -5,7 +5,7 @@ export default async function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy('assets/**/*.*')
   eleventyConfig.addCollection('posts', (collectionApi) => {
     return collectionApi
-      .getFilteredByGlob(['posts/**/*', ...(includeDrafts ? ['_drafts/*'] : [])])
+      .getFilteredByGlob(['posts/**/*', ...(includeDrafts ? ['drafts/**/*'g] : [])])
       .filter((p) => p.data.published !== false)
       .reverse()
   })
