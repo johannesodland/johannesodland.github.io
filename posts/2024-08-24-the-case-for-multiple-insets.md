@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'The case for multiple named insets'
-date: 2024-08-04 23:00:00 +02:00
+date: 2024-08-24 15:00:00 +02:00
 author: Johannes Odland
 ---
 
