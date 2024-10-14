@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset=utf-8>
+      <title>The Case for a Used-Color-Scheme Media Feature</title>
+      <style>@layer reset, default, layout;</style>
+      <link rel=stylesheet href=/assets/css/reset.css>
+      <link rel=stylesheet href=/assets/css/fonts.css>
+      <link rel=stylesheet href=/assets/css/default.css>
+      <link rel=stylesheet href=/assets/css/layout.css>
+      <link rel=stylesheet href=/assets/css/style.css>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel=canonical href="/2024/10/14/the-case-for-a-used-color-scheme-media-feature.html">
+      <link rel="me" href="https://front-end.social/@johannes">
+  </head>
+  <body>
+  
+   <header>
+      <a href="/" class="site-title">Johannes Odland</a>
+      <nav></nav>
+    </header>
+
+    <article role="main">
+      <header>
+        <time datetime="Mon Oct 14 2024 18:30:00 GMT+0000 (Coordinated Universal Time)" pubdate>
+          Oct 14, 2024
+        </time>
+        <h1>The Case for a Used-Color-Scheme Media Feature</h1>
+      </header>
+      <div class="content"><p>The <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme"><code>prefers-color-scheme</code></a> media feature
+currently lets us detect if a user has requested a light or a dark color scheme on a system level.
+This feature allows us to provide specific styles, images and videos to adapt to users’ preferences.</p>
+<p><strong>While useful in its current form, it might not be flexible enough for some sites.</strong></p>
+<p>This is evident on sites like GitHub and Mastodon which don't rely solely on the system preferences.
+Instead they allow the user to set a site-specific preference, giving the option between light, dark or system color scheme.</p>
+<p>Some sites may also have pages that, by design, override the site-specific preferences.</p>
+<p>For these sites to share common stylesheets or media elements,
+they need to be able to query the <em>used color scheme</em> for that specific page.</p>
+<p><strong>In this post, I'll outline the efforts to tackle these challenges,
+including the reasoning for why I think we need a new media feature to query the used color scheme.</strong></p>
+<h2>Site specific preferences</h2>
+<p>Implementing dark-mode across an entire site can be a major undertaking.
+Once it's done, you may prefer giving users the option to switch to the new color scheme,
+rather than automatically aligning them with their system settings.
+Users might be accustomed to the current color scheme, and forcing a change could lead to backlash.</p>
+<p>Some users might prefer a dark color scheme for their system,
+but still prefer to read certain sites in light mode, such
+as Sara Soueidan <a href="https://x.com/SaraSoueidan/status/1421857067111956486">pointed out in this tweet</a>.
+I agree with her; while I use a dark color scheme on a system level, I prefer to use some sites in light mode.</p>
+<p><strong>To support this, you would need to provide a site-specific color scheme preference.</strong></p>
+<h2>Page specific overrides</h2>
+<p>Even with a site-specific color scheme toggle, some pages might need to be exempted.
+Some services or features might be designed to only work in light or dark mode.
+One example is a video page that by design always uses dark mode, as <a href="https://github.com/w3c/csswg-drafts/issues/10249#issuecomment-2288822927">Josh Tumath mentions in this comment</a>.</p>
+<p><strong>To support this, your stylesheets and media components must support page-specific overrides.</strong></p>
+<h2>Current workarounds</h2>
+<p>Unfortunately, the built-in <code>prefers-color-scheme</code> currently supports neither site-specific preferences, nor page-specific overrides.</p>
+<p>If you need this functionality on your site, it's up to you to implement your own custom darkmode toggle.
+This is not straightforward and can require some duplication, as Bramus points out in his article
+<a href="https://www.bram.us/2022/05/25/dark-mode-toggles-should-be-a-browser-feature/">Dark Mode Toggles Should be a Browser Feature</a>.</p>
+<p>You would have to implement a toggle,
+then persist the value, fetch it the next time the user visits and respond to changed system preferences.
+(Check out how Hidde implemented his in <a href="https://hidde.blog/dark-light/">How I built a dark mode toggle</a>)</p>
+<p>However, by implementing your own toggle, you can no longer rely on the <code>prefers-color-scheme</code> feature in your CSS,
+or in your media sources.
+This is a big issue if you need images or videos to match the color-scheme.</p>
+<p><strong>For me, this is one of the most pressing issues with the current state of color-scheme preferences.</strong></p>
+<p>A common issue I encounter is the need for illustrations or infographics to match the page's color scheme.</p>
+<h2>Proposed solutions</h2>
+<p>It probably won't surprise you that I share the views of <a href="https://hidde.blog/dark-light/">Hidde</a>, <a href="https://www.bram.us/2022/05/25/dark-mode-toggles-should-be-a-browser-feature/">Bramus</a> and <a href="https://blog.jim-nielsen.com/2022/browser-level-color-scheme-preference/">Jim Nielsen</a>
+that site-level dark-mode toggles should be a browser feature.</p>
+<p>There are a few proposals that would solve this, at least partly.</p>
+<h3>1. Web Preferences API</h3>
+<p>I would prefer an API like the <a href="https://github.com/w3c/csswg-drafts/issues/6517">proposed</a> <a href="https://drafts.csswg.org/mediaqueries-5/#auto-pref%E2%91%A0">Web Preferences API</a>.<br>
+This API would allow you to override the user preferences on your site using JavaScript.</p>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+    navigator<span class="token punctuation">.</span>preferences<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span><span class="token function">requestOverride</span><span class="token punctuation">(</span><span class="token string">'dark'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>picture</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>source</span> <span class="token attr-name">media</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>(color-scheme: dark)<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>dark.jpg<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>source</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>light.jpg<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>...<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>picture</span><span class="token punctuation">></span></span></code></pre>
+<p>This would allow the migration of existing user preferences and allow the users to toggle color scheme alongside other site-wide preferences.</p>
+<p>One issue though might be that you might no longer query the system wide preferences using <code>prefers-color-scheme</code>.</p>
+<h3>2. In browser settings per-site</h3>
+<p><a href="https://github.com/WebKit/standards-positions/issues/252">WebKit has opposed this API</a>,
+and suggests implementing per-site user preferences in the browser as an alternative.
+I am less enthusiastic about this proposal.
+Sites would have to drop their current toggle and existing user preferences.</p>
+<h3>3. Custom script based media queries</h3>
+<p>An alternative solution could be to use a <a href="https://drafts.csswg.org/mediaqueries-5/#script-custom-mq">custom script based media query</a>,
+also a part of Media Queries Level 5.</p>
+<pre class="language-html"><code class="language-html">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+    <span class="token constant">CSS</span><span class="token punctuation">.</span>customMedia<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token string">'--used-color-scheme'</span><span class="token punctuation">,</span> <span class="token string">'dark'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+    <span class="token atrule"><span class="token rule">@media</span> <span class="token punctuation">(</span><span class="token property">_used-color-scheme</span><span class="token punctuation">:</span> <span class="token string">'dark'</span><span class="token punctuation">)</span></span> <span class="token punctuation">{</span> ... <span class="token punctuation">}</span>
+    </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span></code></pre>
+<p>While this would allow sites to create their own dark-mode toggle it would encourage non-standard media queries,
+perhaps making it more difficult to share components across sites.</p>
+<p style="text-align: center;">⁂</p>
+<p><strong>While the above proposals for a site-specific user preference would be a significant improvement,
+it won't address then need for page specific overrides.</strong></p>
+<h3>4. Meta affecting the prefers-color-scheme</h3>
+<p><a href="https://github.com/w3c/csswg-drafts/issues/10249">Tab has opened an issue</a> suggesting
+that <code>&lt;meta name=color-scheme&gt;</code> should affect the <code>(prefers-color-scheme:dark)</code> media query.</p>
+<p>If accepted, this change could provide a quick solution for both site-specific preference, and specific overrides.
+Because it directly impacts the existing <code>prefers-color-scheme</code> it would also adress the issue of loading matching media assets<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>.</p>
+<h3>5. Style query</h3>
+<p>In the discussions on the issue above,
+opinions seem to be shifting towards a container style query letting you query the <em>used</em> color-scheme property.
+A regular style query would match on the calculated value and we need to match on the used value,
+so a new mechanism would have to be introduced to do this.</p>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+    document<span class="token punctuation">.</span>body<span class="token punctuation">.</span>style<span class="token punctuation">.</span>colorScheme <span class="token operator">=</span> <span class="token string">'dark'</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+    <span class="token atrule"><span class="token rule">@container</span> <span class="token function">used-style</span><span class="token punctuation">(</span><span class="token property">color-scheme</span><span class="token punctuation">:</span> <span class="token string">'dark'</span><span class="token punctuation">)</span></span> <span class="token punctuation">{</span>
+        ...
+    <span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span></code></pre>
+<p>Unfortunately, this would not solve the need for matching media assets to the page's used color scheme,
+as media sources probably never will be selectable by style queries<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>.</p>
+<h3>6. Romans solution</h3>
+<p>Roman has found <a href="https://blog.kizu.dev/querying-the-color-scheme/">a technique</a>
+that lets you capture the used value of the <code>color-scheme</code> property as a color using <code>light-dark()</code> and a registered custom property.
+With this captured value we can use style queries to adapt accordingly.
+When used on <code>&lt;html&gt;</code> or <code>&lt;body&gt;</code>, this could solve the need for adapting to the used color-scheme.</p>
+<p>This technique has some drawbacks, as Roman discusses in his article.
+Also, because it relies on style queries,
+it would not address my main concern of letting media assets adapt to the used color scheme.</p>
+<h2>In conclusion</h2>
+<p>To avoid awkward workarounds, a site-level <code>prefers-color-scheme</code> toggle – preferably with a JavaScript API – is essential.
+Additionally, there should be a way to override the preference per page, such as through <code>&lt;meta name=color-scheme&gt;</code>.</p>
+<p>The resulting used color-scheme should be usable in a media query to load corresponding dark and light mode images.
+A style query would not adequately address this need.</p>
+<p><strong>If its resolved that <code>prefers-color-scheme</code> is unaffected by <code>&lt;meta name=color-scheme&gt;</code>,
+we should look into a new <code>used-color-scheme</code> media feature.</strong></p>
+<p>Josh Tumath has suggested opening a new issue for that <a href="https://github.com/w3c/csswg-drafts/issues/10249#issuecomment-2340321512">in this comment</a>.</p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>Video posters would be an exception, but that is a <a href="https://github.com/whatwg/html/issues/4004#issuecomment-1588568569">whole other issue</a>. <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>Media sources can not be affected by style and layout, unless lazy-loaded. <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+</div>
+    </article>
+  
+    <footer>
+      <h2>Johannes Odland</h2>
+      <p>Infrequent posts about CSS and other frontend stuff.</p>
+      <ul>
+        <li><a href="https://front-end.social/@johannes">Mastodon</a></li>
+        <li><a href="https://github.com/johannesodland">Github</a></li>
+      </ul>
+      <p>Built with <a href="https://www.11ty.dev">Eleventy</a>.</p>
+    </footer>
+  </body>
+</html>
