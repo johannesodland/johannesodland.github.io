@@ -100,4 +100,4 @@ Hopefully we can find a solution in the not-so-distant future.
 [ignore-margins]: https://github.com/w3c/csswg-drafts/issues/9052#issuecomment-1642600755
 [sticky-limited]: https://github.com/w3c/csswg-drafts/issues/2496
 [position-container]: https://github.com/w3c/csswg-drafts/issues/9868
-[proposal]: [https://github.com/w3c/csswg-drafts/issues/10754]
+[proposal]: https://github.com/w3c/csswg-drafts/issues/10754
