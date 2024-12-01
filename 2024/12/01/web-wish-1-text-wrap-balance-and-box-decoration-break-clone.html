@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset=utf-8>
+      <title>Web Wish 1: `text-wrap: balance` and `box-decoration-break: clone`</title>
+      <style>@layer reset, default, layout;</style>
+      <link rel=stylesheet href=/assets/css/reset.css>
+      <link rel=stylesheet href=/assets/css/fonts.css>
+      <link rel=stylesheet href=/assets/css/default.css>
+      <link rel=stylesheet href=/assets/css/layout.css>
+      <link rel=stylesheet href=/assets/css/style.css>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel=canonical href="/2024/12/01/web-wish-1-text-wrap-balance-and-box-decoration-break-clone.html">
+      <link rel="me" href="https://front-end.social/@johannes">
+  </head>
+  <body>
+  
+   <header>
+      <a href="/" class="site-title">Johannes Odland</a>
+      <nav></nav>
+    </header>
+
+    <article role="main">
+      <header>
+        <time datetime="Sun Dec 01 2024 10:00:00 GMT+0000 (Coordinated Universal Time)" pubdate>
+          Dec 1, 2024
+        </time>
+        <h1>Web Wish 1: `text-wrap: balance` and `box-decoration-break: clone`</h1>
+      </header>
+      <div class="content"><p>I've been waiting for <code>text-wrap: balance</code> since <a href="https://lists.w3.org/Archives/Public/www-style//2015Jan/0361.html">it was added</a>
+to the <a href="https://drafts.csswg.org/css-text-4/#text-wrap-style">editors draft of <code>css-text-4</code></a> in 2015.
+Naturally, I was excited when <code>text-wrap: balance</code> was included in <a href="https://web.dev/blog/interop-2024">interop 2024</a>.
+However, it seems I might have gotten my hopes up a little too soon.</p>
+<p>I see two major use cases for <code>text-wrap: balance</code>.
+The first is to balance text in headings, so that we don't end up with an unsightly orphan on the last line.
+The second is to balance text when we present the text with slabs behind it.
+Unbalanced text sticks out like a sore thumb here.</p>
+<figure>
+    <img
+    src="/assets/web-wishlist-2024/text-wrap-balance/text-wrap-balance-slab.webp"
+    alt="Two screen grabs of an article with and without text-wrap: balance. 
+        In the first screen grab, the first line is long but the second line contains one single word. 
+        In the second screen grab, the two lines have equal length."
+    />
+    <figcaption>
+        Example of how a slabbed text line looks with and without `text-wrap: balance`. 
+        Screenshots from the article 
+        <a href="https://www.nrk.no/dokumentar/xl/frostens-vokter-1.14755370">Frostens vokter</a>. 
+    </figcaption>
+</figure>
+<p>When <code>text-wrap: balance</code> was implemented in Blink, it supported both these use cases.
+However, in WebKit,
+it seems that elements with inline children using <code>box-decoration-break: clone</code> were excluded from balancing.
+One possible reason for this could be the lack of a web platform test specifically for the interaction between these two properties.</p>
+<p>While waiting for full support across major browsers,
+I've used different techniques to balance the text with JavaScript.
+It would be a relief to remove this code and have native support.</p>
+<p>So, for Christmas,
+I'm hoping that WebKit will bring full support for the combination of <code>text-wrap: balance</code> and <code>box-decoration-break: clone</code>.</p>
+<p>Relevant issues and PRs:</p>
+<ul>
+<li><a href="https://bugs.webkit.org/show_bug.cgi?id=274145">Text-wrap balance with box-decoration-break clone child fails</a></li>
+<li><a href="https://github.com/web-platform-tests/wpt/pull/48445">Add test for text-wrap: balance with box-decoration-break: clone</a></li>
+</ul>
+</div>
+    </article>
+  
+    <footer>
+      <h2>Johannes Odland</h2>
+      <p>Infrequent posts about CSS and other frontend stuff.</p>
+      <ul>
+        <li><a href="https://front-end.social/@johannes">Mastodon</a></li>
+        <li><a href="https://github.com/johannesodland">Github</a></li>
+      </ul>
+      <p>Built with <a href="https://www.11ty.dev">Eleventy</a>.</p>
+    </footer>
+  </body>
+</html>
