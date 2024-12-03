@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset=utf-8>
+      <title>Web Wish 3: Layer Based SVG Engine (LBSE)</title>
+      <style>@layer reset, default, layout;</style>
+      <link rel=stylesheet href=/assets/css/reset.css>
+      <link rel=stylesheet href=/assets/css/fonts.css>
+      <link rel=stylesheet href=/assets/css/default.css>
+      <link rel=stylesheet href=/assets/css/layout.css>
+      <link rel=stylesheet href=/assets/css/style.css>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel=canonical href="/2024/12/03/web-wish-3-layer-based-svg-engine.html">
+      <link rel="me" href="https://front-end.social/@johannes">
+  </head>
+  <body>
+  
+   <header>
+      <a href="/" class="site-title">Johannes Odland</a>
+      <nav></nav>
+    </header>
+
+    <article role="main">
+      <header>
+        <time datetime="Tue Dec 03 2024 15:00:00 GMT+0000 (Coordinated Universal Time)" pubdate>
+          Dec 3, 2024
+        </time>
+        <h1>Web Wish 3: Layer Based SVG Engine (LBSE)</h1>
+      </header>
+      <div class="content"><p>I love listening to <a href="https://www.igalia.com/chats/">Igalia Chats</a>,
+especially when they bring on people who have been an integral part of the development of the web.
+One of my favourite episodes is where Nikolas Zimmermann talks about
+<a href="https://www.igalia.com/chats/Igalia-Chats-Niko-SVG-WPE">how he and Rob Buis built the KSVG library</a> which eventually powered SVG rendering in WebKit.</p>
+<p>In that episode he explains how HTML and SVG currently has two separate rendering paths in WebKit.
+While SVG was once more powerful than HTML and CSS, with support for transforms, filters and masking,
+HTML and CSS has since gained these capabilities <em>and</em> now have a hardware accelerated rendering path.</p>
+<p>The current SVG engine in WebKit does not support hardware-accelerated compositing.
+Changes to transforms or opacity in an SVG triggers a full re-render, while in HTML and CSS such changes would
+be handled through hardware-accelerated compositing.</p>
+<p>At the time of recording, Zimmerman and Igalia had prototyped a way to harmonize the rendering of HTML and SVG,
+using the Layer Tree — a structure that organizes rendering layers for compositing — to enable hardware accelerated SVG rendering.
+This harmonization would remove duplication and allow SVG to handle complex animations more efficiently.</p>
+<p>It's almost five years since that episode aired, and a lot has happened in the meanwhile.
+While the prototype proved the concepts of the new <a href="https://wpewebkit.org/blog/05-new-svg-engine.html">Layer Based SVG Engine (LBSE)</a>,
+it was still just a prototype and needed to be upstreamed into the WebCore in manageable, reviewable chunks.</p>
+<p>The <a href="https://wpewebkit.org/blog/05-new-svg-engine.html">Status of the new SVG engine in WebKit</a> post on <a href="wpewebkit.org">wpewebkit.org</a> covers the progress in detail.</p>
+<p>Currently, LBSE coexists with the legacy engine behind a compile-time flag.
+The new engine adds hardware accelerated compositing, 3D-transforms, and z-index support for all SVG elements.</p>
+<p>Before it can replace the legacy engine, the new SVG engine still needs to reach feature parity,
+meet security requirements, and match the legacy engine's performance benchmarks.
+An <a href="https://wpewebkit.org/blog/status-of-lbse-in-webkit.html">update from this summer</a> covers the progress made over the last year,
+showing that the new engine is inching towards becoming a complete replacement.</p>
+<p>While it <em>is</em> getting closer to replace the old engine, there are still some issues that needs to be resolved before
+WebKit can make the switch.</p>
+<p>While asking for LBSE to land before Christmas might be too much,
+I hope Igalia Chats will invite Nikolas Zimmermann back to discuss the progress made over the last five years.</p>
+<p>Relevant issues and PRs:</p>
+<ul>
+<li><a href="https://bugs.webkit.org/show_bug.cgi?id=90738">Harmonize HTML &amp; SVG rendering</a></li>
+</ul>
+</div>
+    </article>
+  
+    <footer>
+      <h2>Johannes Odland</h2>
+      <p>Infrequent posts about CSS and other frontend stuff.</p>
+      <ul>
+        <li><a href="https://front-end.social/@johannes">Mastodon</a></li>
+        <li><a href="https://github.com/johannesodland">Github</a></li>
+      </ul>
+      <p>Built with <a href="https://www.11ty.dev">Eleventy</a>.</p>
+    </footer>
+  </body>
+</html>
