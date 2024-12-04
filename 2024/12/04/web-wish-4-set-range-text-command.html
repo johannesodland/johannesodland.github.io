@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset=utf-8>
+      <title>Web Wish 4: set-range-text command</title>
+      <style>@layer reset, default, layout;</style>
+      <link rel=stylesheet href=/assets/css/reset.css>
+      <link rel=stylesheet href=/assets/css/fonts.css>
+      <link rel=stylesheet href=/assets/css/default.css>
+      <link rel=stylesheet href=/assets/css/layout.css>
+      <link rel=stylesheet href=/assets/css/style.css>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel=canonical href="/2024/12/04/web-wish-4-set-range-text-command.html">
+      <link rel="me" href="https://front-end.social/@johannes">
+  </head>
+  <body>
+  
+   <header>
+      <a href="/" class="site-title">Johannes Odland</a>
+      <nav></nav>
+    </header>
+
+    <article role="main">
+      <header>
+        <time datetime="Wed Dec 04 2024 18:30:00 GMT+0000 (Coordinated Universal Time)" pubdate>
+          Dec 4, 2024
+        </time>
+        <h1>Web Wish 4: set-range-text command</h1>
+      </header>
+      <div class="content"><p>My drafts folder is full of half written posts on punctuation and special characters.
+The reason I come back to this theme is that the technological development of the last 100+ years
+have made it incredibly hard to enter and edit special characters on the web.</p>
+<p>In Norwegian, the most common quotation marks are not available on the keyboard,
+so professional writers have to rely on difficult to remember short codes that vary across operating systems.</p>
+<p>Some editors use “smart quotes” to automatically replace the typed characters with the correct ones,
+but this solution only works within certain systems,
+and lacks the flexibility authors need to choose specific quotation marks.</p>
+<p><strong>Time and time again I've had to be the middle man apologizing for how hard this is.</strong></p>
+<p>Given the lacking physical keys for special characters across languages,
+it should be easy to add special characters to form inputs –
+preferably without complex JavaScript setup.</p>
+<p>The recent <a href="https://open-ui.org/components/invokers.explainer/">Invoker Commands proposal</a> makes it possible to add commands to buttons in a declarative
+way, removing the need for JavaScript and paving the cowpath for simple commands like opening and closing a dialog.
+Initially this will support commands like <code>toggle-popover</code>, <code>show-modal</code> and <code>close</code>,
+but many other commands like <code>step-up</code> and <code>step-down</code> have been suggested.</p>
+<p>To make entering special characters easier for everyone,
+I wish for a new declarative <a href="https://github.com/openui/open-ui/issues/1062"><code>set-range-text</code> command</a> for <code>&lt;input type=&quot;text&quot;&gt;</code>
+and <code>&lt;textarea&gt;</code>, that calls <code>.setRangeText()</code> with the button's value.</p>
+<p>Relevant issues and PRs:</p>
+<ul>
+<li><a href="https://github.com/openui/open-ui/issues/1062">[invokers] setRangeText for textarea and inputs</a></li>
+</ul>
+</div>
+    </article>
+  
+    <footer>
+      <h2>Johannes Odland</h2>
+      <p>Infrequent posts about CSS and other frontend stuff.</p>
+      <ul>
+        <li><a href="https://front-end.social/@johannes">Mastodon</a></li>
+        <li><a href="https://github.com/johannesodland">Github</a></li>
+      </ul>
+      <p>Built with <a href="https://www.11ty.dev">Eleventy</a>.</p>
+    </footer>
+  </body>
+</html>
