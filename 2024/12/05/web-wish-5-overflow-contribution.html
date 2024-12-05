@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset=utf-8>
+      <title>Web Wish 5: Overflow Contribution</title>
+      <style>@layer reset, default, layout;</style>
+      <link rel=stylesheet href=/assets/css/reset.css>
+      <link rel=stylesheet href=/assets/css/fonts.css>
+      <link rel=stylesheet href=/assets/css/default.css>
+      <link rel=stylesheet href=/assets/css/layout.css>
+      <link rel=stylesheet href=/assets/css/style.css>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel=canonical href="/2024/12/05/web-wish-5-overflow-contribution.html">
+      <link rel="me" href="https://front-end.social/@johannes">
+  </head>
+  <body>
+  
+   <header>
+      <a href="/" class="site-title">Johannes Odland</a>
+      <nav></nav>
+    </header>
+
+    <article role="main">
+      <header>
+        <time datetime="Thu Dec 05 2024 15:00:00 GMT+0000 (Coordinated Universal Time)" pubdate>
+          Dec 5, 2024
+        </time>
+        <h1>Web Wish 5: Overflow Contribution</h1>
+      </header>
+      <div class="content"><p>Have you ever had a scrollbar appear unexpectedly?
+Perhaps a rogue horizontal scrollbar on the page?</p>
+<p>I often find myself hunting for the element that causes the scrollable overflow area to grow
+– the cause of the rogue scrollbar.
+Normally I can solve the issue by adding <code>overflow: clip</code> to a parent element.</p>
+<p>Unfortunately, that's not always possible.
+You might not want to clip the element to the parent elements bounds.
+Additionally, adding <code>overflow: clip</code> forces <code>transform-style: flat</code>,
+which can wreak havoc if the elements are part of a 3d rendering context.</p>
+<p>Imagine being able to set a CSS property like <code>overflow-contribution: none</code> to exclude elements from
+contributing to the overflow area?</p>
+<p>The CSSWG has resolved to adopt this feature, but it still needs to a formal specification.</p>
+<p>This holiday season, I'm hoping for implementer interest in a CSS property that prevent elements from contributing to scrollable overflow.</p>
+<p>Relevant issues and PRs:</p>
+<ul>
+<li><a href="https://github.com/w3c/csswg-drafts/issues/8361">add method to prevent elements from contributing to scrollable overflow</a></li>
+<li><a href="https://github.com/w3c/csswg-drafts/issues/8400">Ability to ignore specific descendants when generating scrollbars</a></li>
+</ul>
+</div>
+    </article>
+  
+    <footer>
+      <h2>Johannes Odland</h2>
+      <p>Infrequent posts about CSS and other frontend stuff.</p>
+      <ul>
+        <li><a href="https://front-end.social/@johannes">Mastodon</a></li>
+        <li><a href="https://github.com/johannesodland">Github</a></li>
+      </ul>
+      <p>Built with <a href="https://www.11ty.dev">Eleventy</a>.</p>
+    </footer>
+  </body>
+</html>
