@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset=utf-8>
+      <title>Web Wish 6: Responsive Posters</title>
+      <style>@layer reset, default, layout;</style>
+      <link rel=stylesheet href=/assets/css/reset.css>
+      <link rel=stylesheet href=/assets/css/fonts.css>
+      <link rel=stylesheet href=/assets/css/default.css>
+      <link rel=stylesheet href=/assets/css/layout.css>
+      <link rel=stylesheet href=/assets/css/style.css>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel=canonical href="/2024/12/06/web-wish-6-responsive-posters.html">
+      <link rel="me" href="https://front-end.social/@johannes">
+  </head>
+  <body>
+  
+   <header>
+      <a href="/" class="site-title">Johannes Odland</a>
+      <nav></nav>
+    </header>
+
+    <article role="main">
+      <header>
+        <time datetime="Fri Dec 06 2024 15:00:00 GMT+0000 (Coordinated Universal Time)" pubdate>
+          Dec 6, 2024
+        </time>
+        <h1>Web Wish 6: Responsive Posters</h1>
+      </header>
+      <div class="content"><p>Last year, we finally regained support for <a href="https://scottjehl.com/posts/using-responsive-video/">using media queries for delivering responsive video</a>,
+thanks to <a href="https://scottjehl.com/">Scott Jehl</a>.</p>
+<p>That is awesome, but there's still room for improvement.</p>
+<p>The <code>&lt;video&gt;</code> element still supports only a single source for the poster image.
+Wouldn't it be great if you could deliver responsive poster images along with the responsive video?</p>
+<p>One way to do this would be <a href="https://github.com/whatwg/html/issues/10378">allowing a child <code>&lt;picture&gt;</code> element to control the <code>&lt;video&gt;</code> poster</a>.
+This would enable support for using media-queries to art direct the poster images, matching the video source.
+It would also allow for multiple resolutions of the poster image,
+lazy-loading of the poster image and adding an alt-text to the poster image.</p>
+<p>This Christmas, I'm wishing for a way to add responsive poster images to the <code>&lt;video&gt;</code> element.</p>
+<p>Relevant issues and PRs:</p>
+<ul>
+<li><a href="https://github.com/whatwg/html/issues/10378">HTML Video: Allow a child Picture Element to Control the Video Poster Image</a></li>
+<li><a href="https://github.com/whatwg/html/issues/6636">Lazy loading video element poster attribute</a></li>
+<li><a href="https://github.com/whatwg/html/issues/7954">Considerations for providing alternative text to video poster graphics</a></li>
+</ul>
+</div>
+    </article>
+  
+    <footer>
+      <h2>Johannes Odland</h2>
+      <p>Infrequent posts about CSS and other frontend stuff.</p>
+      <ul>
+        <li><a href="https://front-end.social/@johannes">Mastodon</a></li>
+        <li><a href="https://github.com/johannesodland">Github</a></li>
+      </ul>
+      <p>Built with <a href="https://www.11ty.dev">Eleventy</a>.</p>
+    </footer>
+  </body>
+</html>
