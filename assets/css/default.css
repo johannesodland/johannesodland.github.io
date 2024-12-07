@@ -108,6 +108,7 @@
 
   pre,
   code {
+    margin-block: 0 1.5rem;
     border-radius: 3px;
     background-color: #eee;
   }
