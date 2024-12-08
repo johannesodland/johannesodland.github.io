@@ -15,7 +15,7 @@ export function render(data) {
       <div class="content">
         <section>
           <h2>Posts</h2>
-          ${data?.collections?.posts
+          ${data?.collections?.posts?.toReversed()
             ?.map((post) => {
               return html`<article class="plug">
                 <h3><a href="${post.url}">${post.data.title}</a></h3>

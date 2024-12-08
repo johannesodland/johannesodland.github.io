@@ -26,6 +26,7 @@ export function render(data) {
       <ul>
         <li><a href="https://front-end.social/@johannes">Mastodon</a></li>
         <li><a href="https://github.com/johannesodland">Github</a></li>
+        <li><a href="/feed.xml">Atom feed</a></li>
       </ul>
       <p>Built with <a href="https://www.11ty.dev">Eleventy</a>.</p>
     </footer>

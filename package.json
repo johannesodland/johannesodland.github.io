@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/johannesodland/johannesodland.github.io#readme",
   "devDependencies": {
-    "@11ty/eleventy": "^3.0.0-alpha.5",
+    "@11ty/eleventy": "^3.0.0",
+    "@11ty/eleventy-plugin-rss": "^2.0.2",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
     "markdown-it-footnote": "^4.0.0",
     "prettier": "^3.3.3"
