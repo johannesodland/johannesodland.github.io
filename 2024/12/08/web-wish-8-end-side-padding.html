@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset="utf-8">
+      <title>Web Wish 8: End Side Padding on Scroll Containers</title>
+      <style>@layer reset, default, layout;</style>
+      <link rel="stylesheet" href="/eleventy-base-blog/eleventy-base-blog/assets/css/reset.css">
+      <link rel="stylesheet" href="/eleventy-base-blog/eleventy-base-blog/assets/css/fonts.css">
+      <link rel="stylesheet" href="/eleventy-base-blog/eleventy-base-blog/assets/css/default.css">
+      <link rel="stylesheet" href="/eleventy-base-blog/eleventy-base-blog/assets/css/layout.css">
+      <link rel="stylesheet" href="/eleventy-base-blog/eleventy-base-blog/assets/css/style.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="canonical" href="/eleventy-base-blog/eleventy-base-blog/2024/12/08/web-wish-8-end-side-padding.html">
+      <link rel="me" href="https://front-end.social/@johannes">
+  </head>
+  <body>
+  
+   <header>
+      <a href="/eleventy-base-blog/" class="site-title">Johannes Odland</a>
+      <nav></nav>
+    </header>
+
+    <article role="main">
+      <header>
+        <time datetime="Sun Dec 08 2024 15:00:00 GMT+0000 (Coordinated Universal Time)" pubdate="">
+          Dec 8, 2024
+        </time>
+        <h1>Web Wish 8: End Side Padding on Scroll Containers</h1>
+      </header>
+      <div class="content"><p>One of the longest-running issues I've followed is <a href="https://github.com/w3c/csswg-drafts/issues/129">how to handle padding in a scroll container</a>.
+The issue was first opened in 2016.</p>
+<p>Most developers expected padding to be added at the end of the in-flow content of the scroll container.
+This was also how it was specified in <a href="https://www.w3.org/TR/css-overflow-3/">Overflow 3</a>.</p>
+<p>However, browsers handled this differently, and it wasn't clear if the desired behavior was web-compatible.
+Inline padding was particularly problematic,
+as all browsers agreed on excluding it.
+Changing this could cause web-compat issues as pages could rely on the current behavior.</p>
+<p><strong>It was a mess.</strong></p>
+<p>But slowly and steadily, the issues were worked out.</p>
+<p>In 2019 the working group resolved to <a href="https://github.com/w3c/csswg-drafts/issues/3665">always include padding in grid and flexbox containers</a>,
+as there were no web-compat issues there.</p>
+<p>Then, Blink finally ironed out the last web-compat issues,
+and in 2022, the working group resolved to always include inline-end padding.</p>
+<p>Firefox has just begun passing <a href="https://wpt.fyi/results/css/css-overflow/scrollable-overflow-padding.html?label=experimental&amp;label=master&amp;aligned">all the tests</a>,
+and while Safari is not fully compliant yet, the situation has improved significantly.</p>
+<p><strong>Or, so I thought.</strong></p>
+<p>It turns out that IntersectionObserver in Safari <a href="https://wpt.fyi/results/intersection-observer/padding-clip.html?label=experimental&amp;label=master&amp;aligned">doesn't support padding on the scroll container correctly</a>.
+While padding is now usable on scroll containers in many cases,
+any IntersectionObservers that use the scroll container as root may behave erratically.</p>
+<p><strong>So, this Christmas I'm wishing for Safari to support padding correctly in IntersectionObservers.</strong></p>
+<p>Relevant issues and PRs:</p>
+<ul>
+<li><a href="https://github.com/w3c/csswg-drafts/issues/129">Include padding in scrollable overflow area</a></li>
+<li><a href="https://github.com/w3c/csswg-drafts/issues/3665">Clarify padding in overflow content</a></li>
+<li><a href="https://github.com/w3c/IntersectionObserver/issues/504">Clarify root rect with overflow and padding</a></li>
+<li><a href="https://bugs.webkit.org/show_bug.cgi?id=263316">IntersectionObserver root rect with padding is incorrect if there's overflow clipping</a></li>
+</ul>
+</div>
+    </article>
+  
+    <footer>
+      <h2>Johannes Odland</h2>
+      <p>Infrequent posts about CSS and other frontend stuff.</p>
+      <ul>
+        <li><a href="https://front-end.social/@johannes">Mastodon</a></li>
+        <li><a href="https://github.com/johannesodland">Github</a></li>
+        <li><a href="/eleventy-base-blog/eleventy-base-blog/feed.xml">Atom feed</a></li>
+      </ul>
+      <p>Built with <a href="https://www.11ty.dev">Eleventy</a>.</p>
+    </footer>
+  </body>
+</html>

@@ -1,28 +1,28 @@
 <!doctype html>
 <html>
   <head>
-      <meta charset=utf-8>
+      <meta charset="utf-8">
       <title>Cropping Images with CSS While Keeping a Focal Point in the Center</title>
       <style>@layer reset, default, layout;</style>
-      <link rel=stylesheet href=/assets/css/reset.css>
-      <link rel=stylesheet href=/assets/css/fonts.css>
-      <link rel=stylesheet href=/assets/css/default.css>
-      <link rel=stylesheet href=/assets/css/layout.css>
-      <link rel=stylesheet href=/assets/css/style.css>
+      <link rel="stylesheet" href="/eleventy-base-blog/eleventy-base-blog/assets/css/reset.css">
+      <link rel="stylesheet" href="/eleventy-base-blog/eleventy-base-blog/assets/css/fonts.css">
+      <link rel="stylesheet" href="/eleventy-base-blog/eleventy-base-blog/assets/css/default.css">
+      <link rel="stylesheet" href="/eleventy-base-blog/eleventy-base-blog/assets/css/layout.css">
+      <link rel="stylesheet" href="/eleventy-base-blog/eleventy-base-blog/assets/css/style.css">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel=canonical href="/2023/02/26/cropping-images-with-css-while-keeping-a-focal-point-in-the-center.html">
+      <link rel="canonical" href="/eleventy-base-blog/eleventy-base-blog/2023/02/26/cropping-images-with-css-while-keeping-a-focal-point-in-the-center.html">
       <link rel="me" href="https://front-end.social/@johannes">
   </head>
   <body>
   
    <header>
-      <a href="/" class="site-title">Johannes Odland</a>
+      <a href="/eleventy-base-blog/" class="site-title">Johannes Odland</a>
       <nav></nav>
     </header>
 
     <article role="main">
       <header>
-        <time datetime="Sun Feb 26 2023 15:00:00 GMT+0000 (Coordinated Universal Time)" pubdate>
+        <time datetime="Sun Feb 26 2023 15:00:00 GMT+0000 (Coordinated Universal Time)" pubdate="">
           Feb 26, 2023
         </time>
         <h1>Cropping Images with CSS While Keeping a Focal Point in the Center</h1>
@@ -74,28 +74,16 @@ One way to achieve this is by identifying the image’s “focal point” – th
 <figure id="hero-illustration">
     <div class="grid">
         <div class="container">
-            <img
-                src="/assets/image-cropping/focus-point-resize-compressed.jpg"
-                loading="lazy"
-                alt="A horizontally cropped image. The image is a digital landscape illustration. A waterfall cascades down the face of a fir clad cliff.
-The scene is lit up by green northern lights. Above the waterfall an orb is glowing in the color of the sun."
-            />
+            <img src="/eleventy-base-blog/eleventy-base-blog/assets/image-cropping/focus-point-resize-compressed.jpg" loading="lazy" alt="A horizontally cropped image. The image is a digital landscape illustration. A waterfall cascades down the face of a fir clad cliff.
+The scene is lit up by green northern lights. Above the waterfall an orb is glowing in the color of the sun.">
         </div>
         <div class="container">
-            <img
-                src="/assets/image-cropping/focus-point-resize-compressed.jpg"
-                loading="lazy"
-                alt="A squarely cropped image.  The image is a digital landscape illustration. A waterfall cascades down the face of a fir clad cliff.
-The scene is lit up by green northern lights. Above the waterfall an orb is glowing in the color of the sun."
-            />
+            <img src="/eleventy-base-blog/eleventy-base-blog/assets/image-cropping/focus-point-resize-compressed.jpg" loading="lazy" alt="A squarely cropped image.  The image is a digital landscape illustration. A waterfall cascades down the face of a fir clad cliff.
+The scene is lit up by green northern lights. Above the waterfall an orb is glowing in the color of the sun.">
         </div>
         <div class="container">
-            <img
-                src="/assets/image-cropping/focus-point-resize-compressed.jpg"
-                loading="lazy"
-                alt="A vertically cropped image.  The image is a digital landscape illustration. A waterfall cascades down the face of a fir clad cliff.
-The scene is lit up by green northern lights. Above the waterfall an orb is glowing in the color of the sun."
-            />
+            <img src="/eleventy-base-blog/eleventy-base-blog/assets/image-cropping/focus-point-resize-compressed.jpg" loading="lazy" alt="A vertically cropped image.  The image is a digital landscape illustration. A waterfall cascades down the face of a fir clad cliff.
+The scene is lit up by green northern lights. Above the waterfall an orb is glowing in the color of the sun.">
         </div>
     </div>
     <style>
@@ -173,16 +161,11 @@ We can do this by declaring the <a href="https://developer.mozilla.org/en-US/doc
 <p>The image will adjust by stretching to fit its dimensions.
 This is not exactly what we want, but it is a step in the right direction.</p>
 <figure>
-<img
-    src="/assets/image-cropping/nordlys.jpg"
-    loading="lazy"
-    style="width: 100%; aspect-ratio: 3 / 1;"
-    alt="An image stretched into a 3:1 aspect ratio. The image is a digital illustration of a modernistic house on the edge of a lake.
+<img src="/eleventy-base-blog/eleventy-base-blog/assets/image-cropping/nordlys.jpg" loading="lazy" style="width: 100%; aspect-ratio: 3 / 1;" alt="An image stretched into a 3:1 aspect ratio. The image is a digital illustration of a modernistic house on the edge of a lake.
 The scene is set in the blue hour and lit up by green northern lights that reflect in the lake.
 The lights in he house are on and the silhouette of a person looking out can be seen in the middle window.
 The silhouette of a second person can be seen in the lower right of the image.
-It is observing the house, holding something that can be perceived as a knife."
-/>
+It is observing the house, holding something that can be perceived as a knife.">
 <pre class="language-css"><code class="language-css"><span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
 <span class="token property">aspect-ratio</span><span class="token punctuation">:</span> 3 / 1<span class="token punctuation">;</span></code></pre>
 </figure>
@@ -191,18 +174,13 @@ It is observing the house, holding something that can be perceived as a knife."
 <p>This property allows us to choose how the image should be scaled, using values like <code>contain</code>, <code>cover</code>, <code>fill</code>, <code>none</code>, or <code>scale-down</code>.
 When we use the <code>cover</code> value, the image is scaled to fill the container while preserving its natural aspect ratio.</p>
 <figure>
-<img 
-    src="/assets/image-cropping/nordlys.jpg" 
-    loading="lazy" 
-    style="width: 100%; aspect-ratio: 3 / 1; object-fit: cover;" 
-    alt="An image fitted into a 3:1 aspect ratio while maintaining the aspect ratio. 
+<img src="/eleventy-base-blog/eleventy-base-blog/assets/image-cropping/nordlys.jpg" loading="lazy" style="width: 100%; aspect-ratio: 3 / 1; object-fit: cover;" alt="An image fitted into a 3:1 aspect ratio while maintaining the aspect ratio. 
         The image is cropped towards the center. 
         The image is a digital illustration of a modernistic house on the edge of a lake.
 The scene is set in the blue hour and lit up by green northern lights that reflect in the lake.
 The lights in he house are on and the silhouette of a person looking out can be seen in the middle window.
 The silhouette of a second person can be seen in the lower right of the image.
-It is observing the house, holding something that can be perceived as a knife."
-/>
+It is observing the house, holding something that can be perceived as a knife.">
 <pre class="language-css"><code class="language-css"><span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
 <span class="token property">aspect-ratio</span><span class="token punctuation">:</span> 3 / 1<span class="token punctuation">;</span>
 <span class="token property">object-fit</span><span class="token punctuation">:</span> cover<span class="token punctuation">;</span></code></pre>
@@ -223,22 +201,17 @@ the horizontal position is declared first followed by the vertical position.</p>
 We could use a value of <code>0% 100%</code> for the <code>object-position</code> property to achieve this.</p>
 <p>For our example a value of <code>50% 62%</code> seems to give suitable results:</p>
 <figure>
-<img 
-    src="/assets/image-cropping/nordlys.jpg" 
-    loading="lazy" 
-    style="
+<img src="/eleventy-base-blog/eleventy-base-blog/assets/image-cropping/nordlys.jpg" loading="lazy" style="
         width: 100%; 
         aspect-ratio: 3 / 1; 
         object-fit: cover; 
-        object-position: 50% 62%;" 
-    alt="An image fitted into a 3:1 aspect ratio while maintaining the aspect ratio. 
+        object-position: 50% 62%;" alt="An image fitted into a 3:1 aspect ratio while maintaining the aspect ratio. 
         The image position is hand tuned to fit the house in the crop. 
         The image is a digital illustration of a modernistic house on the edge of a lake.
 The scene is set in the blue hour and lit up by green northern lights that reflect in the lake.
 The lights in he house are on and the silhouette of a person looking out can be seen in the middle window.
 The silhouette of a second person can be seen in the lower right of the image.
-It is observing the house, holding something that can be perceived as a knife."
-/>
+It is observing the house, holding something that can be perceived as a knife.">
 <pre class="language-css"><code class="language-css"><span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
 <span class="token property">aspect-ratio</span><span class="token punctuation">:</span> 3 / 1<span class="token punctuation">;</span>
 <span class="token property">object-fit</span><span class="token punctuation">:</span> cover<span class="token punctuation">;</span>
@@ -261,24 +234,19 @@ you can see that the subject is not quite centered in the container.</p>
 <p>In the next sections we will dive into why we can’t use the custom focus point directly,
 and explore a better method of calculating the <code>object-position</code> so that the focus point is centered in the container.</p>
 <figure>
-<img 
-    src="/assets/image-cropping/nordlys.jpg" 
-    loading="lazy" 
-    style="
+<img src="/eleventy-base-blog/eleventy-base-blog/assets/image-cropping/nordlys.jpg" loading="lazy" style="
         --crop-focus-x: 0.6;
         --crop-focus-y: 0.6;
         width: 100%; 
         aspect-ratio: 3 / 1; 
         object-fit: cover; 
-        object-position: calc(var(--crop-focus-x) * 100%) calc(var(--crop-focus-y) * 100%);" 
-    alt="An image fitted into a 3:1 aspect ratio while maintaining the aspect ratio. 
+        object-position: calc(var(--crop-focus-x) * 100%) calc(var(--crop-focus-y) * 100%);" alt="An image fitted into a 3:1 aspect ratio while maintaining the aspect ratio. 
         The image is positioned using a simplistic scheme. 
         The image is a digital illustration of a modernistic house on the edge of a lake.
 The scene is set in the blue hour and lit up by green northern lights that reflect in the lake.
 The lights in he house are on and the silhouette of a person looking out can be seen in the middle window.
 The silhouette of a second person can be seen in the lower right of the image.
-It is observing the house, holding something that can be perceived as a knife."
-/>
+It is observing the house, holding something that can be perceived as a knife.">
 <pre class="language-css"><code class="language-css"><span class="token property">--crop-focus-x</span><span class="token punctuation">:</span> 0.6<span class="token punctuation">;</span>
 <span class="token property">--crop-focus-y</span><span class="token punctuation">:</span> 0.6<span class="token punctuation">;</span>
 <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
@@ -290,16 +258,8 @@ It is observing the house, holding something that can be perceived as a knife."
 <p>To better understand why using focus coordinates directly in <code>object-position</code> doesn’t work,
 let’s take a look at an example image with three positions marked out along the horizontal axis: <code>25%</code>, <code>50%</code>, and <code>75%</code>.</p>
 <figure>
-    <img
-        id="percentages"
-        src="/assets/image-cropping/percentages.png"
-        loading="lazy"
-        alt="An illustration with three focus points in the x axis marked out at 25%, 50% and 75% of the image width. 
-            The points are marked with dark green dots, and a short line pointing down at a text showing the percentage distance."
-        style="display: block; width: 100%; height: auto;"
-        width="1000"
-        height="250"
-    />
+    <img id="percentages" src="/eleventy-base-blog/eleventy-base-blog/assets/image-cropping/percentages.png" loading="lazy" alt="An illustration with three focus points in the x axis marked out at 25%, 50% and 75% of the image width. 
+            The points are marked with dark green dots, and a short line pointing down at a text showing the percentage distance." style="display: block; width: 100%; height: auto;" width="1000" height="250">
 </figure>
 <p>We can crop this image to a <code>1 / 1</code> aspect ratio and use the <code>--crop-focus-x</code> property to set the focus point to one of <code>0.25</code>, <code>0.5</code>, or <code>0.75</code>.
 Below is an interactive demo where you can choose between the three values for <code>--crop-focus-x</code>:</p>
@@ -307,17 +267,13 @@ Below is an interactive demo where you can choose between the three values for <
     <div id="percentages-illustration-1">
         <fieldset>
             <legend>--crop-focus-x</legend>
-            <label><input type="radio" name="focus-point-x" value="25" checked/> 0.25</label>
-            <label><input type="radio" name="focus-point-x" value="50"/> 0.50</label>
-            <label><input type="radio" name="focus-point-x" value="75"/> 0.75</label>
+            <label><input type="radio" name="focus-point-x" value="25" checked=""> 0.25</label>
+            <label><input type="radio" name="focus-point-x" value="50"> 0.50</label>
+            <label><input type="radio" name="focus-point-x" value="75"> 0.75</label>
             <div class="has-suport-info">&#9888; This demo requires support for the `:has()` relational pseudo-class.</div>
         </fieldset>
-        <img
-            src="/assets/image-cropping/percentages.png"
-            loading="lazy"
-            alt="An image fitted into a 1:1 aspect ratio while maintaining the aspect ratio.
-            The image is positioned using a simplistic scheme, so that values 25% and 75% are slightly off center when chosen."
-        />
+        <img src="/eleventy-base-blog/eleventy-base-blog/assets/image-cropping/percentages.png" loading="lazy" alt="An image fitted into a 1:1 aspect ratio while maintaining the aspect ratio.
+            The image is positioned using a simplistic scheme, so that values 25% and 75% are slightly off center when chosen.">
     </div>
     <style>
         #percentages-illustration-1 {
@@ -367,20 +323,14 @@ while the vertical offset is calculated as a percentage of the difference betwee
 then a value of 100% will resolve to a used value of -100px.</strong></p>
 <p>You can read more about percentages on <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-position#regarding_percentages">MDN</a>.</p>
 <figure>
-    <img 
-        src="/assets/image-cropping/percentage-values.jpg" 
-        width="1000" 
-        height="600"
-        style="width: 100%; height: auto;"
-        alt="An illustration that shows a box with a black outline. 
+    <img src="/eleventy-base-blog/eleventy-base-blog/assets/image-cropping/percentage-values.jpg" width="1000" height="600" style="width: 100%; height: auto;" alt="An illustration that shows a box with a black outline. 
             An image is sized to fit the box while keeping the aspect ratio. 
             The image is wider than the box and is protruding on the left side. 
-            The protruding part of the image is marked with the text 100%."
-        />
+            The protruding part of the image is marked with the text 100%.">
     <figcaption>
         Percentage values in `object-position` are relative to the difference between sizes of the container and the scaled image. 
         When using `object-fit: cover` a value of 100% for `object-position` will resolve to a negative value as the image is wider than the container.
-        <br/>
+        <br>
         <small>Illustration: Created with the assistance of DALL·E 2</small>
     </figcaption>
 </figure>
@@ -402,19 +352,13 @@ Let’s focus on the horizontal dimension and break down the calculation into tw
 <li>Then move the image to the left so that the focal point is in the center of the container</li>
 </ol>
 <figure>
-    <img 
-        src="/assets/image-cropping/steps.jpg"
-        alt="Illustration in two parts. 
+    <img src="/eleventy-base-blog/eleventy-base-blog/assets/image-cropping/steps.jpg" alt="Illustration in two parts. 
             The first part shows the container as a black outline. 
             An arrow that is half the width of the container is pointing to the right. 
             An image below the container is shifted this amount to the right so that the left image edge is in the center of the container.
             The second part shows the container as a black outline. 
             An arrow that is half the width of the image is pointing to the left. 
-            The image below is now shifted this amount to the left so that the focal point marked with a yellow circle ends up in the center of the container."
-        width="1000"
-        height="600"
-        style="width: 100%; height: auto;"
-    />
+            The image below is now shifted this amount to the left so that the focal point marked with a yellow circle ends up in the center of the container." width="1000" height="600" style="width: 100%; height: auto;">
     <figcaption>
         <small>Illustration: Created with the assistance of DALL·E 2</small>
     </figcaption>
@@ -426,14 +370,11 @@ The amount we need to move can be calculated as <code>0.5 * var(--container-widt
 <figure id="left-edge-to-center">
     <div class="wrapper">
         <div class="container">
-            <img
-                src="/assets/image-cropping/fp-example.jpg"
-                alt="A horizontal crop of one of the example images. The image is a digital illustration of a modernistic house on the edge of a lake.
+            <img src="/eleventy-base-blog/eleventy-base-blog/assets/image-cropping/fp-example.jpg" alt="A horizontal crop of one of the example images. The image is a digital illustration of a modernistic house on the edge of a lake.
 The scene is set in the blue hour and lit up by green northern lights that reflect in the lake.
 The lights in he house are on and the silhouette of a person looking out can be seen in the middle window.
 The silhouette of a second person can be seen in the lower right of the image.
-It is observing the house, holding something that can be perceived as a knife."
-            />
+It is observing the house, holding something that can be perceived as a knife.">
         </div>
     </div>
     <fieldset>
@@ -443,7 +384,7 @@ It is observing the house, holding something that can be perceived as a knife."
             Initial position
         </label>
         <label>
-            <input type="radio" name="left-edge-move" value="to-center" checked>
+            <input type="radio" name="left-edge-move" value="to-center" checked="">
             Step 1
         </label>
         <div class="has-suport-info">&#9888; This demo requires support for the `:has()` relational pseudo-class.</div>
@@ -511,14 +452,11 @@ Now we can subtract the resulting value from the value from the previous step to
 <figure id="focus-to-center">
 <div class="wrapper">
     <div class="container">
-        <img
-            src="/assets/image-cropping/fp-example.jpg"
-            alt="A horizontal crop of one of the example images. The image is a digital illustration of a modernistic house on the edge of a lake.
+        <img src="/eleventy-base-blog/eleventy-base-blog/assets/image-cropping/fp-example.jpg" alt="A horizontal crop of one of the example images. The image is a digital illustration of a modernistic house on the edge of a lake.
 The scene is set in the blue hour and lit up by green northern lights that reflect in the lake.
 The lights in he house are on and the silhouette of a person looking out can be seen in the middle window.
 The silhouette of a second person can be seen in the lower right of the image.
-It is observing the house, holding something that can be perceived as a knife."
-        />
+It is observing the house, holding something that can be perceived as a knife.">
     </div>
 </div>
 <fieldset>
@@ -528,11 +466,11 @@ It is observing the house, holding something that can be perceived as a knife."
             Initial position
         </label>
         <label>
-            <input type="radio" name="focus-point-move" value="to-center" checked>
+            <input type="radio" name="focus-point-move" value="to-center" checked="">
             Step 1
         </label>
         <label>
-            <input type="radio" name="focus-point-move" value="to-focus-point" checked>
+            <input type="radio" name="focus-point-move" value="to-focus-point" checked="">
             Step 2
         </label>
         <div class="has-suport-info">&#9888; This demo requires support for the `:has()` relational pseudo-class.</div>
@@ -602,22 +540,18 @@ we can see that the focus point centered in the container:</p>
     <div id="percentages-illustration-2">
         <fieldset>
             <legend>--crop-focus-x</legend>
-            <label><input type="radio" name="focus-x-2" value="25" checked/> 0.25</label>
-            <label><input type="radio" name="focus-x-2" value="50"/> 0.50</label>
-            <label><input type="radio" name="focus-x-2" value="75"/> 0.75</label>
+            <label><input type="radio" name="focus-x-2" value="25" checked=""> 0.25</label>
+            <label><input type="radio" name="focus-x-2" value="50"> 0.50</label>
+            <label><input type="radio" name="focus-x-2" value="75"> 0.75</label>
             <div class="has-suport-info">&#9888; This demo requires support for the `:has()` relational pseudo-class.</div>
         </fieldset>
-        <img
-            src="/assets/image-cropping/percentages.png"
-            loading="lazy"
-            alt="An image fitted into a 3:1 aspect ratio while maintaining the aspect ratio.
+        <img src="/eleventy-base-blog/eleventy-base-blog/assets/image-cropping/percentages.png" loading="lazy" alt="An image fitted into a 3:1 aspect ratio while maintaining the aspect ratio.
             The image is positioned using a simplistic scheme.
             The image is a digital illustration of a modernistic house on the edge of a lake.
 The scene is set in the blue hour and lit up by green northern lights that reflect in the lake.
 The lights in he house are on and the silhouette of a person looking out can be seen in the middle window.
 The silhouette of a second person can be seen in the lower right of the image.
-It is observing the house, holding something that can be perceived as a knife."
-        />
+It is observing the house, holding something that can be perceived as a knife.">
     </div>
     <style>
         #percentages-illustration-2 {
@@ -656,7 +590,7 @@ It is observing the house, holding something that can be perceived as a knife."
     <figcaption>
        <em>object-position</em> is now calculated as a function of <em>--container-width</em>, <em>--image-width</em> and <em>--crop-focus-x</em>.
         The points should be centered in the container when selected.
-        <br/>
+        <br>
         <small>Illustration: Created with the assistance of DALL·E 2</small>
     </figcaption>
 </figure>
@@ -721,36 +655,20 @@ Then we can use <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Co
 <figure id="cqu-illustration">
     <div class="grid">
         <div class="container">
-            <img
-                src="/assets/image-cropping/focus-point-resize-compressed.jpg"
-                loading="lazy"
-                alt="A horizontally cropped image. The image is a digital landscape illustration. A waterfall cascades down the face of a fir clad cliff.
-The scene is lit up by green northern lights. Above the waterfall an orb is glowing in the color of the sun."
-            />
+            <img src="/eleventy-base-blog/eleventy-base-blog/assets/image-cropping/focus-point-resize-compressed.jpg" loading="lazy" alt="A horizontally cropped image. The image is a digital landscape illustration. A waterfall cascades down the face of a fir clad cliff.
+The scene is lit up by green northern lights. Above the waterfall an orb is glowing in the color of the sun.">
         </div>
         <div class="container">
-            <img
-                src="/assets/image-cropping/focus-point-resize-compressed.jpg"
-                loading="lazy"
-                alt="A squarely cropped image.  The image is a digital landscape illustration. A waterfall cascades down the face of a fir clad cliff.
-The scene is lit up by green northern lights. Above the waterfall an orb is glowing in the color of the sun."
-            />
+            <img src="/eleventy-base-blog/eleventy-base-blog/assets/image-cropping/focus-point-resize-compressed.jpg" loading="lazy" alt="A squarely cropped image.  The image is a digital landscape illustration. A waterfall cascades down the face of a fir clad cliff.
+The scene is lit up by green northern lights. Above the waterfall an orb is glowing in the color of the sun.">
         </div>
         <div class="container">
-            <img
-                src="/assets/image-cropping/focus-point-resize-compressed.jpg"
-                loading="lazy"
-                alt="A vertically cropped image.  The image is a digital landscape illustration. A waterfall cascades down the face of a fir clad cliff.
-The scene is lit up by green northern lights. Above the waterfall an orb is glowing in the color of the sun."
-            />
+            <img src="/eleventy-base-blog/eleventy-base-blog/assets/image-cropping/focus-point-resize-compressed.jpg" loading="lazy" alt="A vertically cropped image.  The image is a digital landscape illustration. A waterfall cascades down the face of a fir clad cliff.
+The scene is lit up by green northern lights. Above the waterfall an orb is glowing in the color of the sun.">
         </div>
         <div class="container">
-            <img
-                src="/assets/image-cropping/focus-point-resize-compressed.jpg"
-                loading="lazy"
-                alt="A vertically cropped image.  The image is a digital landscape illustration. A waterfall cascades down the face of a fir clad cliff.
-The scene is lit up by green northern lights. Above the waterfall an orb is glowing in the color of the sun."
-            />
+            <img src="/eleventy-base-blog/eleventy-base-blog/assets/image-cropping/focus-point-resize-compressed.jpg" loading="lazy" alt="A vertically cropped image.  The image is a digital landscape illustration. A waterfall cascades down the face of a fir clad cliff.
+The scene is lit up by green northern lights. Above the waterfall an orb is glowing in the color of the sun.">
         </div>
     </div>
     <style>
@@ -839,11 +757,7 @@ and that images are still usable in browsers where new technology like ´contain
 <figure id="percentages-illustration-3">
     <div class="wrapper">
         <div class="container">
-            <img
-                src="/assets/image-cropping/focus-point-resize-compressed.jpg"
-                loading="lazy"
-                alt="alt"
-            />
+            <img src="/eleventy-base-blog/eleventy-base-blog/assets/image-cropping/focus-point-resize-compressed.jpg" loading="lazy" alt="alt">
         </div>
     </div>
     <style>
@@ -888,7 +802,7 @@ and that images are still usable in browsers where new technology like ´contain
         Final cropping solution using container units and object-position. 
         Resize the image by dragging the handle in the lower right corner of the image.
         (This example currently doesn’t work in Safari as <em>resize</em> is disabled when the element has a child size container.)
-        <br/>
+        <br>
         <small>Illustration: Created with the assistance of DALL·E 2</small>
     </figcaption>
 </figure>
@@ -901,6 +815,7 @@ and that images are still usable in browsers where new technology like ´contain
       <ul>
         <li><a href="https://front-end.social/@johannes">Mastodon</a></li>
         <li><a href="https://github.com/johannesodland">Github</a></li>
+        <li><a href="/eleventy-base-blog/eleventy-base-blog/feed.xml">Atom feed</a></li>
       </ul>
       <p>Built with <a href="https://www.11ty.dev">Eleventy</a>.</p>
     </footer>
