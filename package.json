@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "npx @11ty/eleventy",
-    "build-ghpages": "npx @11ty/eleventy --pathprefix=/eleventy-base-blog/",
+    "build-ghpages": "npx @11ty/eleventy",
     "dev": "npx @11ty/eleventy --serve --quiet",
     "format": "prettier \"**/*{.js,.ts,.css}\" --ignore-path .gitignore",
     "format:fix": "npm run format -- --write"
@@ -26,5 +26,8 @@
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
     "markdown-it-footnote": "^4.0.0",
     "prettier": "^3.3.3"
+  },
+  "volta": {
+    "node": "22.12.0"
   }
 }
