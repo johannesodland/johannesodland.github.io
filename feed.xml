@@ -2,18 +2,18 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
   <title>Johannes Odland</title>
   <subtitle>Infrequent posts about CSS and other frontend stuff.</subtitle>
-  <link href="https://johannesodland.github.io/eleventy-base-blog/feed.xml" rel="self" />
-  <link href="https://johannesodland.github.io/eleventy-base-blog/" />
+  <link href="https://johannesodland.github.io/feed.xml" rel="self" />
+  <link href="https://johannesodland.github.io/" />
   <updated>2024-12-08T15:00:00Z</updated>
-  <id>https://johannesodland.github.io/eleventy-base-blog/</id>
+  <id>https://johannesodland.github.io/</id>
   <author>
     <name>Johannes Odland</name>
   </author>
   <entry>
     <title>Web Wish 8: End Side Padding on Scroll Containers</title>
-    <link href="https://johannesodland.github.io/eleventy-base-blog/2024/12/08/web-wish-8-end-side-padding.html" />
+    <link href="https://johannesodland.github.io/2024/12/08/web-wish-8-end-side-padding.html" />
     <updated>2024-12-08T15:00:00Z</updated>
-    <id>https://johannesodland.github.io/eleventy-base-blog/2024/12/08/web-wish-8-end-side-padding.html</id>
+    <id>https://johannesodland.github.io/2024/12/08/web-wish-8-end-side-padding.html</id>
     <content type="html">&lt;p&gt;One of the longest-running issues I&#39;ve followed is &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/129&quot;&gt;how to handle padding in a scroll container&lt;/a&gt;.
 The issue was first opened in 2016.&lt;/p&gt;
 &lt;p&gt;Most developers expected padding to be added at the end of the in-flow content of the scroll container.
@@ -46,9 +46,9 @@ any IntersectionObservers that use the scroll container as root may behave errat
   </entry>
   <entry>
     <title>Web Wish 7: Custom Element Disconnected Signal</title>
-    <link href="https://johannesodland.github.io/eleventy-base-blog/2024/12/07/web-wish-7-custom-element-disconnected-signal.html" />
+    <link href="https://johannesodland.github.io/2024/12/07/web-wish-7-custom-element-disconnected-signal.html" />
     <updated>2024-12-07T19:30:00Z</updated>
-    <id>https://johannesodland.github.io/eleventy-base-blog/2024/12/07/web-wish-7-custom-element-disconnected-signal.html</id>
+    <id>https://johannesodland.github.io/2024/12/07/web-wish-7-custom-element-disconnected-signal.html</id>
     <content type="html">&lt;p&gt;Managing lifecycles in custom elements can be tedious.
 For instance, any event listener on global objects added in &lt;code&gt;connectedCallback()&lt;/code&gt; must be removed in &lt;code&gt;disconnectedCallback()&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;This double bookkeeping is error-prone, and could be simpler.
@@ -83,9 +83,9 @@ when an element is disconnected.&lt;/p&gt;
   </entry>
   <entry>
     <title>Web Wish 6: Responsive Posters</title>
-    <link href="https://johannesodland.github.io/eleventy-base-blog/2024/12/06/web-wish-6-responsive-posters.html" />
+    <link href="https://johannesodland.github.io/2024/12/06/web-wish-6-responsive-posters.html" />
     <updated>2024-12-06T15:00:00Z</updated>
-    <id>https://johannesodland.github.io/eleventy-base-blog/2024/12/06/web-wish-6-responsive-posters.html</id>
+    <id>https://johannesodland.github.io/2024/12/06/web-wish-6-responsive-posters.html</id>
     <content type="html">&lt;p&gt;Last year, we finally regained support for &lt;a href=&quot;https://scottjehl.com/posts/using-responsive-video/&quot;&gt;using media queries for delivering responsive video&lt;/a&gt;,
 thanks to &lt;a href=&quot;https://scottjehl.com/&quot;&gt;Scott Jehl&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;That is awesome, but there&#39;s still room for improvement.&lt;/p&gt;
@@ -106,9 +106,9 @@ lazy-loading of the poster image and adding an alt-text to the poster image.&lt;
   </entry>
   <entry>
     <title>Web Wish 5: Overflow Contribution</title>
-    <link href="https://johannesodland.github.io/eleventy-base-blog/2024/12/05/web-wish-5-overflow-contribution.html" />
+    <link href="https://johannesodland.github.io/2024/12/05/web-wish-5-overflow-contribution.html" />
     <updated>2024-12-05T15:00:00Z</updated>
-    <id>https://johannesodland.github.io/eleventy-base-blog/2024/12/05/web-wish-5-overflow-contribution.html</id>
+    <id>https://johannesodland.github.io/2024/12/05/web-wish-5-overflow-contribution.html</id>
     <content type="html">&lt;p&gt;Have you ever had a scrollbar appear unexpectedly?
 Perhaps a rogue horizontal scrollbar on the page?&lt;/p&gt;
 &lt;p&gt;I often find myself hunting for the element that causes the scrollable overflow area to grow
@@ -131,9 +131,9 @@ contributing to the overflow area?&lt;/p&gt;
   </entry>
   <entry>
     <title>Web Wish 4: set-range-text command</title>
-    <link href="https://johannesodland.github.io/eleventy-base-blog/2024/12/04/web-wish-4-set-range-text-command.html" />
+    <link href="https://johannesodland.github.io/2024/12/04/web-wish-4-set-range-text-command.html" />
     <updated>2024-12-04T18:30:00Z</updated>
-    <id>https://johannesodland.github.io/eleventy-base-blog/2024/12/04/web-wish-4-set-range-text-command.html</id>
+    <id>https://johannesodland.github.io/2024/12/04/web-wish-4-set-range-text-command.html</id>
     <content type="html">&lt;p&gt;My drafts folder is full of half written posts on punctuation and special characters.
 The reason I come back to this theme is that the technological development of the last 100+ years
 have made it incredibly hard to enter and edit special characters on the web.&lt;/p&gt;
@@ -161,9 +161,9 @@ and &lt;code&gt;&amp;lt;textarea&amp;gt;&lt;/code&gt;, that calls &lt;code&gt;.s
   </entry>
   <entry>
     <title>Web Wish 3: Layer Based SVG Engine (LBSE)</title>
-    <link href="https://johannesodland.github.io/eleventy-base-blog/2024/12/03/web-wish-3-layer-based-svg-engine.html" />
+    <link href="https://johannesodland.github.io/2024/12/03/web-wish-3-layer-based-svg-engine.html" />
     <updated>2024-12-03T15:00:00Z</updated>
-    <id>https://johannesodland.github.io/eleventy-base-blog/2024/12/03/web-wish-3-layer-based-svg-engine.html</id>
+    <id>https://johannesodland.github.io/2024/12/03/web-wish-3-layer-based-svg-engine.html</id>
     <content type="html">&lt;p&gt;I love listening to &lt;a href=&quot;https://www.igalia.com/chats/&quot;&gt;Igalia Chats&lt;/a&gt;,
 especially when they bring on people who have been an integral part of the development of the web.
 One of my favourite episodes is where Nikolas Zimmermann talks about
@@ -180,7 +180,7 @@ This harmonization would remove duplication and allow SVG to handle complex anim
 &lt;p&gt;It&#39;s almost five years since that episode aired, and a lot has happened in the meanwhile.
 While the prototype proved the concepts of the new &lt;a href=&quot;https://wpewebkit.org/blog/05-new-svg-engine.html&quot;&gt;Layer Based SVG Engine (LBSE)&lt;/a&gt;,
 it was still just a prototype and needed to be upstreamed into the WebCore in manageable, reviewable chunks.&lt;/p&gt;
-&lt;p&gt;The &lt;a href=&quot;https://wpewebkit.org/blog/05-new-svg-engine.html&quot;&gt;Status of the new SVG engine in WebKit&lt;/a&gt; post on &lt;a href=&quot;https://johannesodland.github.io/eleventy-base-blog/2024/12/03/wpewebkit.org&quot;&gt;wpewebkit.org&lt;/a&gt; covers the progress in detail.&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&quot;https://wpewebkit.org/blog/05-new-svg-engine.html&quot;&gt;Status of the new SVG engine in WebKit&lt;/a&gt; post on &lt;a href=&quot;https://johannesodland.github.io/2024/12/03/wpewebkit.org&quot;&gt;wpewebkit.org&lt;/a&gt; covers the progress in detail.&lt;/p&gt;
 &lt;p&gt;Currently, LBSE coexists with the legacy engine behind a compile-time flag.
 The new engine adds hardware accelerated compositing, 3D-transforms, and z-index support for all SVG elements.&lt;/p&gt;
 &lt;p&gt;Before it can replace the legacy engine, the new SVG engine still needs to reach feature parity,
@@ -199,9 +199,9 @@ I hope Igalia Chats will invite Nikolas Zimmermann back to discuss the progress 
   </entry>
   <entry>
     <title>Web Wish 2: Native Low Quality Image Preview (LQIP)</title>
-    <link href="https://johannesodland.github.io/eleventy-base-blog/2024/12/02/web-wish-2-native-low-quality-image-preview-lqip.html" />
+    <link href="https://johannesodland.github.io/2024/12/02/web-wish-2-native-low-quality-image-preview-lqip.html" />
     <updated>2024-12-02T17:30:00Z</updated>
-    <id>https://johannesodland.github.io/eleventy-base-blog/2024/12/02/web-wish-2-native-low-quality-image-preview-lqip.html</id>
+    <id>https://johannesodland.github.io/2024/12/02/web-wish-2-native-low-quality-image-preview-lqip.html</id>
     <content type="html">&lt;p&gt;Implementing lazy-loading images has never been easier.&lt;/p&gt;
 &lt;p&gt;First we got support for the &lt;a href=&quot;https://github.com/whatwg/html/issues/2806&quot;&gt;&lt;code&gt;loading=lazy&lt;/code&gt;&lt;/a&gt; attribute, making it easy to defer images.
 Then came automatic aspect-ratio calculations based on &lt;a href=&quot;https://github.com/WICG/intrinsicsize-attribute/issues/16#issuecomment-503245998&quot;&gt;the &lt;code&gt;width&lt;/code&gt; and &lt;code&gt;height&lt;/code&gt; attributes&lt;/a&gt;,
@@ -227,9 +227,9 @@ and that we can set an LQIP source for each &lt;code&gt;&amp;lt;source&amp;gt;&l
   </entry>
   <entry>
     <title>Web Wish 1: `text-wrap: balance` and `box-decoration-break: clone`</title>
-    <link href="https://johannesodland.github.io/eleventy-base-blog/2024/12/01/web-wish-1-text-wrap-balance-and-box-decoration-break-clone.html" />
+    <link href="https://johannesodland.github.io/2024/12/01/web-wish-1-text-wrap-balance-and-box-decoration-break-clone.html" />
     <updated>2024-12-01T10:00:00Z</updated>
-    <id>https://johannesodland.github.io/eleventy-base-blog/2024/12/01/web-wish-1-text-wrap-balance-and-box-decoration-break-clone.html</id>
+    <id>https://johannesodland.github.io/2024/12/01/web-wish-1-text-wrap-balance-and-box-decoration-break-clone.html</id>
     <content type="html">&lt;p&gt;I&#39;ve been waiting for &lt;code&gt;text-wrap: balance&lt;/code&gt; since &lt;a href=&quot;https://lists.w3.org/Archives/Public/www-style//2015Jan/0361.html&quot;&gt;it was added&lt;/a&gt;
 to the &lt;a href=&quot;https://drafts.csswg.org/css-text-4/#text-wrap-style&quot;&gt;editors draft of &lt;code&gt;css-text-4&lt;/code&gt;&lt;/a&gt; in 2015.
 Naturally, I was excited when &lt;code&gt;text-wrap: balance&lt;/code&gt; was included in &lt;a href=&quot;https://web.dev/blog/interop-2024&quot;&gt;interop 2024&lt;/a&gt;.
@@ -239,7 +239,7 @@ The first is to balance text in headings, so that we don&#39;t end up with an un
 The second is to balance text when we present the text with slabs behind it.
 Unbalanced text sticks out like a sore thumb here.&lt;/p&gt;
 &lt;figure&gt;
-    &lt;img src=&quot;https://johannesodland.github.io/eleventy-base-blog/assets/web-wishlist-2024/text-wrap-balance/text-wrap-balance-slab.webp&quot; alt=&quot;Two screen grabs of an article with and without text-wrap: balance. 
+    &lt;img src=&quot;https://johannesodland.github.io/assets/web-wishlist-2024/text-wrap-balance/text-wrap-balance-slab.webp&quot; alt=&quot;Two screen grabs of an article with and without text-wrap: balance. 
         In the first screen grab, the first line is long but the second line contains one single word. 
         In the second screen grab, the two lines have equal length.&quot;&gt;
     &lt;figcaption&gt;
@@ -266,9 +266,9 @@ I&#39;m hoping that WebKit will bring full support for the combination of &lt;co
   </entry>
   <entry>
     <title>The Case for a Used-Color-Scheme Media Feature</title>
-    <link href="https://johannesodland.github.io/eleventy-base-blog/2024/10/14/the-case-for-a-used-color-scheme-media-feature.html" />
+    <link href="https://johannesodland.github.io/2024/10/14/the-case-for-a-used-color-scheme-media-feature.html" />
     <updated>2024-10-14T18:30:00Z</updated>
-    <id>https://johannesodland.github.io/eleventy-base-blog/2024/10/14/the-case-for-a-used-color-scheme-media-feature.html</id>
+    <id>https://johannesodland.github.io/2024/10/14/the-case-for-a-used-color-scheme-media-feature.html</id>
     <content type="html">&lt;p&gt;The &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme&quot;&gt;&lt;code&gt;prefers-color-scheme&lt;/code&gt;&lt;/a&gt; media feature
 currently lets us detect if a user has requested a light or a dark color scheme on a system level.
 This feature allows us to provide specific styles, images and videos to adapt to users’ preferences.&lt;/p&gt;
@@ -348,7 +348,7 @@ it won&#39;t address then need for page specific overrides.&lt;/strong&gt;&lt;/p
 &lt;p&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/10249&quot;&gt;Tab has opened an issue&lt;/a&gt; suggesting
 that &lt;code&gt;&amp;lt;meta name=color-scheme&amp;gt;&lt;/code&gt; should affect the &lt;code&gt;(prefers-color-scheme:dark)&lt;/code&gt; media query.&lt;/p&gt;
 &lt;p&gt;If accepted, this change could provide a quick solution for both site-specific preference, and specific overrides.
-Because it directly impacts the existing &lt;code&gt;prefers-color-scheme&lt;/code&gt; it would also adress the issue of loading matching media assets&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://johannesodland.github.io/eleventy-base-blog/2024/10/14/the-case-for-a-used-color-scheme-media-feature.html#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+Because it directly impacts the existing &lt;code&gt;prefers-color-scheme&lt;/code&gt; it would also adress the issue of loading matching media assets&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://johannesodland.github.io/2024/10/14/the-case-for-a-used-color-scheme-media-feature.html#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
 &lt;h3&gt;5. Style query&lt;/h3&gt;
 &lt;p&gt;In the discussions on the issue above,
 opinions seem to be shifting towards a container style query letting you query the &lt;em&gt;used&lt;/em&gt; color-scheme property.
@@ -363,7 +363,7 @@ so a new mechanism would have to be introduced to do this.&lt;/p&gt;
     &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;style&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Unfortunately, this would not solve the need for matching media assets to the page&#39;s used color scheme,
-as media sources probably never will be selectable by style queries&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://johannesodland.github.io/eleventy-base-blog/2024/10/14/the-case-for-a-used-color-scheme-media-feature.html#fn2&quot; id=&quot;fnref2&quot;&gt;[2]&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+as media sources probably never will be selectable by style queries&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://johannesodland.github.io/2024/10/14/the-case-for-a-used-color-scheme-media-feature.html#fn2&quot; id=&quot;fnref2&quot;&gt;[2]&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
 &lt;h3&gt;6. Romans solution&lt;/h3&gt;
 &lt;p&gt;Roman has found &lt;a href=&quot;https://blog.kizu.dev/querying-the-color-scheme/&quot;&gt;a technique&lt;/a&gt;
 that lets you capture the used value of the &lt;code&gt;color-scheme&lt;/code&gt; property as a color using &lt;code&gt;light-dark()&lt;/code&gt; and a registered custom property.
@@ -383,9 +383,9 @@ we should look into a new &lt;code&gt;used-color-scheme&lt;/code&gt; media featu
 &lt;hr class=&quot;footnotes-sep&quot;&gt;
 &lt;section class=&quot;footnotes&quot;&gt;
 &lt;ol class=&quot;footnotes-list&quot;&gt;
-&lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Video posters would be an exception, but that is a &lt;a href=&quot;https://github.com/whatwg/html/issues/4004#issuecomment-1588568569&quot;&gt;whole other issue&lt;/a&gt;. &lt;a href=&quot;https://johannesodland.github.io/eleventy-base-blog/2024/10/14/the-case-for-a-used-color-scheme-media-feature.html#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Video posters would be an exception, but that is a &lt;a href=&quot;https://github.com/whatwg/html/issues/4004#issuecomment-1588568569&quot;&gt;whole other issue&lt;/a&gt;. &lt;a href=&quot;https://johannesodland.github.io/2024/10/14/the-case-for-a-used-color-scheme-media-feature.html#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id=&quot;fn2&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Media sources can not be affected by style and layout, unless lazy-loaded. &lt;a href=&quot;https://johannesodland.github.io/eleventy-base-blog/2024/10/14/the-case-for-a-used-color-scheme-media-feature.html#fnref2&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&quot;fn2&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Media sources can not be affected by style and layout, unless lazy-loaded. &lt;a href=&quot;https://johannesodland.github.io/2024/10/14/the-case-for-a-used-color-scheme-media-feature.html#fnref2&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/section&gt;
@@ -393,10 +393,10 @@ we should look into a new &lt;code&gt;used-color-scheme&lt;/code&gt; media featu
   </entry>
   <entry>
     <title>The case for multiple named insets</title>
-    <link href="https://johannesodland.github.io/eleventy-base-blog/2024/08/24/the-case-for-multiple-insets.html" />
+    <link href="https://johannesodland.github.io/2024/08/24/the-case-for-multiple-insets.html" />
     <updated>2024-08-24T13:00:00Z</updated>
-    <id>https://johannesodland.github.io/eleventy-base-blog/2024/08/24/the-case-for-multiple-insets.html</id>
-    <content type="html">&lt;p&gt;When sticky positioning became supported in most&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://johannesodland.github.io/eleventy-base-blog/2024/08/24/the-case-for-multiple-insets.html#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt; major browsers in 2017, it felt revolutionary.
+    <id>https://johannesodland.github.io/2024/08/24/the-case-for-multiple-insets.html</id>
+    <content type="html">&lt;p&gt;When sticky positioning became supported in most&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://johannesodland.github.io/2024/08/24/the-case-for-multiple-insets.html#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt; major browsers in 2017, it felt revolutionary.
 The times of wrapper elements and swapping positioning schemes were soon a thing of the past.
 We were on the track to providing a jitter free user experience.&lt;/p&gt;
 &lt;p&gt;While revolutionary, it felt fairly limited.
@@ -404,7 +404,7 @@ These limitations were well documented in &lt;a href=&quot;https://github.com/w3
 &lt;h2&gt;Constrained by its block level ancestor&lt;/h2&gt;
 &lt;p&gt;One of the issues is that it is cumbersome to define the sticky constraint rectangle.&lt;/p&gt;
 &lt;p&gt;The sticky element will only be pushed as far as it stays within its containing block.
-But for sticky positioning the containing block is the nearest block level ancestor&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://johannesodland.github.io/eleventy-base-blog/2024/08/24/the-case-for-multiple-insets.html#fn2&quot; id=&quot;fnref2&quot;&gt;[2]&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+But for sticky positioning the containing block is the nearest block level ancestor&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://johannesodland.github.io/2024/08/24/the-case-for-multiple-insets.html#fn2&quot; id=&quot;fnref2&quot;&gt;[2]&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;The sticky element cannot be wrapped by any block level element without being contained by it.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Sometimes we need the sticky element to escape its block level ancestor and rather use a box further up the ancestor chain as a constraint.
 Fortunately the CSSWG is discussing something like a &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/9868&quot;&gt;&lt;code&gt;position-container&lt;/code&gt; property&lt;/a&gt; that will allow us to change the containing block.&lt;/p&gt;
@@ -447,9 +447,9 @@ Since the CSSWG has resolved to ignore margins, we need another way of defining 
 &lt;hr class=&quot;footnotes-sep&quot;&gt;
 &lt;section class=&quot;footnotes&quot;&gt;
 &lt;ol class=&quot;footnotes-list&quot;&gt;
-&lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Excluding IE that unfortunately stuck around for way to long. &lt;a href=&quot;https://johannesodland.github.io/eleventy-base-blog/2024/08/24/the-case-for-multiple-insets.html#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Excluding IE that unfortunately stuck around for way to long. &lt;a href=&quot;https://johannesodland.github.io/2024/08/24/the-case-for-multiple-insets.html#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id=&quot;fn2&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;This is simplified. Check out &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block&quot;&gt;Identifying the containing block&lt;/a&gt; for a more precise definition. &lt;a href=&quot;https://johannesodland.github.io/eleventy-base-blog/2024/08/24/the-case-for-multiple-insets.html#fnref2&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&quot;fn2&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;This is simplified. Check out &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block&quot;&gt;Identifying the containing block&lt;/a&gt; for a more precise definition. &lt;a href=&quot;https://johannesodland.github.io/2024/08/24/the-case-for-multiple-insets.html#fnref2&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/section&gt;

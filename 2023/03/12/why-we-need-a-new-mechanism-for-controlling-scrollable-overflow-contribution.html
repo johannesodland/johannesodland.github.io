@@ -1,28 +1,28 @@
 <!doctype html>
 <html>
   <head>
-      <meta charset="utf-8">
+      <meta charset=utf-8>
       <title>Why We Need a New Mechanism for Controlling Scrollable Overflow Contribution</title>
       <style>@layer reset, default, layout;</style>
-      <link rel="stylesheet" href="/eleventy-base-blog/eleventy-base-blog/assets/css/reset.css">
-      <link rel="stylesheet" href="/eleventy-base-blog/eleventy-base-blog/assets/css/fonts.css">
-      <link rel="stylesheet" href="/eleventy-base-blog/eleventy-base-blog/assets/css/default.css">
-      <link rel="stylesheet" href="/eleventy-base-blog/eleventy-base-blog/assets/css/layout.css">
-      <link rel="stylesheet" href="/eleventy-base-blog/eleventy-base-blog/assets/css/style.css">
+      <link rel=stylesheet href=/assets/css/reset.css>
+      <link rel=stylesheet href=/assets/css/fonts.css>
+      <link rel=stylesheet href=/assets/css/default.css>
+      <link rel=stylesheet href=/assets/css/layout.css>
+      <link rel=stylesheet href=/assets/css/style.css>
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="canonical" href="/eleventy-base-blog/eleventy-base-blog/2023/03/12/why-we-need-a-new-mechanism-for-controlling-scrollable-overflow-contribution.html">
+      <link rel=canonical href="/2023/03/12/why-we-need-a-new-mechanism-for-controlling-scrollable-overflow-contribution.html">
       <link rel="me" href="https://front-end.social/@johannes">
   </head>
   <body>
   
    <header>
-      <a href="/eleventy-base-blog/" class="site-title">Johannes Odland</a>
+      <a href="/" class="site-title">Johannes Odland</a>
       <nav></nav>
     </header>
 
     <article role="main">
       <header>
-        <time datetime="Sun Mar 12 2023 13:20:00 GMT+0000 (Coordinated Universal Time)" pubdate="">
+        <time datetime="Sun Mar 12 2023 13:20:00 GMT+0000 (Coordinated Universal Time)" pubdate>
           Mar 12, 2023
         </time>
         <h1>Why We Need a New Mechanism for Controlling Scrollable Overflow Contribution</h1>
@@ -185,7 +185,7 @@ This is the idea behind a proposed new CSS property, <code>overflow-contribution
         overflow: visible
     </label>
     <label>
-        <input type="radio" name="overflow1" value="clip" checked="">
+        <input type="radio" name="overflow1" value="clip" checked>
         overflow: clip
     </label>
     <div class="has-suport-info">&#9888; This demo requires support for the `:has()` relational pseudo-class.</div>
@@ -260,7 +260,7 @@ We have to explore other options to control the scrollable overflow region.</p>
 <fieldset>
     <legend>Overflow</legend>
     <label>
-        <input type="radio" name="overflow2" value="visible" checked="">
+        <input type="radio" name="overflow2" value="visible" checked>
         overflow: visible
     </label>
     <label>
@@ -357,7 +357,7 @@ We have to explore other options to control the scrollable overflow region.</p>
         but it removes the background elements from the 3d rendering context. 
         Without overflow: clip the scrollable overflow area is extended to show all the background elements, 
         something that is not desired.
-        <br>
+        <br/>
         <small>Illustration: Created with the assistance of DALL·E 2</small>
     </figcaption>
 </figure>
@@ -468,7 +468,7 @@ As we mentioned above, only Firefox will calculate the scrollable overflow area 
         Scroll to the right to see how far the scrollable overflow area has been extended. 
         The background elements are sizes so that they will not extend further than the main content when scrolled to the right.
         Unfortunately only Firefox seem to take the perspective transform into account when extending the scrollable overflow area.
-        <br>
+        <br/>
         <small>Illustration: Created with the assistance of DALL·E 2</small>
     </figcaption>
 </figure>
@@ -496,7 +496,7 @@ Fortunately, the CSSWG <a href="https://github.com/w3c/csswg-drafts/issues/8361"
       <ul>
         <li><a href="https://front-end.social/@johannes">Mastodon</a></li>
         <li><a href="https://github.com/johannesodland">Github</a></li>
-        <li><a href="/eleventy-base-blog/eleventy-base-blog/feed.xml">Atom feed</a></li>
+        <li><a href="/feed.xml">Atom feed</a></li>
       </ul>
       <p>Built with <a href="https://www.11ty.dev">Eleventy</a>.</p>
     </footer>
