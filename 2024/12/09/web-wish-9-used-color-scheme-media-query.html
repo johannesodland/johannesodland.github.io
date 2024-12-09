@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset=utf-8>
+      <title>Web Wish 9: Used Color Scheme Media Query</title>
+      <style>@layer reset, default, layout;</style>
+      <link rel=stylesheet href=/assets/css/reset.css>
+      <link rel=stylesheet href=/assets/css/fonts.css>
+      <link rel=stylesheet href=/assets/css/default.css>
+      <link rel=stylesheet href=/assets/css/layout.css>
+      <link rel=stylesheet href=/assets/css/style.css>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel=canonical href="/2024/12/09/web-wish-9-used-color-scheme-media-query.html">
+      <link rel="me" href="https://front-end.social/@johannes">
+  </head>
+  <body>
+  
+   <header>
+      <a href="/" class="site-title">Johannes Odland</a>
+      <nav></nav>
+    </header>
+
+    <article role="main">
+      <header>
+        <time datetime="Mon Dec 09 2024 15:00:00 GMT+0000 (Coordinated Universal Time)" pubdate>
+          Dec 9, 2024
+        </time>
+        <h1>Web Wish 9: Used Color Scheme Media Query</h1>
+      </header>
+      <div class="content"><p>Currently, you can use <code>prefers-color-scheme</code> in the <code>media</code> attribute of a <code>&lt;source&gt;</code>
+to provide video or images that matches the users preferred color scheme.</p>
+<p>However, this might not actually match the used color scheme,
+as a different color scheme can be set in either <code>&lt;meta name=color-scheme&gt;</code> or by setting the <code>color-scheme</code> property.</p>
+<p>I need a way to provide image and video sources that match the <em>used</em> color scheme and not just the preferred one.
+I've written extensively about it in <a href="https://johannesodland.github.io/2024/10/14/the-case-for-a-used-color-scheme-media-feature.html">The Case for a Used-Color-Scheme Media Feature</a></p>
+<p>This holiday I'm wishing for a way to provide light and dark mode image sources, so they can match the used color scheme.</p>
+<p>Relevant issues and PRs:</p>
+<ul>
+<li><a href="https://github.com/w3c/csswg-drafts/issues/10249">Effect of <meta name=color-scheme> on the (prefers-color-scheme) MQ</a></li>
+</ul>
+</div>
+    </article>
+  
+    <footer>
+      <h2>Johannes Odland</h2>
+      <p>Infrequent posts about CSS and other frontend stuff.</p>
+      <ul>
+        <li><a href="https://front-end.social/@johannes">Mastodon</a></li>
+        <li><a href="https://github.com/johannesodland">Github</a></li>
+        <li><a href="/feed.xml">Atom feed</a></li>
+      </ul>
+      <p>Built with <a href="https://www.11ty.dev">Eleventy</a>.</p>
+    </footer>
+  </body>
+</html>

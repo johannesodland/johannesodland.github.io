@@ -4,11 +4,29 @@
   <subtitle>Infrequent posts about CSS and other frontend stuff.</subtitle>
   <link href="https://johannesodland.github.io/feed.xml" rel="self" />
   <link href="https://johannesodland.github.io/" />
-  <updated>2024-12-08T15:00:00Z</updated>
+  <updated>2024-12-09T15:00:00Z</updated>
   <id>https://johannesodland.github.io/</id>
   <author>
     <name>Johannes Odland</name>
   </author>
+  <entry>
+    <title>Web Wish 9: Used Color Scheme Media Query</title>
+    <link href="https://johannesodland.github.io/2024/12/09/web-wish-9-used-color-scheme-media-query.html" />
+    <updated>2024-12-09T15:00:00Z</updated>
+    <id>https://johannesodland.github.io/2024/12/09/web-wish-9-used-color-scheme-media-query.html</id>
+    <content type="html">&lt;p&gt;Currently, you can use &lt;code&gt;prefers-color-scheme&lt;/code&gt; in the &lt;code&gt;media&lt;/code&gt; attribute of a &lt;code&gt;&amp;lt;source&amp;gt;&lt;/code&gt;
+to provide video or images that matches the users preferred color scheme.&lt;/p&gt;
+&lt;p&gt;However, this might not actually match the used color scheme,
+as a different color scheme can be set in either &lt;code&gt;&amp;lt;meta name=color-scheme&amp;gt;&lt;/code&gt; or by setting the &lt;code&gt;color-scheme&lt;/code&gt; property.&lt;/p&gt;
+&lt;p&gt;I need a way to provide image and video sources that match the &lt;em&gt;used&lt;/em&gt; color scheme and not just the preferred one.
+I&#39;ve written extensively about it in &lt;a href=&quot;https://johannesodland.github.io/2024/10/14/the-case-for-a-used-color-scheme-media-feature.html&quot;&gt;The Case for a Used-Color-Scheme Media Feature&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This holiday I&#39;m wishing for a way to provide light and dark mode image sources, so they can match the used color scheme.&lt;/p&gt;
+&lt;p&gt;Relevant issues and PRs:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/10249&quot;&gt;Effect of &lt;meta name=&quot;color-scheme&quot;&gt; on the (prefers-color-scheme) MQ&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Web Wish 8: End Side Padding on Scroll Containers</title>
     <link href="https://johannesodland.github.io/2024/12/08/web-wish-8-end-side-padding.html" />
@@ -386,70 +404,6 @@ we should look into a new &lt;code&gt;used-color-scheme&lt;/code&gt; media featu
 &lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Video posters would be an exception, but that is a &lt;a href=&quot;https://github.com/whatwg/html/issues/4004#issuecomment-1588568569&quot;&gt;whole other issue&lt;/a&gt;. &lt;a href=&quot;https://johannesodland.github.io/2024/10/14/the-case-for-a-used-color-scheme-media-feature.html#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&quot;fn2&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Media sources can not be affected by style and layout, unless lazy-loaded. &lt;a href=&quot;https://johannesodland.github.io/2024/10/14/the-case-for-a-used-color-scheme-media-feature.html#fnref2&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/section&gt;
-</content>
-  </entry>
-  <entry>
-    <title>The case for multiple named insets</title>
-    <link href="https://johannesodland.github.io/2024/08/24/the-case-for-multiple-insets.html" />
-    <updated>2024-08-24T13:00:00Z</updated>
-    <id>https://johannesodland.github.io/2024/08/24/the-case-for-multiple-insets.html</id>
-    <content type="html">&lt;p&gt;When sticky positioning became supported in most&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://johannesodland.github.io/2024/08/24/the-case-for-multiple-insets.html#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt; major browsers in 2017, it felt revolutionary.
-The times of wrapper elements and swapping positioning schemes were soon a thing of the past.
-We were on the track to providing a jitter free user experience.&lt;/p&gt;
-&lt;p&gt;While revolutionary, it felt fairly limited.
-These limitations were well documented in &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/2496&quot;&gt;issue #2496&lt;/a&gt; by jonjohnjohnson.&lt;/p&gt;
-&lt;h2&gt;Constrained by its block level ancestor&lt;/h2&gt;
-&lt;p&gt;One of the issues is that it is cumbersome to define the sticky constraint rectangle.&lt;/p&gt;
-&lt;p&gt;The sticky element will only be pushed as far as it stays within its containing block.
-But for sticky positioning the containing block is the nearest block level ancestor&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://johannesodland.github.io/2024/08/24/the-case-for-multiple-insets.html#fn2&quot; id=&quot;fnref2&quot;&gt;[2]&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;The sticky element cannot be wrapped by any block level element without being contained by it.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Sometimes we need the sticky element to escape its block level ancestor and rather use a box further up the ancestor chain as a constraint.
-Fortunately the CSSWG is discussing something like a &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/9868&quot;&gt;&lt;code&gt;position-container&lt;/code&gt; property&lt;/a&gt; that will allow us to change the containing block.&lt;/p&gt;
-&lt;p&gt;Hopefully, this issue will soon be resolved.&lt;/p&gt;
-&lt;h2&gt;Defining insets from the containing block&lt;/h2&gt;
-&lt;p&gt;The other issue is that it is cumbersome to define insets from the containing block.&lt;/p&gt;
-&lt;p&gt;In absolute positioning, you can simply use the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/inset&quot;&gt;box inset properties&lt;/a&gt; to define insets from the containing block.&lt;/p&gt;
-&lt;p&gt;But for sticky positioning, the box inset properties are already used as insets from the scrollport.
-Currently, they can&#39;t define insets from the containing block as well.&lt;/p&gt;
-&lt;p&gt;To define insets from the containing block we have to use the margins of the element.
-But, the margin properties are &lt;em&gt;also&lt;/em&gt; used to define the in-flow margin.&lt;/p&gt;
-&lt;p&gt;Due to this dual interpretation, and that it is unclear how collapsing margins would apply,
-&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/9052#issuecomment-1642600755&quot;&gt;the CSSWG has resolved&lt;/a&gt; to not consider the margins when calculating the sticky position.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;This leaves us in a bind.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Using margins is problematic, but currently it&#39;s the only way we can affect the insets from the containing block for sticky-pos elements.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;We need to define insets for multiple boxes, but can currently only affect &lt;em&gt;one&lt;/em&gt; using the box inset properties.&lt;/strong&gt;&lt;/p&gt;
-&lt;h2&gt;A proposal&lt;/h2&gt;
-&lt;p&gt;Issue &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/2496&quot;&gt;#2496&lt;/a&gt; suggested adding a separate &lt;code&gt;sticky&lt;/code&gt; property.
-But, it could be confusing if containing block insets  sometimes are defined in the box inset properties,
-and other times in a separate property.&lt;/p&gt;
-&lt;p&gt;What if we could define multiple named box insets?&lt;/p&gt;
-&lt;p&gt;To define insets for a sticky positioned element that sticks to the scrollport and is inset 20px from the containing block, we could write this:&lt;/p&gt;
-&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token property&quot;&gt;inset-block&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
-  scrollport 0&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-  containing-block 20px&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If the element was only to be sticky to the top, we could do this:&lt;/p&gt;
-&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token property&quot;&gt;top&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; scrollport 0&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;token property&quot;&gt;bottom&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; containing-block 20px&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Since scrollport would be the default inset name under sticky positioning, the name could be dropped in the &lt;code&gt;top&lt;/code&gt; property.
-This would ensure backwards compatibility.&lt;/p&gt;
-&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token property&quot;&gt;top&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; 0&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;token property&quot;&gt;bottom&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; containing-block 20px&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Inset names that have no effect under the positioning scheme would simply be ignored.&lt;/p&gt;
-&lt;h2&gt;TL;DR&lt;/h2&gt;
-&lt;p&gt;Sticky positioning is still fairly limited.&lt;br&gt;
-It&#39;s cumbersome to set insets from the containing block under sticky positioning, but it&#39;s &lt;em&gt;possible&lt;/em&gt; using margins.
-Since the CSSWG has resolved to ignore margins, we need another way of defining these insets.&lt;/p&gt;
-&lt;p&gt;I have &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/10754&quot;&gt;proposed to support multiple named insets&lt;/a&gt; in the box inset properties.&lt;/p&gt;
-&lt;p&gt;Hopefully we can find a solution in the not-so-distant future.&lt;/p&gt;
-&lt;hr class=&quot;footnotes-sep&quot;&gt;
-&lt;section class=&quot;footnotes&quot;&gt;
-&lt;ol class=&quot;footnotes-list&quot;&gt;
-&lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Excluding IE that unfortunately stuck around for way to long. &lt;a href=&quot;https://johannesodland.github.io/2024/08/24/the-case-for-multiple-insets.html#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id=&quot;fn2&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;This is simplified. Check out &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block&quot;&gt;Identifying the containing block&lt;/a&gt; for a more precise definition. &lt;a href=&quot;https://johannesodland.github.io/2024/08/24/the-case-for-multiple-insets.html#fnref2&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/section&gt;
