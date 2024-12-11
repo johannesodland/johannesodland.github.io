@@ -4,11 +4,32 @@
   <subtitle>Infrequent posts about CSS and other frontend stuff.</subtitle>
   <link href="https://johannesodland.github.io/feed.xml" rel="self" />
   <link href="https://johannesodland.github.io/" />
-  <updated>2024-12-10T15:00:00Z</updated>
+  <updated>2024-12-11T15:00:00Z</updated>
   <id>https://johannesodland.github.io/</id>
   <author>
     <name>Johannes Odland</name>
   </author>
+  <entry>
+    <title>Web Wish 11: Srcset for Video</title>
+    <link href="https://johannesodland.github.io/2024/12/11/web-wish-11-scroll-triggered-animations.html" />
+    <updated>2024-12-11T15:00:00Z</updated>
+    <id>https://johannesodland.github.io/2024/12/11/web-wish-11-scroll-triggered-animations.html</id>
+    <content type="html">&lt;p&gt;We often use IntersectionObserver to trigger animations based on scroll position.
+This works, but it feels excessive load javascript boilerplate just to play and pause an animation.&lt;/p&gt;
+&lt;p&gt;Scroll-driven animations lets us declaratively bind animations to the scroll position,
+but there&#39;s currently no way to declaratively play and pause regular animations based on scroll position.&lt;/p&gt;
+&lt;p&gt;Fortunately, &lt;a href=&quot;https://front-end.social/@ydaniv&quot;&gt;Yehonatan Daniv&lt;/a&gt; &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/8942&quot;&gt;has proposed&lt;/a&gt; a solution that the working group has resolved to draft into &lt;a href=&quot;https://drafts.csswg.org/css-animations-2/&quot;&gt;CSS Animations Level 2&lt;/a&gt;.
+The proposal includes an &lt;code&gt;animation-trigger&lt;/code&gt; property, allowing you to define animation triggers like this:&lt;/p&gt;
+&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;  &lt;span class=&quot;token property&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; --slide-in 330ms backwards&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;animation-trigger&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; alternate entry 50%&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I hope browsers will be interested in implementing this proposal.
+It would help us eliminate a lot of boilerplate JavaScript.&lt;/p&gt;
+&lt;p&gt;Relevant issues and PRs:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/8942&quot;&gt;Add animation-trigger for triggering animations when an element is in a timeline&#39;s range&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Web Wish 10: Srcset for Video</title>
     <link href="https://johannesodland.github.io/2024/12/10/web-wish-10-srcset-for-video.html" />
@@ -256,45 +277,6 @@ and that we can set an LQIP source for each &lt;code&gt;&amp;lt;source&amp;gt;&l
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/whatwg/html/issues/3631&quot;&gt;Controlling the appearance of images being loaded&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/8243&quot;&gt;Add &#39;replacement-box&#39; as option to background-origin and background-clip&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Web Wish 1: `text-wrap: balance` and `box-decoration-break: clone`</title>
-    <link href="https://johannesodland.github.io/2024/12/01/web-wish-1-text-wrap-balance-and-box-decoration-break-clone.html" />
-    <updated>2024-12-01T10:00:00Z</updated>
-    <id>https://johannesodland.github.io/2024/12/01/web-wish-1-text-wrap-balance-and-box-decoration-break-clone.html</id>
-    <content type="html">&lt;p&gt;I&#39;ve been waiting for &lt;code&gt;text-wrap: balance&lt;/code&gt; since &lt;a href=&quot;https://lists.w3.org/Archives/Public/www-style//2015Jan/0361.html&quot;&gt;it was added&lt;/a&gt;
-to the &lt;a href=&quot;https://drafts.csswg.org/css-text-4/#text-wrap-style&quot;&gt;editors draft of &lt;code&gt;css-text-4&lt;/code&gt;&lt;/a&gt; in 2015.
-Naturally, I was excited when &lt;code&gt;text-wrap: balance&lt;/code&gt; was included in &lt;a href=&quot;https://web.dev/blog/interop-2024&quot;&gt;interop 2024&lt;/a&gt;.
-However, it seems I might have gotten my hopes up a little too soon.&lt;/p&gt;
-&lt;p&gt;I see two major use cases for &lt;code&gt;text-wrap: balance&lt;/code&gt;.
-The first is to balance text in headings, so that we don&#39;t end up with an unsightly orphan on the last line.
-The second is to balance text when we present the text with slabs behind it.
-Unbalanced text sticks out like a sore thumb here.&lt;/p&gt;
-&lt;figure&gt;
-    &lt;img src=&quot;https://johannesodland.github.io/assets/web-wishlist-2024/text-wrap-balance/text-wrap-balance-slab.webp&quot; alt=&quot;Two screen grabs of an article with and without text-wrap: balance. 
-        In the first screen grab, the first line is long but the second line contains one single word. 
-        In the second screen grab, the two lines have equal length.&quot;&gt;
-    &lt;figcaption&gt;
-        Example of how a slabbed text line looks with and without `text-wrap: balance`. 
-        Screenshots from the article 
-        &lt;a href=&quot;https://www.nrk.no/dokumentar/xl/frostens-vokter-1.14755370&quot;&gt;Frostens vokter&lt;/a&gt;. 
-    &lt;/figcaption&gt;
-&lt;/figure&gt;
-&lt;p&gt;When &lt;code&gt;text-wrap: balance&lt;/code&gt; was implemented in Blink, it supported both these use cases.
-However, in WebKit,
-it seems that elements with inline children using &lt;code&gt;box-decoration-break: clone&lt;/code&gt; were excluded from balancing.
-One possible reason for this could be the lack of a web platform test specifically for the interaction between these two properties.&lt;/p&gt;
-&lt;p&gt;While waiting for full support across major browsers,
-I&#39;ve used different techniques to balance the text with JavaScript.
-It would be a relief to remove this code and have native support.&lt;/p&gt;
-&lt;p&gt;So, for Christmas,
-I&#39;m hoping that WebKit will bring full support for the combination of &lt;code&gt;text-wrap: balance&lt;/code&gt; and &lt;code&gt;box-decoration-break: clone&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Relevant issues and PRs:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://bugs.webkit.org/show_bug.cgi?id=274145&quot;&gt;Text-wrap balance with box-decoration-break clone child fails&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/web-platform-tests/wpt/pull/48445&quot;&gt;Add test for text-wrap: balance with box-decoration-break: clone&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
