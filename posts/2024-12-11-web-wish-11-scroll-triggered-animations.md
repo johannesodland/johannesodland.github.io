@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'Web Wish 11: Srcset for Video'
+title: 'Web Wish 11: Scroll-Triggered Animations'
 date: 2024-12-11 16:00:00 +01:00
 author: Johannes Odland
 ---
