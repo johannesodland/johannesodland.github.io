@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset=utf-8>
+      <title>Web Wish 12: Custom CSS Functions</title>
+      <style>@layer reset, default, layout;</style>
+      <link rel=stylesheet href=/assets/css/reset.css>
+      <link rel=stylesheet href=/assets/css/fonts.css>
+      <link rel=stylesheet href=/assets/css/default.css>
+      <link rel=stylesheet href=/assets/css/layout.css>
+      <link rel=stylesheet href=/assets/css/style.css>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel=canonical href="/2024/12/12/web-wish-12-custom-css-functions.html">
+      <link rel="me" href="https://front-end.social/@johannes">
+  </head>
+  <body>
+  
+   <header>
+      <a href="/" class="site-title">Johannes Odland</a>
+      <nav></nav>
+    </header>
+
+    <article role="main">
+      <header>
+        <time datetime="Thu Dec 12 2024 15:00:00 GMT+0000 (Coordinated Universal Time)" pubdate>
+          Dec 12, 2024
+        </time>
+        <h1>Web Wish 12: Custom CSS Functions</h1>
+      </header>
+      <div class="content"><p>Some CSS declarations tend to repeat with only minor tweaks to their values
+– like converting <code>px</code> to <code>rem</code>, or setting up fluid typography.</p>
+<p>With the introduction of custom properties,
+it became possible to build function-like custom properties to reduce this repetition.
+<a href="https://www.miriamsuzanne.com">Miriam Suzanne</a> demonstrated this brilliantly in <a href="https://www.smashingmagazine.com/2019/07/css-custom-properties-cascade/">Custom Properties in the Cascade</a>.</p>
+<p>While useful, this technique has its limitations.</p>
+<p>Thankfully <a href="https://www.miriamsuzanne.com">Miriam</a> has proposed a new solution: <a href="https://github.com/w3c/csswg-drafts/issues/9350">Custom CSS Functions and Mixins</a>.
+The <a href="https://drafts.csswg.org/css-mixins-1/">editors draft</a> is beginning to take shape,
+and introduces the ability to define custom functions with <code>@function</code>.</p>
+<p>Here's how it could look:</p>
+<pre class="language-css"><code class="language-css"><span class="token atrule"><span class="token rule">@function</span> <span class="token function">--as-rem</span><span class="token punctuation">(</span>--length &lt;length><span class="token punctuation">)</span></span> <span class="token punctuation">{</span>
+  <span class="token property">result</span><span class="token punctuation">:</span> <span class="token function">calc</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--length<span class="token punctuation">)</span> / 16px * 1rem<span class="token punctuation">)</span><span class="token punctuation">;</span>     
+<span class="token punctuation">}</span>
+
+<span class="token selector">h1</span> <span class="token punctuation">{</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> <span class="token function">--as-rem</span><span class="token punctuation">(</span>22px<span class="token punctuation">)</span><span class="token punctuation">;</span>  
+<span class="token punctuation">}</span></code></pre>
+<p>Mixins might still be a long way off, so this holiday, I'm wishing for a browser prototype of custom CSS functions, available behind a flag.</p>
+<p>Relevant issues and PRs:</p>
+<ul>
+<li><a href="https://github.com/w3c/csswg-drafts/issues/9350">Proposal: Custom CSS Functions &amp; Mixins</a></li>
+</ul>
+</div>
+    </article>
+  
+    <footer>
+      <h2>Johannes Odland</h2>
+      <p>Infrequent posts about CSS and other frontend stuff.</p>
+      <ul>
+        <li><a href="https://front-end.social/@johannes">Mastodon</a></li>
+        <li><a href="https://github.com/johannesodland">Github</a></li>
+        <li><a href="/feed.xml">Atom feed</a></li>
+      </ul>
+      <p>Built with <a href="https://www.11ty.dev">Eleventy</a>.</p>
+    </footer>
+  </body>
+</html>
