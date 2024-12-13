@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset=utf-8>
+      <title>Web Wish 13: Progress Functions</title>
+      <style>@layer reset, default, layout;</style>
+      <link rel=stylesheet href=/assets/css/reset.css>
+      <link rel=stylesheet href=/assets/css/fonts.css>
+      <link rel=stylesheet href=/assets/css/default.css>
+      <link rel=stylesheet href=/assets/css/layout.css>
+      <link rel=stylesheet href=/assets/css/style.css>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel=canonical href="/2024/12/13/web-wish-13-progress-functions.html">
+      <link rel="me" href="https://front-end.social/@johannes">
+  </head>
+  <body>
+  
+   <header>
+      <a href="/" class="site-title">Johannes Odland</a>
+      <nav></nav>
+    </header>
+
+    <article role="main">
+      <header>
+        <time datetime="Fri Dec 13 2024 15:00:00 GMT+0000 (Coordinated Universal Time)" pubdate>
+          Dec 13, 2024
+        </time>
+        <h1>Web Wish 13: Progress Functions</h1>
+      </header>
+      <div class="content"><p>Continuing from yesterday's post,
+one of the declarations that often causes repetition is setting up fluid typography.</p>
+<p>This is a two key steps.</p>
+<ol>
+<li>Calculating the progress from a minimum to a maximum viewport size.</li>
+<li>Interpolating between two (font-size) values based on that progress.</li>
+</ol>
+<p>While is possible to achieve this in browsers now, the setup is complex, hard to read,
+and can involve a lot of repetition when applying it to multiple values.</p>
+<p>For a while the specs had a generic <code>mix()</code> function that could be used at the property level,
+and has since gained additional separate <code>*-mix()</code> functions that can be used as individual components,
+such as <code>calc-mix()</code> that takes a <code>&lt;progress&gt;</code> value and two calc sums.</p>
+<p>What remained was a method to simplify progress calculation.
+With custom CSS functions, one could simplify the calculation and avoid repitition,
+but as this is a calculation many authors will have to set up, why not make it a native CSS feature?</p>
+<p>Fortunately <a href="https://drafts.csswg.org/css-values-5/#progress-func">CSS Values and Units Module Level 5</a> now defines such a general <code>progress()</code> function,
+and additionally a <code>media-progress()</code> and a <code>container-progress()</code>.</p>
+<p>It the future, they can be used as below:</p>
+<pre class="language-css"><code class="language-css"><span class="token selector">h1</span> <span class="token punctuation">{</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> <span class="token function">mix</span><span class="token punctuation">(</span><span class="token function">progress</span><span class="token punctuation">(</span>100vw<span class="token punctuation">,</span> 375px<span class="token punctuation">,</span> 1600px<span class="token punctuation">)</span><span class="token punctuation">,</span> 22px<span class="token punctuation">,</span> 26px<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+  <span class="token comment">/* Alternatively */</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> <span class="token function">calc-mix</span><span class="token punctuation">(</span><span class="token function">progress</span><span class="token punctuation">(</span>100vw<span class="token punctuation">,</span> 375px<span class="token punctuation">,</span> 1600px<span class="token punctuation">)</span><span class="token punctuation">,</span> 22px<span class="token punctuation">,</span> 26px<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> <span class="token function">calc-mix</span><span class="token punctuation">(</span><span class="token function">media-progress</span><span class="token punctuation">(</span>width<span class="token punctuation">,</span> 375px<span class="token punctuation">,</span> 1600px<span class="token punctuation">)</span><span class="token punctuation">,</span> 22px<span class="token punctuation">,</span> 26px<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>This Christmas, I'm wishing for a browser prototype for both the <code>progress()</code>, <code>*-progress()</code> and <code>*-mix()</code> functions
+to make progress towards a simpler and more readable setup of fluid typography.</p>
+<ul>
+<li><a href="https://github.com/w3c/csswg-drafts/issues/7268">Proposal for a 'progress' function to calculate progress between two <length> values</a></li>
+<li><a href="https://github.com/w3c/csswg-drafts/issues/6245">Interpolate values between breakpoints</a></li>
+</ul>
+</div>
+    </article>
+  
+    <footer>
+      <h2>Johannes Odland</h2>
+      <p>Infrequent posts about CSS and other frontend stuff.</p>
+      <ul>
+        <li><a href="https://front-end.social/@johannes">Mastodon</a></li>
+        <li><a href="https://github.com/johannesodland">Github</a></li>
+        <li><a href="/feed.xml">Atom feed</a></li>
+      </ul>
+      <p>Built with <a href="https://www.11ty.dev">Eleventy</a>.</p>
+    </footer>
+  </body>
+</html>

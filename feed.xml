@@ -4,11 +4,48 @@
   <subtitle>Infrequent posts about CSS and other frontend stuff.</subtitle>
   <link href="https://johannesodland.github.io/feed.xml" rel="self" />
   <link href="https://johannesodland.github.io/" />
-  <updated>2024-12-12T15:00:00Z</updated>
+  <updated>2024-12-13T15:00:00Z</updated>
   <id>https://johannesodland.github.io/</id>
   <author>
     <name>Johannes Odland</name>
   </author>
+  <entry>
+    <title>Web Wish 13: Progress Functions</title>
+    <link href="https://johannesodland.github.io/2024/12/13/web-wish-13-progress-functions.html" />
+    <updated>2024-12-13T15:00:00Z</updated>
+    <id>https://johannesodland.github.io/2024/12/13/web-wish-13-progress-functions.html</id>
+    <content type="html">&lt;p&gt;Continuing from yesterday&#39;s post,
+one of the declarations that often causes repetition is setting up fluid typography.&lt;/p&gt;
+&lt;p&gt;This is a two key steps.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Calculating the progress from a minimum to a maximum viewport size.&lt;/li&gt;
+&lt;li&gt;Interpolating between two (font-size) values based on that progress.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;While is possible to achieve this in browsers now, the setup is complex, hard to read,
+and can involve a lot of repetition when applying it to multiple values.&lt;/p&gt;
+&lt;p&gt;For a while the specs had a generic &lt;code&gt;mix()&lt;/code&gt; function that could be used at the property level,
+and has since gained additional separate &lt;code&gt;*-mix()&lt;/code&gt; functions that can be used as individual components,
+such as &lt;code&gt;calc-mix()&lt;/code&gt; that takes a &lt;code&gt;&amp;lt;progress&amp;gt;&lt;/code&gt; value and two calc sums.&lt;/p&gt;
+&lt;p&gt;What remained was a method to simplify progress calculation.
+With custom CSS functions, one could simplify the calculation and avoid repitition,
+but as this is a calculation many authors will have to set up, why not make it a native CSS feature?&lt;/p&gt;
+&lt;p&gt;Fortunately &lt;a href=&quot;https://drafts.csswg.org/css-values-5/#progress-func&quot;&gt;CSS Values and Units Module Level 5&lt;/a&gt; now defines such a general &lt;code&gt;progress()&lt;/code&gt; function,
+and additionally a &lt;code&gt;media-progress()&lt;/code&gt; and a &lt;code&gt;container-progress()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;It the future, they can be used as below:&lt;/p&gt;
+&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token selector&quot;&gt;h1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;mix&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;progress&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;100vw&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 375px&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 1600px&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 22px&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 26px&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; 
+  &lt;span class=&quot;token comment&quot;&gt;/* Alternatively */&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;calc-mix&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;progress&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;100vw&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 375px&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 1600px&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 22px&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 26px&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;calc-mix&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;media-progress&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;width&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 375px&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 1600px&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 22px&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 26px&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This Christmas, I&#39;m wishing for a browser prototype for both the &lt;code&gt;progress()&lt;/code&gt;, &lt;code&gt;*-progress()&lt;/code&gt; and &lt;code&gt;*-mix()&lt;/code&gt; functions
+to make progress towards a simpler and more readable setup of fluid typography.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/7268&quot;&gt;Proposal for a &#39;progress&#39; function to calculate progress between two &lt;length&gt; values&lt;/length&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/6245&quot;&gt;Interpolate values between breakpoints&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Web Wish 12: Custom CSS Functions</title>
     <link href="https://johannesodland.github.io/2024/12/12/web-wish-12-custom-css-functions.html" />
@@ -240,44 +277,6 @@ and &lt;code&gt;&amp;lt;textarea&amp;gt;&lt;/code&gt;, that calls &lt;code&gt;.s
 &lt;p&gt;Relevant issues and PRs:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/openui/open-ui/issues/1062&quot;&gt;[invokers] setRangeText for textarea and inputs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Web Wish 3: Layer Based SVG Engine (LBSE)</title>
-    <link href="https://johannesodland.github.io/2024/12/03/web-wish-3-layer-based-svg-engine.html" />
-    <updated>2024-12-03T15:00:00Z</updated>
-    <id>https://johannesodland.github.io/2024/12/03/web-wish-3-layer-based-svg-engine.html</id>
-    <content type="html">&lt;p&gt;I love listening to &lt;a href=&quot;https://www.igalia.com/chats/&quot;&gt;Igalia Chats&lt;/a&gt;,
-especially when they bring on people who have been an integral part of the development of the web.
-One of my favourite episodes is where Nikolas Zimmermann talks about
-&lt;a href=&quot;https://www.igalia.com/chats/Igalia-Chats-Niko-SVG-WPE&quot;&gt;how he and Rob Buis built the KSVG library&lt;/a&gt; which eventually powered SVG rendering in WebKit.&lt;/p&gt;
-&lt;p&gt;In that episode he explains how HTML and SVG currently has two separate rendering paths in WebKit.
-While SVG was once more powerful than HTML and CSS, with support for transforms, filters and masking,
-HTML and CSS has since gained these capabilities &lt;em&gt;and&lt;/em&gt; now have a hardware accelerated rendering path.&lt;/p&gt;
-&lt;p&gt;The current SVG engine in WebKit does not support hardware-accelerated compositing.
-Changes to transforms or opacity in an SVG triggers a full re-render, while in HTML and CSS such changes would
-be handled through hardware-accelerated compositing.&lt;/p&gt;
-&lt;p&gt;At the time of recording, Zimmerman and Igalia had prototyped a way to harmonize the rendering of HTML and SVG,
-using the Layer Tree — a structure that organizes rendering layers for compositing — to enable hardware accelerated SVG rendering.
-This harmonization would remove duplication and allow SVG to handle complex animations more efficiently.&lt;/p&gt;
-&lt;p&gt;It&#39;s almost five years since that episode aired, and a lot has happened in the meanwhile.
-While the prototype proved the concepts of the new &lt;a href=&quot;https://wpewebkit.org/blog/05-new-svg-engine.html&quot;&gt;Layer Based SVG Engine (LBSE)&lt;/a&gt;,
-it was still just a prototype and needed to be upstreamed into the WebCore in manageable, reviewable chunks.&lt;/p&gt;
-&lt;p&gt;The &lt;a href=&quot;https://wpewebkit.org/blog/05-new-svg-engine.html&quot;&gt;Status of the new SVG engine in WebKit&lt;/a&gt; post on &lt;a href=&quot;https://johannesodland.github.io/2024/12/03/wpewebkit.org&quot;&gt;wpewebkit.org&lt;/a&gt; covers the progress in detail.&lt;/p&gt;
-&lt;p&gt;Currently, LBSE coexists with the legacy engine behind a compile-time flag.
-The new engine adds hardware accelerated compositing, 3D-transforms, and z-index support for all SVG elements.&lt;/p&gt;
-&lt;p&gt;Before it can replace the legacy engine, the new SVG engine still needs to reach feature parity,
-meet security requirements, and match the legacy engine&#39;s performance benchmarks.
-An &lt;a href=&quot;https://wpewebkit.org/blog/status-of-lbse-in-webkit.html&quot;&gt;update from this summer&lt;/a&gt; covers the progress made over the last year,
-showing that the new engine is inching towards becoming a complete replacement.&lt;/p&gt;
-&lt;p&gt;While it &lt;em&gt;is&lt;/em&gt; getting closer to replace the old engine, there are still some issues that needs to be resolved before
-WebKit can make the switch.&lt;/p&gt;
-&lt;p&gt;While asking for LBSE to land before Christmas might be too much,
-I hope Igalia Chats will invite Nikolas Zimmermann back to discuss the progress made over the last five years.&lt;/p&gt;
-&lt;p&gt;Relevant issues and PRs:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://bugs.webkit.org/show_bug.cgi?id=90738&quot;&gt;Harmonize HTML &amp;amp; SVG rendering&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
