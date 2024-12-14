@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset=utf-8>
+      <title>Web Wish 14: Scroll Snapping in the Viewport</title>
+      <style>@layer reset, default, layout;</style>
+      <link rel=stylesheet href=/assets/css/reset.css>
+      <link rel=stylesheet href=/assets/css/fonts.css>
+      <link rel=stylesheet href=/assets/css/default.css>
+      <link rel=stylesheet href=/assets/css/layout.css>
+      <link rel=stylesheet href=/assets/css/style.css>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel=canonical href="/2024/12/14/web-wish-14-scroll-snapping-in-the-viewport.html">
+      <link rel="me" href="https://front-end.social/@johannes">
+  </head>
+  <body>
+  
+   <header>
+      <a href="/" class="site-title">Johannes Odland</a>
+      <nav></nav>
+    </header>
+
+    <article role="main">
+      <header>
+        <time datetime="Sat Dec 14 2024 15:00:00 GMT+0000 (Coordinated Universal Time)" pubdate>
+          Dec 14, 2024
+        </time>
+        <h1>Web Wish 14: Scroll Snapping in the Viewport</h1>
+      </header>
+      <div class="content"><p>Scroll snapping has been around for a while now, and it's fantastic<br>
+– until you apply <code>scroll-snap-type</code> to the <code>&lt;html&gt;</code> element.</p>
+<p>That's when a whole host of issues start to surface.</p>
+<p>While scroll snapping works across most browsers and devices, applying it to <code>&lt;html&gt;</code> introduces a range of issues,
+particularly in Safari.</p>
+<p>For example:</p>
+<ul>
+<li>Navigation with VoiceOver breaks down:
+<ul>
+<li>Sometimes the <a href="https://bugs.webkit.org/show_bug.cgi?id=251003">focused element is pushed off-screen</a></li>
+<li>Other times the <a href="https://bugs.webkit.org/show_bug.cgi?id=282386">page gets stuck at the top</a>
+– <a href="https://bugs.webkit.org/show_bug.cgi?id=272079">Fragment links fail</a>
+– <a href="https://bugs.webkit.org/show_bug.cgi?id=245722">Smooth scrolling is unreliable</a></li>
+</ul>
+</li>
+</ul>
+<p>This Holiday season, I'm wishing for Safari to address these VoiceOver and navigation issues with scroll snapping.</p>
+<p>Relevant issues:</p>
+<ul>
+<li><a href="https://bugs.webkit.org/show_bug.cgi?id=272079">Fragment links does not work with scroll-snap on root</a></li>
+<li><a href="https://bugs.webkit.org/show_bug.cgi?id=251003">Scroll-snap snaps to wrong element after VoiceOver navigation</a></li>
+<li><a href="https://bugs.webkit.org/show_bug.cgi?id=282386">REGRESSION(?): Page with scroll-snap is stuck at the top when navigating with VoiceOver</a></li>
+<li><a href="https://bugs.webkit.org/show_bug.cgi?id=245722">Smooth scroll in viewport with scroll-snap fails on iOS</a></li>
+</ul>
+</div>
+    </article>
+  
+    <footer>
+      <h2>Johannes Odland</h2>
+      <p>Infrequent posts about CSS and other frontend stuff.</p>
+      <ul>
+        <li><a href="https://front-end.social/@johannes">Mastodon</a></li>
+        <li><a href="https://github.com/johannesodland">Github</a></li>
+        <li><a href="/feed.xml">Atom feed</a></li>
+      </ul>
+      <p>Built with <a href="https://www.11ty.dev">Eleventy</a>.</p>
+    </footer>
+  </body>
+</html>

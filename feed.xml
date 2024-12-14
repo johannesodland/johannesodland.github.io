@@ -4,11 +4,42 @@
   <subtitle>Infrequent posts about CSS and other frontend stuff.</subtitle>
   <link href="https://johannesodland.github.io/feed.xml" rel="self" />
   <link href="https://johannesodland.github.io/" />
-  <updated>2024-12-13T15:00:00Z</updated>
+  <updated>2024-12-14T15:00:00Z</updated>
   <id>https://johannesodland.github.io/</id>
   <author>
     <name>Johannes Odland</name>
   </author>
+  <entry>
+    <title>Web Wish 14: Scroll Snapping in the Viewport</title>
+    <link href="https://johannesodland.github.io/2024/12/14/web-wish-14-scroll-snapping-in-the-viewport.html" />
+    <updated>2024-12-14T15:00:00Z</updated>
+    <id>https://johannesodland.github.io/2024/12/14/web-wish-14-scroll-snapping-in-the-viewport.html</id>
+    <content type="html">&lt;p&gt;Scroll snapping has been around for a while now, and it&#39;s fantastic&lt;br&gt;
+– until you apply &lt;code&gt;scroll-snap-type&lt;/code&gt; to the &lt;code&gt;&amp;lt;html&amp;gt;&lt;/code&gt; element.&lt;/p&gt;
+&lt;p&gt;That&#39;s when a whole host of issues start to surface.&lt;/p&gt;
+&lt;p&gt;While scroll snapping works across most browsers and devices, applying it to &lt;code&gt;&amp;lt;html&amp;gt;&lt;/code&gt; introduces a range of issues,
+particularly in Safari.&lt;/p&gt;
+&lt;p&gt;For example:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Navigation with VoiceOver breaks down:
+&lt;ul&gt;
+&lt;li&gt;Sometimes the &lt;a href=&quot;https://bugs.webkit.org/show_bug.cgi?id=251003&quot;&gt;focused element is pushed off-screen&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Other times the &lt;a href=&quot;https://bugs.webkit.org/show_bug.cgi?id=282386&quot;&gt;page gets stuck at the top&lt;/a&gt;
+– &lt;a href=&quot;https://bugs.webkit.org/show_bug.cgi?id=272079&quot;&gt;Fragment links fail&lt;/a&gt;
+– &lt;a href=&quot;https://bugs.webkit.org/show_bug.cgi?id=245722&quot;&gt;Smooth scrolling is unreliable&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This Holiday season, I&#39;m wishing for Safari to address these VoiceOver and navigation issues with scroll snapping.&lt;/p&gt;
+&lt;p&gt;Relevant issues:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://bugs.webkit.org/show_bug.cgi?id=272079&quot;&gt;Fragment links does not work with scroll-snap on root&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://bugs.webkit.org/show_bug.cgi?id=251003&quot;&gt;Scroll-snap snaps to wrong element after VoiceOver navigation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://bugs.webkit.org/show_bug.cgi?id=282386&quot;&gt;REGRESSION(?): Page with scroll-snap is stuck at the top when navigating with VoiceOver&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://bugs.webkit.org/show_bug.cgi?id=245722&quot;&gt;Smooth scroll in viewport with scroll-snap fails on iOS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Web Wish 13: Progress Functions</title>
     <link href="https://johannesodland.github.io/2024/12/13/web-wish-13-progress-functions.html" />
@@ -247,36 +278,6 @@ contributing to the overflow area?&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/8361&quot;&gt;add method to prevent elements from contributing to scrollable overflow&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/8400&quot;&gt;Ability to ignore specific descendants when generating scrollbars&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Web Wish 4: set-range-text command</title>
-    <link href="https://johannesodland.github.io/2024/12/04/web-wish-4-set-range-text-command.html" />
-    <updated>2024-12-04T18:30:00Z</updated>
-    <id>https://johannesodland.github.io/2024/12/04/web-wish-4-set-range-text-command.html</id>
-    <content type="html">&lt;p&gt;My drafts folder is full of half written posts on punctuation and special characters.
-The reason I come back to this theme is that the technological development of the last 100+ years
-have made it incredibly hard to enter and edit special characters on the web.&lt;/p&gt;
-&lt;p&gt;In Norwegian, the most common quotation marks are not available on the keyboard,
-so professional writers have to rely on difficult to remember short codes that vary across operating systems.&lt;/p&gt;
-&lt;p&gt;Some editors use “smart quotes” to automatically replace the typed characters with the correct ones,
-but this solution only works within certain systems,
-and lacks the flexibility authors need to choose specific quotation marks.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Time and time again I&#39;ve had to be the middle man apologizing for how hard this is.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Given the lacking physical keys for special characters across languages,
-it should be easy to add special characters to form inputs –
-preferably without complex JavaScript setup.&lt;/p&gt;
-&lt;p&gt;The recent &lt;a href=&quot;https://open-ui.org/components/invokers.explainer/&quot;&gt;Invoker Commands proposal&lt;/a&gt; makes it possible to add commands to buttons in a declarative
-way, removing the need for JavaScript and paving the cowpath for simple commands like opening and closing a dialog.
-Initially this will support commands like &lt;code&gt;toggle-popover&lt;/code&gt;, &lt;code&gt;show-modal&lt;/code&gt; and &lt;code&gt;close&lt;/code&gt;,
-but many other commands like &lt;code&gt;step-up&lt;/code&gt; and &lt;code&gt;step-down&lt;/code&gt; have been suggested.&lt;/p&gt;
-&lt;p&gt;To make entering special characters easier for everyone,
-I wish for a new declarative &lt;a href=&quot;https://github.com/openui/open-ui/issues/1062&quot;&gt;&lt;code&gt;set-range-text&lt;/code&gt; command&lt;/a&gt; for &lt;code&gt;&amp;lt;input type=&amp;quot;text&amp;quot;&amp;gt;&lt;/code&gt;
-and &lt;code&gt;&amp;lt;textarea&amp;gt;&lt;/code&gt;, that calls &lt;code&gt;.setRangeText()&lt;/code&gt; with the button&#39;s value.&lt;/p&gt;
-&lt;p&gt;Relevant issues and PRs:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/openui/open-ui/issues/1062&quot;&gt;[invokers] setRangeText for textarea and inputs&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
