@@ -4,11 +4,30 @@
   <subtitle>Infrequent posts about CSS and other frontend stuff.</subtitle>
   <link href="https://johannesodland.github.io/feed.xml" rel="self" />
   <link href="https://johannesodland.github.io/" />
-  <updated>2024-12-14T15:00:00Z</updated>
+  <updated>2024-12-15T17:45:00Z</updated>
   <id>https://johannesodland.github.io/</id>
   <author>
     <name>Johannes Odland</name>
   </author>
+  <entry>
+    <title>Web Wish 15: Transparent Video</title>
+    <link href="https://johannesodland.github.io/2024/12/15/web-wish-15-transparent-video.html" />
+    <updated>2024-12-15T17:45:00Z</updated>
+    <id>https://johannesodland.github.io/2024/12/15/web-wish-15-transparent-video.html</id>
+    <content type="html">&lt;p&gt;Today&#39;s wish is pretty simple.&lt;/p&gt;
+&lt;p&gt;We use plenty of videos on our site that are not traditional youtube-style video.
+This can for example be infographics or other visualizations.&lt;/p&gt;
+&lt;p&gt;A common denominator is that the content should be able to be integrated seamlessly into the site.
+It is possible to embed a background color into the video.
+Unfortunately, the compressed colors will often stand out like a sore thumb, as they don&#39;t match the colors of the page.&lt;/p&gt;
+&lt;p&gt;Additionally, it should be possible to reuse the video in different sections of the page,
+and those sections might have different backgrounds.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;To address this we need transparent video.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Unfortunately, there&#39;s no single codec that supports this across browsers and devices.
+&lt;a href=&quot;https://jakearchibald.com/&quot;&gt;Jake Archibald&lt;/a&gt; has described this issue in detail in &lt;a href=&quot;https://jakearchibald.com/2024/video-with-transparency/&quot;&gt;Video with alpha transparency on the web&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This Christmas I&#39;m wishing for browser developers to put transparent video on their roadmap.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Web Wish 14: Scroll Snapping in the Viewport</title>
     <link href="https://johannesodland.github.io/2024/12/14/web-wish-14-scroll-snapping-in-the-viewport.html" />
@@ -253,31 +272,6 @@ lazy-loading of the poster image and adding an alt-text to the poster image.&lt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/whatwg/html/issues/10378&quot;&gt;HTML Video: Allow a child Picture Element to Control the Video Poster Image&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/whatwg/html/issues/6636&quot;&gt;Lazy loading video element poster attribute&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/whatwg/html/issues/7954&quot;&gt;Considerations for providing alternative text to video poster graphics&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Web Wish 5: Overflow Contribution</title>
-    <link href="https://johannesodland.github.io/2024/12/05/web-wish-5-overflow-contribution.html" />
-    <updated>2024-12-05T15:00:00Z</updated>
-    <id>https://johannesodland.github.io/2024/12/05/web-wish-5-overflow-contribution.html</id>
-    <content type="html">&lt;p&gt;Have you ever had a scrollbar appear unexpectedly?
-Perhaps a rogue horizontal scrollbar on the page?&lt;/p&gt;
-&lt;p&gt;I often find myself hunting for the element that causes the scrollable overflow area to grow
-– the cause of the rogue scrollbar.
-Normally I can solve the issue by adding &lt;code&gt;overflow: clip&lt;/code&gt; to a parent element.&lt;/p&gt;
-&lt;p&gt;Unfortunately, that&#39;s not always possible.
-You might not want to clip the element to the parent elements bounds.
-Additionally, adding &lt;code&gt;overflow: clip&lt;/code&gt; forces &lt;code&gt;transform-style: flat&lt;/code&gt;,
-which can wreak havoc if the elements are part of a 3d rendering context.&lt;/p&gt;
-&lt;p&gt;Imagine being able to set a CSS property like &lt;code&gt;overflow-contribution: none&lt;/code&gt; to exclude elements from
-contributing to the overflow area?&lt;/p&gt;
-&lt;p&gt;The CSSWG has resolved to adopt this feature, but it still needs to a formal specification.&lt;/p&gt;
-&lt;p&gt;This holiday season, I&#39;m hoping for implementer interest in a CSS property that prevent elements from contributing to scrollable overflow.&lt;/p&gt;
-&lt;p&gt;Relevant issues and PRs:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/8361&quot;&gt;add method to prevent elements from contributing to scrollable overflow&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/8400&quot;&gt;Ability to ignore specific descendants when generating scrollbars&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
