@@ -4,11 +4,76 @@
   <subtitle>Infrequent posts about CSS and other frontend stuff.</subtitle>
   <link href="https://johannesodland.github.io/feed.xml" rel="self" />
   <link href="https://johannesodland.github.io/" />
-  <updated>2024-12-15T17:45:00Z</updated>
+  <updated>2024-12-16T15:00:00Z</updated>
   <id>https://johannesodland.github.io/</id>
   <author>
     <name>Johannes Odland</name>
   </author>
+  <entry>
+    <title>Web Wish 16: Role Text Next</title>
+    <link href="https://johannesodland.github.io/2024/12/16/web-wish-16-role-text-alternative.html" />
+    <updated>2024-12-16T15:00:00Z</updated>
+    <id>https://johannesodland.github.io/2024/12/16/web-wish-16-role-text-alternative.html</id>
+    <content type="html">&lt;p&gt;How should &lt;code&gt;&amp;lt;span&amp;gt;C&amp;lt;/span&amp;gt;&amp;lt;span&amp;gt;A&amp;lt;/span&amp;gt;&amp;lt;span&amp;gt;T&amp;lt;/span&amp;gt;&lt;/code&gt; or &lt;code&gt;IV&lt;/code&gt; be read by Assistive Technology (AT)?
+Should it be pronounced “C-A-T” and “I-V” or as “cat” and “Roman numeral four”?&lt;/p&gt;
+&lt;p&gt;Currently, this decision is left up to AT and browsers, which is practical and “safe”.
+As authors we can&#39;t predict if the content will be spoken aloud or rendered in braille.&lt;/p&gt;
+&lt;p&gt;However, the AT and the browser can&#39;t always infer the authors intent.
+For example, splitting cat into separate spans might be purely decorative,
+and “IV” could mean intravenous in stead of a numeral.&lt;/p&gt;
+&lt;h2&gt;Say Hello (and Goodbye) to &lt;code&gt;role=text&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;For a time there was &lt;a href=&quot;https://github.com/w3c/aria/issues/870&quot;&gt;a proposal to add &lt;code&gt;role=text&lt;/code&gt;&lt;/a&gt; to ARIA.
+This role would flatten the accessibility tree, presenting the contents as plain text.
+Additionally, it would allow &lt;code&gt;aria-label&lt;/code&gt; to override the presentation of the contents.&lt;/p&gt;
+&lt;p&gt;Both WebKit and Blink implemented support for &lt;code&gt;role=text&lt;/code&gt;, and many sites started to rely on it.
+But in 2023 &lt;a href=&quot;https://bugs.webkit.org/show_bug.cgi?id=260641&quot;&gt;WebKit dropped support&lt;/a&gt;,
+and ARIA closed the &lt;a href=&quot;https://github.com/w3c/aria/issues/870&quot;&gt;re-add role=text issue&lt;/a&gt; shortly after.&lt;/p&gt;
+&lt;h2&gt;Why &lt;code&gt;role=text&lt;/code&gt; Failed&lt;/h2&gt;
+&lt;p&gt;Many opposed &lt;code&gt;role=text&lt;/code&gt;, and with good reason:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Flatting the accessibility hides the underlying structure, which can deny the users the ability to inspect the original content.&lt;/li&gt;
+&lt;li&gt;While breaking up &lt;code&gt;IV&lt;/code&gt; into &lt;code&gt;I V&lt;/code&gt; might help speech synthesis, it could confuse braille users by teaching incorrect spellings.&lt;/li&gt;
+&lt;li&gt;Often there&#39;s a better solution, such as using &lt;code&gt;role=img&lt;/code&gt; in &lt;code&gt;&amp;lt;span role=&amp;quot;img&amp;quot; aria-label=&amp;quot;love&amp;quot;&amp;gt;♥︎&amp;lt;/span&amp;gt; New York.&lt;/code&gt;
+Here &lt;code&gt;role=img&lt;/code&gt; communicates that “love” is represented as an icon.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Today &lt;code&gt;role=text&lt;/code&gt; is practically dead, though it&#39;s still &lt;a href=&quot;https://bugs.webkit.org/show_bug.cgi?id=260685&quot;&gt;behind a flag in WebKit&lt;/a&gt;,
+awaiting complete removal if there&#39;s no protests.&lt;/p&gt;
+&lt;h2&gt;Exploring Alternatives&lt;/h2&gt;
+&lt;p&gt;For a while there was an initiative to &lt;a href=&quot;https://github.com/w3c/aria/issues/699&quot;&gt;add a new &lt;code&gt;aria-textseparation&lt;/code&gt; property&lt;/a&gt;
+that would let authors specify how text content should be separated from neighbouring elements.
+Unfortunately the proposal has been stagnant since 2019.&lt;/p&gt;
+&lt;p&gt;There has been some progress, though.
+ARIA 1.3 has added &lt;code&gt;aria-braillelabel&lt;/code&gt; that allows us to provide a separate accessible name for Braille.
+There is also ongoing work to &lt;a href=&quot;https://www.w3.org/WAI/pronunciation/&quot;&gt;enable text-to-speach to pronounce words correctly&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;The Remaining Issue&lt;/h2&gt;
+&lt;p&gt;An unresolved problem involves text that is split into separate inline elements for presentational purposes.&lt;/p&gt;
+&lt;p&gt;Consider the following example:&lt;/p&gt;
+&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;a&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;href&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;#...&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;span&lt;/span&gt; &lt;span class=&quot;token special-attr&quot;&gt;&lt;span class=&quot;token attr-name&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;token value css language-css&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;Fear the goverments&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;span&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;span&lt;/span&gt; &lt;span class=&quot;token special-attr&quot;&gt;&lt;span class=&quot;token attr-name&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;token value css language-css&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;gift will be expencive&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;span&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;a&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Using VoiceOver on an iPhone, this will read as two separate elements:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;“Fear the governments, link”&lt;/li&gt;
+&lt;li&gt;“gift will be expensive, link”.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Luckily, for anchor elements (and others with a role that accept &lt;code&gt;aria-label&lt;/code&gt;) we can fix this:&lt;/p&gt;
+&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;a&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;href&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;#...&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;aria-label&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;Fear the governments gift will be expensive&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;...&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;a&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;`&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;However, if the text isn&#39;t part of an element that support &lt;code&gt;aria-label&lt;/code&gt;,
+there is no way to tell AT whether to read the text continuously or with pauses.&lt;/p&gt;
+&lt;p&gt;It&#39;s important for AT users to inspect structural changes, but excessive detail can create noise.
+I see that in many cases AT users should be able to inspect that something is happening with the text,
+For instance:&lt;/p&gt;
+&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;span&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;C&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;span&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;span&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;A&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;span&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;span&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;T&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;span&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This might be split for animation purposes, and would be invisible to users with &lt;code&gt;prefers-reduced-motion: reduce&lt;/code&gt;.
+However, some AT would still read each characters separately, leading to a noisy experience.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Excessive verbosity can sometimes hinder more than help.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2&gt;My holiday wish&lt;/h2&gt;
+&lt;p&gt;This Holiday season, I&#39;m wishing for a new solution to help AT interpret text that is split into individual elements.
+It seems like &lt;code&gt;role=text&lt;/code&gt; wasn&#39;t the answer. &lt;a href=&quot;https://github.com/w3c/aria/issues/699&quot;&gt;&lt;code&gt;aria-textseparation&lt;/code&gt;&lt;/a&gt; seems to have faded away.
+What we need is the next &lt;code&gt;role=text&lt;/code&gt;.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Web Wish 15: Transparent Video</title>
     <link href="https://johannesodland.github.io/2024/12/15/web-wish-15-transparent-video.html" />
@@ -249,29 +314,6 @@ when an element is disconnected.&lt;/p&gt;
 &lt;p&gt;Relevant issues and PRs:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/whatwg/dom/issues/1296&quot;&gt;Provide an AbortSignal that aborts when Nodes become disconnected&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Web Wish 6: Responsive Posters</title>
-    <link href="https://johannesodland.github.io/2024/12/06/web-wish-6-responsive-posters.html" />
-    <updated>2024-12-06T15:00:00Z</updated>
-    <id>https://johannesodland.github.io/2024/12/06/web-wish-6-responsive-posters.html</id>
-    <content type="html">&lt;p&gt;Last year, we finally regained support for &lt;a href=&quot;https://scottjehl.com/posts/using-responsive-video/&quot;&gt;using media queries for delivering responsive video&lt;/a&gt;,
-thanks to &lt;a href=&quot;https://scottjehl.com/&quot;&gt;Scott Jehl&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;That is awesome, but there&#39;s still room for improvement.&lt;/p&gt;
-&lt;p&gt;The &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt; element still supports only a single source for the poster image.
-Wouldn&#39;t it be great if you could deliver responsive poster images along with the responsive video?&lt;/p&gt;
-&lt;p&gt;One way to do this would be &lt;a href=&quot;https://github.com/whatwg/html/issues/10378&quot;&gt;allowing a child &lt;code&gt;&amp;lt;picture&amp;gt;&lt;/code&gt; element to control the &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt; poster&lt;/a&gt;.
-This would enable support for using media-queries to art direct the poster images, matching the video source.
-It would also allow for multiple resolutions of the poster image,
-lazy-loading of the poster image and adding an alt-text to the poster image.&lt;/p&gt;
-&lt;p&gt;This Christmas, I&#39;m wishing for a way to add responsive poster images to the &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt; element.&lt;/p&gt;
-&lt;p&gt;Relevant issues and PRs:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/whatwg/html/issues/10378&quot;&gt;HTML Video: Allow a child Picture Element to Control the Video Poster Image&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/whatwg/html/issues/6636&quot;&gt;Lazy loading video element poster attribute&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/whatwg/html/issues/7954&quot;&gt;Considerations for providing alternative text to video poster graphics&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>

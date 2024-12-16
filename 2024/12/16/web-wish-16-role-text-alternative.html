@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset=utf-8>
+      <title>Web Wish 16: Role Text Next</title>
+      <style>@layer reset, default, layout;</style>
+      <link rel=stylesheet href=/assets/css/reset.css>
+      <link rel=stylesheet href=/assets/css/fonts.css>
+      <link rel=stylesheet href=/assets/css/default.css>
+      <link rel=stylesheet href=/assets/css/layout.css>
+      <link rel=stylesheet href=/assets/css/style.css>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel=canonical href="/2024/12/16/web-wish-16-role-text-alternative.html">
+      <link rel="me" href="https://front-end.social/@johannes">
+  </head>
+  <body>
+  
+   <header>
+      <a href="/" class="site-title">Johannes Odland</a>
+      <nav></nav>
+    </header>
+
+    <article role="main">
+      <header>
+        <time datetime="Mon Dec 16 2024 15:00:00 GMT+0000 (Coordinated Universal Time)" pubdate>
+          Dec 16, 2024
+        </time>
+        <h1>Web Wish 16: Role Text Next</h1>
+      </header>
+      <div class="content"><p>How should <code>&lt;span&gt;C&lt;/span&gt;&lt;span&gt;A&lt;/span&gt;&lt;span&gt;T&lt;/span&gt;</code> or <code>IV</code> be read by Assistive Technology (AT)?
+Should it be pronounced “C-A-T” and “I-V” or as “cat” and “Roman numeral four”?</p>
+<p>Currently, this decision is left up to AT and browsers, which is practical and “safe”.
+As authors we can't predict if the content will be spoken aloud or rendered in braille.</p>
+<p>However, the AT and the browser can't always infer the authors intent.
+For example, splitting cat into separate spans might be purely decorative,
+and “IV” could mean intravenous in stead of a numeral.</p>
+<h2>Say Hello (and Goodbye) to <code>role=text</code></h2>
+<p>For a time there was <a href="https://github.com/w3c/aria/issues/870">a proposal to add <code>role=text</code></a> to ARIA.
+This role would flatten the accessibility tree, presenting the contents as plain text.
+Additionally, it would allow <code>aria-label</code> to override the presentation of the contents.</p>
+<p>Both WebKit and Blink implemented support for <code>role=text</code>, and many sites started to rely on it.
+But in 2023 <a href="https://bugs.webkit.org/show_bug.cgi?id=260641">WebKit dropped support</a>,
+and ARIA closed the <a href="https://github.com/w3c/aria/issues/870">re-add role=text issue</a> shortly after.</p>
+<h2>Why <code>role=text</code> Failed</h2>
+<p>Many opposed <code>role=text</code>, and with good reason:</p>
+<ul>
+<li>Flatting the accessibility hides the underlying structure, which can deny the users the ability to inspect the original content.</li>
+<li>While breaking up <code>IV</code> into <code>I V</code> might help speech synthesis, it could confuse braille users by teaching incorrect spellings.</li>
+<li>Often there's a better solution, such as using <code>role=img</code> in <code>&lt;span role=&quot;img&quot; aria-label=&quot;love&quot;&gt;♥︎&lt;/span&gt; New York.</code>
+Here <code>role=img</code> communicates that “love” is represented as an icon.</li>
+</ul>
+<p>Today <code>role=text</code> is practically dead, though it's still <a href="https://bugs.webkit.org/show_bug.cgi?id=260685">behind a flag in WebKit</a>,
+awaiting complete removal if there's no protests.</p>
+<h2>Exploring Alternatives</h2>
+<p>For a while there was an initiative to <a href="https://github.com/w3c/aria/issues/699">add a new <code>aria-textseparation</code> property</a>
+that would let authors specify how text content should be separated from neighbouring elements.
+Unfortunately the proposal has been stagnant since 2019.</p>
+<p>There has been some progress, though.
+ARIA 1.3 has added <code>aria-braillelabel</code> that allows us to provide a separate accessible name for Braille.
+There is also ongoing work to <a href="https://www.w3.org/WAI/pronunciation/">enable text-to-speach to pronounce words correctly</a>.</p>
+<h2>The Remaining Issue</h2>
+<p>An unresolved problem involves text that is split into separate inline elements for presentational purposes.</p>
+<p>Consider the following example:</p>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#...<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css">...</span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>Fear the goverments<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css">...</span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>gift will be expencive<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span></code></pre>
+<p>Using VoiceOver on an iPhone, this will read as two separate elements:</p>
+<ul>
+<li>“Fear the governments, link”</li>
+<li>“gift will be expensive, link”.</li>
+</ul>
+<p>Luckily, for anchor elements (and others with a role that accept <code>aria-label</code>) we can fix this:</p>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#...<span class="token punctuation">"</span></span> <span class="token attr-name">aria-label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Fear the governments gift will be expensive<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>`</code></pre>
+<p>However, if the text isn't part of an element that support <code>aria-label</code>,
+there is no way to tell AT whether to read the text continuously or with pauses.</p>
+<p>It's important for AT users to inspect structural changes, but excessive detail can create noise.
+I see that in many cases AT users should be able to inspect that something is happening with the text,
+For instance:</p>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>C<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>A<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>T<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span></code></pre>
+<p>This might be split for animation purposes, and would be invisible to users with <code>prefers-reduced-motion: reduce</code>.
+However, some AT would still read each characters separately, leading to a noisy experience.</p>
+<p><strong>Excessive verbosity can sometimes hinder more than help.</strong></p>
+<h2>My holiday wish</h2>
+<p>This Holiday season, I'm wishing for a new solution to help AT interpret text that is split into individual elements.
+It seems like <code>role=text</code> wasn't the answer. <a href="https://github.com/w3c/aria/issues/699"><code>aria-textseparation</code></a> seems to have faded away.
+What we need is the next <code>role=text</code>.</p>
+</div>
+    </article>
+  
+    <footer>
+      <h2>Johannes Odland</h2>
+      <p>Infrequent posts about CSS and other frontend stuff.</p>
+      <ul>
+        <li><a href="https://front-end.social/@johannes">Mastodon</a></li>
+        <li><a href="https://github.com/johannesodland">Github</a></li>
+        <li><a href="/feed.xml">Atom feed</a></li>
+      </ul>
+      <p>Built with <a href="https://www.11ty.dev">Eleventy</a>.</p>
+    </footer>
+  </body>
+</html>
