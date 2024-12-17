@@ -4,11 +4,39 @@
   <subtitle>Infrequent posts about CSS and other frontend stuff.</subtitle>
   <link href="https://johannesodland.github.io/feed.xml" rel="self" />
   <link href="https://johannesodland.github.io/" />
-  <updated>2024-12-16T15:00:00Z</updated>
+  <updated>2024-12-17T19:00:00Z</updated>
   <id>https://johannesodland.github.io/</id>
   <author>
     <name>Johannes Odland</name>
   </author>
+  <entry>
+    <title>Web Wish 17: Viewport Relative Lengths</title>
+    <link href="https://johannesodland.github.io/2024/12/17/web-wish-17-viewport-relative-lengths.html" />
+    <updated>2024-12-17T19:00:00Z</updated>
+    <id>https://johannesodland.github.io/2024/12/17/web-wish-17-viewport-relative-lengths.html</id>
+    <content type="html">&lt;p&gt;Viewport relative units come in really handy when you need to size elements relative to the viewport,
+say a hero element that should have the exact size of the viewport.&lt;/p&gt;
+&lt;p&gt;There&#39;s one catch though, the size of the viewport can change dynamically as mobile browser interfaces,
+like the address bar, expand and collapse as users scroll.
+If the elements on the page expand and collapse as a result, the layout of the page ends up unstable,
+and the user can experience bouncing around the page as he changes scroll direction.&lt;/p&gt;
+&lt;p&gt;This is why browsers made &lt;code&gt;vh&lt;/code&gt; units stable, reflecting the size of the viewport with browser interfaces collapsed.
+This ensures that the layout does not shift unexpectedly, providing a smoother user experience.&lt;/p&gt;
+&lt;p&gt;This also prompted the CSS working group to standardize new viewport units.
+The new units include two stable sets: one for the large viewport with interfaces retracted (&lt;code&gt;lv*&lt;/code&gt;), and one for the small viewport with user interfaces expanded (&lt;code&gt;sv*&lt;/code&gt;).
+The final set of units allows authors to opt in to dynamic sizes (&lt;code&gt;dv*&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;Most of the major browsers support the new viewport units correctly, &lt;a href=&quot;https://github.com/mozilla-mobile/firefox-ios/issues/22607&quot;&gt;except for Firefox on iOS&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The new units were a big step forward, but there&#39;s still a challenge: inconsistent support in In App Browsers (IABs).
+Apps like social media, messaging platforms and other services often open links in IABs, to keep users within their ecosystems.
+Unfortunately many of these IABs fail to implement viewport units correctly.&lt;/p&gt;
+&lt;p&gt;In fact, the SFSafariViewController does not seem to &lt;a href=&quot;https://bugs.webkit.org/show_bug.cgi?id=255708&quot;&gt;handle the viewport units correctly&lt;/a&gt;.
+This is particularly problematic, since SFSafariViewController is widely used in popular apps like Slack.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;This is a major frustration for authors that have to maintain fragile javascript workarounds to make sure their page layout doesn&#39;t break
+– and for users who experience broken pages as a result.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Today, I&#39;m wishing for Apple and app developers to collaborate on fixing viewport units in IABs,
+making viewport-based layouts more reliable for authors and users alike.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Web Wish 16: Role Text Next</title>
     <link href="https://johannesodland.github.io/2024/12/16/web-wish-16-role-text-alternative.html" />
@@ -277,43 +305,6 @@ any IntersectionObservers that use the scroll container as root may behave errat
 &lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/3665&quot;&gt;Clarify padding in overflow content&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/w3c/IntersectionObserver/issues/504&quot;&gt;Clarify root rect with overflow and padding&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://bugs.webkit.org/show_bug.cgi?id=263316&quot;&gt;IntersectionObserver root rect with padding is incorrect if there&#39;s overflow clipping&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Web Wish 7: Custom Element Disconnected Signal</title>
-    <link href="https://johannesodland.github.io/2024/12/07/web-wish-7-custom-element-disconnected-signal.html" />
-    <updated>2024-12-07T19:30:00Z</updated>
-    <id>https://johannesodland.github.io/2024/12/07/web-wish-7-custom-element-disconnected-signal.html</id>
-    <content type="html">&lt;p&gt;Managing lifecycles in custom elements can be tedious.
-For instance, any event listener on global objects added in &lt;code&gt;connectedCallback()&lt;/code&gt; must be removed in &lt;code&gt;disconnectedCallback()&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;This double bookkeeping is error-prone, and could be simpler.
-Using an &lt;code&gt;AbortController&lt;/code&gt; can simplify things by automatically removing event listeners when the &lt;code&gt;abort()&lt;/code&gt; method is called.&lt;/p&gt;
-&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;SomeElement&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;HTMLElement&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-  #abortController
-  &lt;span class=&quot;token function&quot;&gt;connectedCallback&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;#abortController&lt;span class=&quot;token operator&quot;&gt;?.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;abort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;#abortController &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;AbortController&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
-    document&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;scroll&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;signal&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;#abortController&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;signal &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;token function&quot;&gt;disconnectedCallback&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;#abortController&lt;span class=&quot;token operator&quot;&gt;?.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;abort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This process would be much cleaner if the HTMLElement offered a built-in &lt;code&gt;disconnectedSignal()&lt;/code&gt;.
-Luckily, &lt;a href=&quot;https://indieweb.social/@keithamus&quot;&gt;Keith Cirkel&lt;/a&gt; &lt;a href=&quot;https://github.com/whatwg/dom/issues/1296&quot;&gt;has proposed such a signal&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;With this proposal, the example above would become:&lt;/p&gt;
-&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;SomeElement&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;HTMLElement&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;token function&quot;&gt;connectedCallback&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    document&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;scroll&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;signal&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;disconnectedSignal&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This Christmas, I&#39;m wishing for a &lt;code&gt;disconnectedSignal()&lt;/code&gt; method to automatically remove event listeners
-when an element is disconnected.&lt;/p&gt;
-&lt;p&gt;Relevant issues and PRs:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/whatwg/dom/issues/1296&quot;&gt;Provide an AbortSignal that aborts when Nodes become disconnected&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
