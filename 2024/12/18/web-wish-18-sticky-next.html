@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset=utf-8>
+      <title>Web Wish 18: Sticky Next</title>
+      <style>@layer reset, default, layout;</style>
+      <link rel=stylesheet href=/assets/css/reset.css>
+      <link rel=stylesheet href=/assets/css/fonts.css>
+      <link rel=stylesheet href=/assets/css/default.css>
+      <link rel=stylesheet href=/assets/css/layout.css>
+      <link rel=stylesheet href=/assets/css/style.css>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel=canonical href="/2024/12/18/web-wish-18-sticky-next.html">
+      <link rel="me" href="https://front-end.social/@johannes">
+  </head>
+  <body>
+  
+   <header>
+      <a href="/" class="site-title">Johannes Odland</a>
+      <nav></nav>
+    </header>
+
+    <article role="main">
+      <header>
+        <time datetime="Wed Dec 18 2024 15:00:00 GMT+0000 (Coordinated Universal Time)" pubdate>
+          Dec 18, 2024
+        </time>
+        <h1>Web Wish 18: Sticky Next</h1>
+      </header>
+      <div class="content"><p>Sticky positioning lets you “stick” an element to a position relative to the scroll-port,
+instead of scrolling it out of the screen.</p>
+<p>It's awesome.</p>
+<p><strong>But o, so limiting.</strong></p>
+<p>The element will only be “stuck” as far as is possible while staying within its containing block,
+which is the nearest block-level container.
+It would be great if we could <a href="https://github.com/w3c/csswg-drafts/issues/9868">choose a different containing block</a>.</p>
+<p>It's not really possible to configure how far inside that containing it should stay sticky.
+Or, it is, but the CSS working group has <a href="https://github.com/w3c/csswg-drafts/issues/9052#issuecomment-1642600755">resolved to remove that option</a>.
+It would be awesome if it was possible to <a href="https://github.com/w3c/csswg-drafts/issues/10754">configure the insets from the containing block</a>,
+and not just the insets from the scroll-port.</p>
+<p>It would also be awesome if we could let sticky elements <a href="https://github.com/w3c/csswg-drafts/issues/2496#issuecomment-1002312635">stack against each other</a>.</p>
+<p>So, this year I'm hoping the CSS working group and browser implementors can start looking into how we can make sticky positioning even better.</p>
+<p>Relevant issues and PRs:</p>
+<p>– <a href="https://github.com/w3c/csswg-drafts/issues/11145">[css-position] Meta-issue: Unresolved sticky positioning use cases</a></p>
+</div>
+    </article>
+  
+    <footer>
+      <h2>Johannes Odland</h2>
+      <p>Infrequent posts about CSS and other frontend stuff.</p>
+      <ul>
+        <li><a href="https://front-end.social/@johannes">Mastodon</a></li>
+        <li><a href="https://github.com/johannesodland">Github</a></li>
+        <li><a href="/feed.xml">Atom feed</a></li>
+      </ul>
+      <p>Built with <a href="https://www.11ty.dev">Eleventy</a>.</p>
+    </footer>
+  </body>
+</html>

@@ -4,11 +4,33 @@
   <subtitle>Infrequent posts about CSS and other frontend stuff.</subtitle>
   <link href="https://johannesodland.github.io/feed.xml" rel="self" />
   <link href="https://johannesodland.github.io/" />
-  <updated>2024-12-17T19:00:00Z</updated>
+  <updated>2024-12-18T15:00:00Z</updated>
   <id>https://johannesodland.github.io/</id>
   <author>
     <name>Johannes Odland</name>
   </author>
+  <entry>
+    <title>Web Wish 18: Sticky Next</title>
+    <link href="https://johannesodland.github.io/2024/12/18/web-wish-18-sticky-next.html" />
+    <updated>2024-12-18T15:00:00Z</updated>
+    <id>https://johannesodland.github.io/2024/12/18/web-wish-18-sticky-next.html</id>
+    <content type="html">&lt;p&gt;Sticky positioning lets you “stick” an element to a position relative to the scroll-port,
+instead of scrolling it out of the screen.&lt;/p&gt;
+&lt;p&gt;It&#39;s awesome.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;But o, so limiting.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The element will only be “stuck” as far as is possible while staying within its containing block,
+which is the nearest block-level container.
+It would be great if we could &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/9868&quot;&gt;choose a different containing block&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It&#39;s not really possible to configure how far inside that containing it should stay sticky.
+Or, it is, but the CSS working group has &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/9052#issuecomment-1642600755&quot;&gt;resolved to remove that option&lt;/a&gt;.
+It would be awesome if it was possible to &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/10754&quot;&gt;configure the insets from the containing block&lt;/a&gt;,
+and not just the insets from the scroll-port.&lt;/p&gt;
+&lt;p&gt;It would also be awesome if we could let sticky elements &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/2496#issuecomment-1002312635&quot;&gt;stack against each other&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;So, this year I&#39;m hoping the CSS working group and browser implementors can start looking into how we can make sticky positioning even better.&lt;/p&gt;
+&lt;p&gt;Relevant issues and PRs:&lt;/p&gt;
+&lt;p&gt;– &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/11145&quot;&gt;[css-position] Meta-issue: Unresolved sticky positioning use cases&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Web Wish 17: Viewport Relative Lengths</title>
     <link href="https://johannesodland.github.io/2024/12/17/web-wish-17-viewport-relative-lengths.html" />
@@ -270,41 +292,6 @@ I&#39;ve written extensively about it in &lt;a href=&quot;https://johannesodland
 &lt;p&gt;Relevant issues and PRs:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/10249&quot;&gt;Effect of &lt;meta name=&quot;color-scheme&quot;&gt; on the (prefers-color-scheme) MQ&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Web Wish 8: End Side Padding on Scroll Containers</title>
-    <link href="https://johannesodland.github.io/2024/12/08/web-wish-8-end-side-padding.html" />
-    <updated>2024-12-08T15:00:00Z</updated>
-    <id>https://johannesodland.github.io/2024/12/08/web-wish-8-end-side-padding.html</id>
-    <content type="html">&lt;p&gt;One of the longest-running issues I&#39;ve followed is &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/129&quot;&gt;how to handle padding in a scroll container&lt;/a&gt;.
-The issue was first opened in 2016.&lt;/p&gt;
-&lt;p&gt;Most developers expected padding to be added at the end of the in-flow content of the scroll container.
-This was also how it was specified in &lt;a href=&quot;https://www.w3.org/TR/css-overflow-3/&quot;&gt;Overflow 3&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;However, browsers handled this differently, and it wasn&#39;t clear if the desired behavior was web-compatible.
-Inline padding was particularly problematic,
-as all browsers agreed on excluding it.
-Changing this could cause web-compat issues as pages could rely on the current behavior.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;It was a mess.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;But slowly and steadily, the issues were worked out.&lt;/p&gt;
-&lt;p&gt;In 2019 the working group resolved to &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/3665&quot;&gt;always include padding in grid and flexbox containers&lt;/a&gt;,
-as there were no web-compat issues there.&lt;/p&gt;
-&lt;p&gt;Then, Blink finally ironed out the last web-compat issues,
-and in 2022, the working group resolved to always include inline-end padding.&lt;/p&gt;
-&lt;p&gt;Firefox has just begun passing &lt;a href=&quot;https://wpt.fyi/results/css/css-overflow/scrollable-overflow-padding.html?label=experimental&amp;amp;label=master&amp;amp;aligned&quot;&gt;all the tests&lt;/a&gt;,
-and while Safari is not fully compliant yet, the situation has improved significantly.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Or, so I thought.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;It turns out that IntersectionObserver in Safari &lt;a href=&quot;https://wpt.fyi/results/intersection-observer/padding-clip.html?label=experimental&amp;amp;label=master&amp;amp;aligned&quot;&gt;doesn&#39;t support padding on the scroll container correctly&lt;/a&gt;.
-While padding is now usable on scroll containers in many cases,
-any IntersectionObservers that use the scroll container as root may behave erratically.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;So, this Christmas I&#39;m wishing for Safari to support padding correctly in IntersectionObservers.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Relevant issues and PRs:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/129&quot;&gt;Include padding in scrollable overflow area&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/3665&quot;&gt;Clarify padding in overflow content&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/w3c/IntersectionObserver/issues/504&quot;&gt;Clarify root rect with overflow and padding&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://bugs.webkit.org/show_bug.cgi?id=263316&quot;&gt;IntersectionObserver root rect with padding is incorrect if there&#39;s overflow clipping&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
