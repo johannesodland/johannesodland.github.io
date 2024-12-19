@@ -4,11 +4,38 @@
   <subtitle>Infrequent posts about CSS and other frontend stuff.</subtitle>
   <link href="https://johannesodland.github.io/feed.xml" rel="self" />
   <link href="https://johannesodland.github.io/" />
-  <updated>2024-12-18T15:00:00Z</updated>
+  <updated>2024-12-19T15:00:00Z</updated>
   <id>https://johannesodland.github.io/</id>
   <author>
     <name>Johannes Odland</name>
   </author>
+  <entry>
+    <title>Web Wish 19: Display Invisible Characters</title>
+    <link href="https://johannesodland.github.io/2024/12/19/web-wish-19-display-invisible-characters.html" />
+    <updated>2024-12-19T15:00:00Z</updated>
+    <id>https://johannesodland.github.io/2024/12/19/web-wish-19-display-invisible-characters.html</id>
+    <content type="html">&lt;p&gt;Typography holds particular interest for me,
+coming from a small country where unique typographical conventions emerged
+alongside our journey to independence from a union with neighboring countries.&lt;/p&gt;
+&lt;p&gt;Maintaining those conventions is hard, as technology has continually eroded them.&lt;/p&gt;
+&lt;p&gt;Numbers, in Norwegian, should be formatted with space as a thousands separator.
+To ensure numbers are not broken across lines, a non-breaking space should be used.&lt;/p&gt;
+&lt;p&gt;But, non-breaking spaces are hard to enter and impossible to visually distinguish from regular spaces in an input field.&lt;/p&gt;
+&lt;p&gt;Similarly, it&#39;s impossible to verify that soft-hyphens are inserted at the correct positions.
+Without soft-hyphens, long compound words can be pushed entirely to the next line,
+disrupting the flow of text and making it harder to read.&lt;/p&gt;
+&lt;p&gt;Both of these are important characters when preparing Norwegian text for publication.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The core issue is that invisible characters are nearly undetectable during editing.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;This issue has been solved in other tools, like Word,
+which allow toggling the visibility of invisible characters during editing.
+We should be able to solve it on the web as well.&lt;/p&gt;
+&lt;p&gt;Fortunately, there&#39;s a &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/8874&quot;&gt;proposal for toggling the visibility of invisible characters&lt;/a&gt; using
+&lt;code&gt;text-transform&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token property&quot;&gt;text-transform&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; visible-whitespace&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This holiday, I&#39;m wishing for progress in standardizing a way to show these invisible characters in editors.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Web Wish 18: Sticky Next</title>
     <link href="https://johannesodland.github.io/2024/12/18/web-wish-18-sticky-next.html" />
@@ -274,24 +301,6 @@ And, while they&#39;re at it figuring out how to support &lt;code&gt;sizes=auto&
 &lt;p&gt;Relevant issues and PRs:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/whatwg/html/issues/10379&quot;&gt;HTML Video and its Source Elements Should Support SRCSET and SIZES&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Web Wish 9: Used Color Scheme Media Query</title>
-    <link href="https://johannesodland.github.io/2024/12/09/web-wish-9-used-color-scheme-media-query.html" />
-    <updated>2024-12-09T15:00:00Z</updated>
-    <id>https://johannesodland.github.io/2024/12/09/web-wish-9-used-color-scheme-media-query.html</id>
-    <content type="html">&lt;p&gt;Currently, you can use &lt;code&gt;prefers-color-scheme&lt;/code&gt; in the &lt;code&gt;media&lt;/code&gt; attribute of a &lt;code&gt;&amp;lt;source&amp;gt;&lt;/code&gt;
-to provide video or images that matches the users preferred color scheme.&lt;/p&gt;
-&lt;p&gt;However, this might not actually match the used color scheme,
-as a different color scheme can be set in either &lt;code&gt;&amp;lt;meta name=color-scheme&amp;gt;&lt;/code&gt; or by setting the &lt;code&gt;color-scheme&lt;/code&gt; property.&lt;/p&gt;
-&lt;p&gt;I need a way to provide image and video sources that match the &lt;em&gt;used&lt;/em&gt; color scheme and not just the preferred one.
-I&#39;ve written extensively about it in &lt;a href=&quot;https://johannesodland.github.io/2024/10/14/the-case-for-a-used-color-scheme-media-feature.html&quot;&gt;The Case for a Used-Color-Scheme Media Feature&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;This holiday I&#39;m wishing for a way to provide light and dark mode image sources, so they can match the used color scheme.&lt;/p&gt;
-&lt;p&gt;Relevant issues and PRs:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/10249&quot;&gt;Effect of &lt;meta name=&quot;color-scheme&quot;&gt; on the (prefers-color-scheme) MQ&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>

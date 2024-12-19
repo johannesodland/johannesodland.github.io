@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset=utf-8>
+      <title>Web Wish 19: Display Invisible Characters</title>
+      <style>@layer reset, default, layout;</style>
+      <link rel=stylesheet href=/assets/css/reset.css>
+      <link rel=stylesheet href=/assets/css/fonts.css>
+      <link rel=stylesheet href=/assets/css/default.css>
+      <link rel=stylesheet href=/assets/css/layout.css>
+      <link rel=stylesheet href=/assets/css/style.css>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel=canonical href="/2024/12/19/web-wish-19-display-invisible-characters.html">
+      <link rel="me" href="https://front-end.social/@johannes">
+  </head>
+  <body>
+  
+   <header>
+      <a href="/" class="site-title">Johannes Odland</a>
+      <nav></nav>
+    </header>
+
+    <article role="main">
+      <header>
+        <time datetime="Thu Dec 19 2024 15:00:00 GMT+0000 (Coordinated Universal Time)" pubdate>
+          Dec 19, 2024
+        </time>
+        <h1>Web Wish 19: Display Invisible Characters</h1>
+      </header>
+      <div class="content"><p>Typography holds particular interest for me,
+coming from a small country where unique typographical conventions emerged
+alongside our journey to independence from a union with neighboring countries.</p>
+<p>Maintaining those conventions is hard, as technology has continually eroded them.</p>
+<p>Numbers, in Norwegian, should be formatted with space as a thousands separator.
+To ensure numbers are not broken across lines, a non-breaking space should be used.</p>
+<p>But, non-breaking spaces are hard to enter and impossible to visually distinguish from regular spaces in an input field.</p>
+<p>Similarly, it's impossible to verify that soft-hyphens are inserted at the correct positions.
+Without soft-hyphens, long compound words can be pushed entirely to the next line,
+disrupting the flow of text and making it harder to read.</p>
+<p>Both of these are important characters when preparing Norwegian text for publication.</p>
+<p><strong>The core issue is that invisible characters are nearly undetectable during editing.</strong></p>
+<p>This issue has been solved in other tools, like Word,
+which allow toggling the visibility of invisible characters during editing.
+We should be able to solve it on the web as well.</p>
+<p>Fortunately, there's a <a href="https://github.com/w3c/csswg-drafts/issues/8874">proposal for toggling the visibility of invisible characters</a> using
+<code>text-transform</code>.</p>
+<p>Example:</p>
+<pre class="language-css"><code class="language-css"><span class="token property">text-transform</span><span class="token punctuation">:</span> visible-whitespace<span class="token punctuation">;</span></code></pre>
+<p>This holiday, I'm wishing for progress in standardizing a way to show these invisible characters in editors.</p>
+</div>
+    </article>
+  
+    <footer>
+      <h2>Johannes Odland</h2>
+      <p>Infrequent posts about CSS and other frontend stuff.</p>
+      <ul>
+        <li><a href="https://front-end.social/@johannes">Mastodon</a></li>
+        <li><a href="https://github.com/johannesodland">Github</a></li>
+        <li><a href="/feed.xml">Atom feed</a></li>
+      </ul>
+      <p>Built with <a href="https://www.11ty.dev">Eleventy</a>.</p>
+    </footer>
+  </body>
+</html>
