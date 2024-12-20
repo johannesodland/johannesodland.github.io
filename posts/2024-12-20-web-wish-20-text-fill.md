@@ -38,7 +38,6 @@ The “text” you see is a clipped background, and the text-shadow will be pain
 
 ```css
 background-image: linear-gradient(to bottom in oklch, blue, red);
--webkit-background-clip: text;
 background-clip: text;
 color: transparent;
 text-shadow: 1px 1px 0 black;
@@ -53,7 +52,6 @@ text-shadow: 1px 1px 0 black;
     text-align: center;
     span {
         background-image: linear-gradient(to bottom in oklch, blue, red);
-        -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
         text-shadow: 1px 1px 0 black;
