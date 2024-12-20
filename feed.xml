@@ -4,11 +4,73 @@
   <subtitle>Infrequent posts about CSS and other frontend stuff.</subtitle>
   <link href="https://johannesodland.github.io/feed.xml" rel="self" />
   <link href="https://johannesodland.github.io/" />
-  <updated>2024-12-19T15:00:00Z</updated>
+  <updated>2024-12-20T15:00:00Z</updated>
   <id>https://johannesodland.github.io/</id>
   <author>
     <name>Johannes Odland</name>
   </author>
+  <entry>
+    <title>Web Wish 20: Text Fill</title>
+    <link href="https://johannesodland.github.io/2024/12/20/web-wish-20-text-fill.html" />
+    <updated>2024-12-20T15:00:00Z</updated>
+    <id>https://johannesodland.github.io/2024/12/20/web-wish-20-text-fill.html</id>
+    <content type="html">&lt;p&gt;If you need a text with a fill, you can always put that fill in the background,
+clip the background to the text, and make the text transparent so that the clipped background becomes visible.&lt;/p&gt;
+&lt;p&gt;It works across all modern browsers.&lt;/p&gt;
+&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token property&quot;&gt;background-image&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;linear-gradient&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;to bottom in oklch&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; blue&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; red&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token property&quot;&gt;background-clip&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; text&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token property&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; transparent&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p class=&quot;example-1&quot;&gt;&lt;span&gt;Text with a gradient background fill&lt;/span&gt;&lt;/p&gt;
+&lt;style&gt;
+.example-1 {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.5em;
+    text-align: center;
+    span {
+        background-image: linear-gradient(to bottom in oklch, blue, red);
+        background-clip: text;
+        color: transparent;
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
+    }
+}
+&lt;/style&gt;
+&lt;p&gt;But, if you use &lt;code&gt;text-shadow&lt;/code&gt; on the element, you might be in for a surprise.
+The “text” you see is a clipped background, and the text-shadow will be painted on top of it.&lt;/p&gt;
+&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token property&quot;&gt;background-image&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;linear-gradient&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;to bottom in oklch&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; blue&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; red&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token property&quot;&gt;-webkit-background-clip&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; text&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token property&quot;&gt;background-clip&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; text&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token property&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; transparent&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token property&quot;&gt;text-shadow&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; 1px 1px 0 black&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p class=&quot;example-2&quot;&gt;&lt;span&gt;Text with a black text-shadow on top&lt;/span&gt;&lt;/p&gt;
+&lt;style&gt;
+.example-2 {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.5em;
+    text-align: center;
+    span {
+        background-image: linear-gradient(to bottom in oklch, blue, red);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 1px 1px 0 black;
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone; 
+    }
+}
+&lt;/style&gt;
+&lt;p&gt;The &lt;a href=&quot;https://www.w3.org/TR/fill-stroke-3/&quot;&gt;CSS Fill and Stroke Module&lt;/a&gt; defines a &lt;code&gt;fill-image&lt;/code&gt; property that would let you fill the text properly,
+so that it would work in combination with the &lt;code&gt;text-shadow&lt;/code&gt; property.
+As far as I know, none of the browsers implement this property for inline text elements.&lt;/p&gt;
+&lt;p&gt;Today I&#39;m wishing for browser implementers to support the &lt;code&gt;fill-*&lt;/code&gt; properties for inline text.&lt;/p&gt;
+&lt;p&gt;Relevant issues and PRs:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://issues.chromium.org/issues/354087606&quot;&gt;text-shadow paints on top of text styled with background-clip: text;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Web Wish 19: Display Invisible Characters</title>
     <link href="https://johannesodland.github.io/2024/12/19/web-wish-19-display-invisible-characters.html" />
@@ -285,22 +347,6 @@ It would help us eliminate a lot of boilerplate JavaScript.&lt;/p&gt;
 &lt;p&gt;Relevant issues and PRs:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/8942&quot;&gt;Add animation-trigger for triggering animations when an element is in a timeline&#39;s range&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Web Wish 10: Srcset for Video</title>
-    <link href="https://johannesodland.github.io/2024/12/10/web-wish-10-srcset-for-video.html" />
-    <updated>2024-12-10T15:00:00Z</updated>
-    <id>https://johannesodland.github.io/2024/12/10/web-wish-10-srcset-for-video.html</id>
-    <content type="html">&lt;p&gt;As mentioned earlier, &lt;a href=&quot;https://scottjehl.com/&quot;&gt;Scott Jehl&lt;/a&gt; successfully landed support for &lt;a href=&quot;https://scottjehl.com/posts/using-responsive-video/&quot;&gt;responsive video&lt;/a&gt; last year.&lt;/p&gt;
-&lt;p&gt;While we now can use media queries to art direct video sources,
-it should also be possible to provide multiple resolutions for each source and have the browser pick the optimal one.&lt;/p&gt;
-&lt;p&gt;This is why I&#39;m wishing for browsers to implement support for &lt;code&gt;srcset&lt;/code&gt; and &lt;code&gt;sizes&lt;/code&gt; on the &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;source&amp;gt;&lt;/code&gt; elements.
-And, while they&#39;re at it figuring out how to support &lt;code&gt;sizes=auto&lt;/code&gt; for video would be a nice bonus.&lt;/p&gt;
-&lt;p&gt;Relevant issues and PRs:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/whatwg/html/issues/10379&quot;&gt;HTML Video and its Source Elements Should Support SRCSET and SIZES&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset=utf-8>
+      <title>Web Wish 20: Text Fill</title>
+      <style>@layer reset, default, layout;</style>
+      <link rel=stylesheet href=/assets/css/reset.css>
+      <link rel=stylesheet href=/assets/css/fonts.css>
+      <link rel=stylesheet href=/assets/css/default.css>
+      <link rel=stylesheet href=/assets/css/layout.css>
+      <link rel=stylesheet href=/assets/css/style.css>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel=canonical href="/2024/12/20/web-wish-20-text-fill.html">
+      <link rel="me" href="https://front-end.social/@johannes">
+  </head>
+  <body>
+  
+   <header>
+      <a href="/" class="site-title">Johannes Odland</a>
+      <nav></nav>
+    </header>
+
+    <article role="main">
+      <header>
+        <time datetime="Fri Dec 20 2024 15:00:00 GMT+0000 (Coordinated Universal Time)" pubdate>
+          Dec 20, 2024
+        </time>
+        <h1>Web Wish 20: Text Fill</h1>
+      </header>
+      <div class="content"><p>If you need a text with a fill, you can always put that fill in the background,
+clip the background to the text, and make the text transparent so that the clipped background becomes visible.</p>
+<p>It works across all modern browsers.</p>
+<pre class="language-css"><code class="language-css"><span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token function">linear-gradient</span><span class="token punctuation">(</span>to bottom in oklch<span class="token punctuation">,</span> blue<span class="token punctuation">,</span> red<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token property">background-clip</span><span class="token punctuation">:</span> text<span class="token punctuation">;</span>
+<span class="token property">color</span><span class="token punctuation">:</span> transparent<span class="token punctuation">;</span></code></pre>
+<p class="example-1"><span>Text with a gradient background fill</span></p>
+<style>
+.example-1 {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.5em;
+    text-align: center;
+    span {
+        background-image: linear-gradient(to bottom in oklch, blue, red);
+        background-clip: text;
+        color: transparent;
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
+    }
+}
+</style>
+<p>But, if you use <code>text-shadow</code> on the element, you might be in for a surprise.
+The “text” you see is a clipped background, and the text-shadow will be painted on top of it.</p>
+<pre class="language-css"><code class="language-css"><span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token function">linear-gradient</span><span class="token punctuation">(</span>to bottom in oklch<span class="token punctuation">,</span> blue<span class="token punctuation">,</span> red<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token property">-webkit-background-clip</span><span class="token punctuation">:</span> text<span class="token punctuation">;</span>
+<span class="token property">background-clip</span><span class="token punctuation">:</span> text<span class="token punctuation">;</span>
+<span class="token property">color</span><span class="token punctuation">:</span> transparent<span class="token punctuation">;</span>
+<span class="token property">text-shadow</span><span class="token punctuation">:</span> 1px 1px 0 black<span class="token punctuation">;</span></code></pre>
+<p class="example-2"><span>Text with a black text-shadow on top</span></p>
+<style>
+.example-2 {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.5em;
+    text-align: center;
+    span {
+        background-image: linear-gradient(to bottom in oklch, blue, red);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 1px 1px 0 black;
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone; 
+    }
+}
+</style>
+<p>The <a href="https://www.w3.org/TR/fill-stroke-3/">CSS Fill and Stroke Module</a> defines a <code>fill-image</code> property that would let you fill the text properly,
+so that it would work in combination with the <code>text-shadow</code> property.
+As far as I know, none of the browsers implement this property for inline text elements.</p>
+<p>Today I'm wishing for browser implementers to support the <code>fill-*</code> properties for inline text.</p>
+<p>Relevant issues and PRs:</p>
+<ul>
+<li><a href="https://issues.chromium.org/issues/354087606">text-shadow paints on top of text styled with background-clip: text;</a></li>
+</ul>
+</div>
+    </article>
+  
+    <footer>
+      <h2>Johannes Odland</h2>
+      <p>Infrequent posts about CSS and other frontend stuff.</p>
+      <ul>
+        <li><a href="https://front-end.social/@johannes">Mastodon</a></li>
+        <li><a href="https://github.com/johannesodland">Github</a></li>
+        <li><a href="/feed.xml">Atom feed</a></li>
+      </ul>
+      <p>Built with <a href="https://www.11ty.dev">Eleventy</a>.</p>
+    </footer>
+  </body>
+</html>
