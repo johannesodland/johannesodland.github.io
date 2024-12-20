@@ -39,7 +39,6 @@ clip the background to the text, and make the text transparent so that the clipp
 &lt;p&gt;But, if you use &lt;code&gt;text-shadow&lt;/code&gt; on the element, you might be in for a surprise.
 The “text” you see is a clipped background, and the text-shadow will be painted on top of it.&lt;/p&gt;
 &lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token property&quot;&gt;background-image&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;linear-gradient&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;to bottom in oklch&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; blue&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; red&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;token property&quot;&gt;-webkit-background-clip&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; text&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token property&quot;&gt;background-clip&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; text&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token property&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; transparent&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token property&quot;&gt;text-shadow&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; 1px 1px 0 black&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
@@ -52,7 +51,6 @@ The “text” you see is a clipped background, and the text-shadow will be pain
     text-align: center;
     span {
         background-image: linear-gradient(to bottom in oklch, blue, red);
-        -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
         text-shadow: 1px 1px 0 black;
