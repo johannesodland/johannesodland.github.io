@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset=utf-8>
+      <title>Web Wish 21: Has Slotted</title>
+      <style>@layer reset, default, layout;</style>
+      <link rel=stylesheet href=/assets/css/reset.css>
+      <link rel=stylesheet href=/assets/css/fonts.css>
+      <link rel=stylesheet href=/assets/css/default.css>
+      <link rel=stylesheet href=/assets/css/layout.css>
+      <link rel=stylesheet href=/assets/css/style.css>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel=canonical href="/2024/12/21/web-wish-21-has-slotted.html">
+      <link rel="me" href="https://front-end.social/@johannes">
+  </head>
+  <body>
+  
+   <header>
+      <a href="/" class="site-title">Johannes Odland</a>
+      <nav></nav>
+    </header>
+
+    <article role="main">
+      <header>
+        <time datetime="Sat Dec 21 2024 15:00:00 GMT+0000 (Coordinated Universal Time)" pubdate>
+          Dec 21, 2024
+        </time>
+        <h1>Web Wish 21: Has Slotted</h1>
+      </header>
+      <div class="content"><p>Need to style your web-component differently depending on whether a slot has a slotted element?</p>
+<p>Right now you would need to listen to the <code>slotchange</code> event, and check if the slot has any <code>assignedNodes</code>, and set a class to style the element.</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">const</span> slots <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>shadowRoot<span class="token punctuation">.</span><span class="token function">querySelectorAll</span><span class="token punctuation">(</span><span class="token string">'slot'</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> slot <span class="token keyword">of</span> slots<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  slot<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'slotchange'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    slot<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">toggle</span><span class="token punctuation">(</span><span class="token string">'has-slotted'</span><span class="token punctuation">,</span> slot<span class="token punctuation">.</span><span class="token function">assignedNodes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre>
+<pre class="language-css"><code class="language-css"><span class="token selector">slot:not(.has-slotted)</span> <span class="token punctuation">{</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>It would be awesome if it was possible to style the slot based on whether it has slotted content, without waiting for the javascript to run.</p>
+<pre class="language-css"><code class="language-css"><span class="token selector">slot:not(:has-slotted)</span> <span class="token punctuation">{</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>There is an open <a href="https://github.com/w3c/csswg-drafts/issues/6867">issue for a <code>:has-slotted</code> pseudo-class</a>, and things have been moving fast.</p>
+<p>The CSS Scoping spec is now updated with a <a href="https://drafts.csswg.org/css-scoping/#the-has-slotted-pseudo"><code>:has-slotted</code> section</a>,
+and there are prototypes in <a href="https://chromestatus.com/feature/5134941143433216">Chrome</a> and <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1921747">in Firefox</a>.</p>
+<p>I hope the CSSWG keep up the momentum, so that we might soon have a <code>:has-slotted</code> pseudo-class,
+and perhaps, in time, a functional <code>:has-slotted()</code> pseudo-class.</p>
+</div>
+    </article>
+  
+    <footer>
+      <h2>Johannes Odland</h2>
+      <p>Infrequent posts about CSS and other frontend stuff.</p>
+      <ul>
+        <li><a href="https://front-end.social/@johannes">Mastodon</a></li>
+        <li><a href="https://github.com/johannesodland">Github</a></li>
+        <li><a href="/feed.xml">Atom feed</a></li>
+      </ul>
+      <p>Built with <a href="https://www.11ty.dev">Eleventy</a>.</p>
+    </footer>
+  </body>
+</html>

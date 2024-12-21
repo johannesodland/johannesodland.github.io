@@ -4,11 +4,38 @@
   <subtitle>Infrequent posts about CSS and other frontend stuff.</subtitle>
   <link href="https://johannesodland.github.io/feed.xml" rel="self" />
   <link href="https://johannesodland.github.io/" />
-  <updated>2024-12-20T15:00:00Z</updated>
+  <updated>2024-12-21T15:00:00Z</updated>
   <id>https://johannesodland.github.io/</id>
   <author>
     <name>Johannes Odland</name>
   </author>
+  <entry>
+    <title>Web Wish 21: Has Slotted</title>
+    <link href="https://johannesodland.github.io/2024/12/21/web-wish-21-has-slotted.html" />
+    <updated>2024-12-21T15:00:00Z</updated>
+    <id>https://johannesodland.github.io/2024/12/21/web-wish-21-has-slotted.html</id>
+    <content type="html">&lt;p&gt;Need to style your web-component differently depending on whether a slot has a slotted element?&lt;/p&gt;
+&lt;p&gt;Right now you would need to listen to the &lt;code&gt;slotchange&lt;/code&gt; event, and check if the slot has any &lt;code&gt;assignedNodes&lt;/code&gt;, and set a class to style the element.&lt;/p&gt;
+&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; slots &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;shadowRoot&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;querySelectorAll&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;slot&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; slot &lt;span class=&quot;token keyword&quot;&gt;of&lt;/span&gt; slots&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  slot&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;slotchange&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    slot&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;classList&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;toggle&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;has-slotted&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; slot&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;assignedNodes&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;length &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token selector&quot;&gt;slot:not(.has-slotted)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; none&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It would be awesome if it was possible to style the slot based on whether it has slotted content, without waiting for the javascript to run.&lt;/p&gt;
+&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token selector&quot;&gt;slot:not(:has-slotted)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; none&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There is an open &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/6867&quot;&gt;issue for a &lt;code&gt;:has-slotted&lt;/code&gt; pseudo-class&lt;/a&gt;, and things have been moving fast.&lt;/p&gt;
+&lt;p&gt;The CSS Scoping spec is now updated with a &lt;a href=&quot;https://drafts.csswg.org/css-scoping/#the-has-slotted-pseudo&quot;&gt;&lt;code&gt;:has-slotted&lt;/code&gt; section&lt;/a&gt;,
+and there are prototypes in &lt;a href=&quot;https://chromestatus.com/feature/5134941143433216&quot;&gt;Chrome&lt;/a&gt; and &lt;a href=&quot;https://bugzilla.mozilla.org/show_bug.cgi?id=1921747&quot;&gt;in Firefox&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I hope the CSSWG keep up the momentum, so that we might soon have a &lt;code&gt;:has-slotted&lt;/code&gt; pseudo-class,
+and perhaps, in time, a functional &lt;code&gt;:has-slotted()&lt;/code&gt; pseudo-class.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Web Wish 20: Text Fill</title>
     <link href="https://johannesodland.github.io/2024/12/20/web-wish-20-text-fill.html" />
@@ -324,27 +351,6 @@ and introduces the ability to define custom functions with &lt;code&gt;@function
 &lt;p&gt;Relevant issues and PRs:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/9350&quot;&gt;Proposal: Custom CSS Functions &amp;amp; Mixins&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Web Wish 11: Scroll-Triggered Animations</title>
-    <link href="https://johannesodland.github.io/2024/12/11/web-wish-11-scroll-triggered-animations.html" />
-    <updated>2024-12-11T15:00:00Z</updated>
-    <id>https://johannesodland.github.io/2024/12/11/web-wish-11-scroll-triggered-animations.html</id>
-    <content type="html">&lt;p&gt;We often use IntersectionObserver to trigger animations based on scroll position.
-This works, but it feels excessive load javascript boilerplate just to play and pause an animation.&lt;/p&gt;
-&lt;p&gt;Scroll-driven animations lets us declaratively bind animations to the scroll position,
-but there&#39;s currently no way to declaratively play and pause regular animations based on scroll position.&lt;/p&gt;
-&lt;p&gt;Fortunately, &lt;a href=&quot;https://front-end.social/@ydaniv&quot;&gt;Yehonatan Daniv&lt;/a&gt; &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/8942&quot;&gt;has proposed&lt;/a&gt; a solution that the working group has resolved to draft into &lt;a href=&quot;https://drafts.csswg.org/css-animations-2/&quot;&gt;CSS Animations Level 2&lt;/a&gt;.
-The proposal includes an &lt;code&gt;animation-trigger&lt;/code&gt; property, allowing you to define animation triggers like this:&lt;/p&gt;
-&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;  &lt;span class=&quot;token property&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; --slide-in 330ms backwards&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;animation-trigger&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; alternate entry 50%&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I hope browsers will be interested in implementing this proposal.
-It would help us eliminate a lot of boilerplate JavaScript.&lt;/p&gt;
-&lt;p&gt;Relevant issues and PRs:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/8942&quot;&gt;Add animation-trigger for triggering animations when an element is in a timeline&#39;s range&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
