@@ -4,11 +4,66 @@
   <subtitle>Infrequent posts about CSS and other frontend stuff.</subtitle>
   <link href="https://johannesodland.github.io/feed.xml" rel="self" />
   <link href="https://johannesodland.github.io/" />
-  <updated>2024-12-21T15:00:00Z</updated>
+  <updated>2024-12-22T15:00:00Z</updated>
   <id>https://johannesodland.github.io/</id>
   <author>
     <name>Johannes Odland</name>
   </author>
+  <entry>
+    <title>Web Wish 22: Flex-Wrap Balance</title>
+    <link href="https://johannesodland.github.io/2024/12/22/web-wish-22-flex-wrap-balance.html" />
+    <updated>2024-12-22T15:00:00Z</updated>
+    <id>https://johannesodland.github.io/2024/12/22/web-wish-22-flex-wrap-balance.html</id>
+    <content type="html">&lt;p&gt;When using flexbox to layout items in multiple rows, you easily end up with only one or a few items on the last row.
+All the remaining space is distributed to the last row.&lt;/p&gt;
+&lt;figure&gt;
+    &lt;img src=&quot;https://johannesodland.github.io/assets/web-wishlist-2024/flex-wrap-balance/flex-wrap-balance-none.png&quot; alt=&quot;Illustration of a flex container with 10 items. 
+It has three rows with three items each, and the fourth row has a single item&quot;&gt;
+    &lt;figcaption&gt;
+        A flex-container with no balancing. 
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;If you&#39;re also using &lt;code&gt;flex: auto&lt;/code&gt; on the items to make them fill the entire row,
+the items on that last row can end up awkwardly large.&lt;/p&gt;
+&lt;figure&gt;
+    &lt;img src=&quot;https://johannesodland.github.io/assets/web-wishlist-2024/flex-wrap-balance/flex-wrap-balance-none-flex.png&quot; alt=&quot;Illustration of a flex container with 10 items. 
+It has three rows with three items each, and the fourth row has a single item. 
+The items are stretched to fill the entire row, making the last item as wide as the container.&quot;&gt;
+    &lt;figcaption&gt;
+        A flex-container with no balancing and `flex: auto` on the items.
+        The item on the last row is ends up filling the entire width of the container. 
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;What if we could control this, similarly to how we control text wrapping with &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/text-wrap&quot;&gt;&lt;code&gt;text-wrap: balance&lt;/code&gt;&lt;/a&gt;?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Then we could ensure a more even balancing, and that the last row does not end up with a single item.&lt;/p&gt;
+&lt;figure&gt;
+    &lt;img src=&quot;https://johannesodland.github.io/assets/web-wishlist-2024/flex-wrap-balance/flex-wrap-balance-start-flex.png&quot; alt=&quot;Illustration of a flex container with 10 items. 
+It has four rows in total. The first two rows contains three items each, while the remaining two rows contain two items each. 
+The items are stretched to fill the entire row.&quot;&gt;
+    &lt;figcaption&gt;
+        A flex-container with balancing.
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;But, there&#39;s room to improve!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;A normal pattern is to give the first items in a layout some extra focus.
+What if we could control how the wrapping algorithm distribute the extra space?
+Then we could control whether the remaining space would be distributed towards the start or the end of the cross axis.&lt;/p&gt;
+&lt;figure&gt;
+    &lt;img src=&quot;https://johannesodland.github.io/assets/web-wishlist-2024/flex-wrap-balance/flex-wrap-balance-end-flex.png&quot; alt=&quot;Illustration of a flex container with 10 items. 
+It has four rows in total. The first two rows contains two items each, while the remaining two rows contain three items each. 
+The items are stretched to fill the entire row.&quot;&gt;
+    &lt;figcaption&gt;
+        A flex-container with balancing and control over distribution of the free space.
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;This would help immensely when setting up a product page or an image gallery.&lt;/p&gt;
+&lt;p&gt;For Christmas, I&#39;m hoping the CSS working group will resolve to specify flex-wrap balancing.&lt;/p&gt;
+&lt;p&gt;Relevant issues and PRs:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/3070&quot;&gt;[css-flexbox-2] Add flex-wrap: balance;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Web Wish 21: Has Slotted</title>
     <link href="https://johannesodland.github.io/2024/12/21/web-wish-21-has-slotted.html" />
@@ -322,35 +377,6 @@ to make progress towards a simpler and more readable setup of fluid typography.&
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/7268&quot;&gt;Proposal for a &#39;progress&#39; function to calculate progress between two &lt;length&gt; values&lt;/length&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/6245&quot;&gt;Interpolate values between breakpoints&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Web Wish 12: Custom CSS Functions</title>
-    <link href="https://johannesodland.github.io/2024/12/12/web-wish-12-custom-css-functions.html" />
-    <updated>2024-12-12T15:00:00Z</updated>
-    <id>https://johannesodland.github.io/2024/12/12/web-wish-12-custom-css-functions.html</id>
-    <content type="html">&lt;p&gt;Some CSS declarations tend to repeat with only minor tweaks to their values
-– like converting &lt;code&gt;px&lt;/code&gt; to &lt;code&gt;rem&lt;/code&gt;, or setting up fluid typography.&lt;/p&gt;
-&lt;p&gt;With the introduction of custom properties,
-it became possible to build function-like custom properties to reduce this repetition.
-&lt;a href=&quot;https://www.miriamsuzanne.com&quot;&gt;Miriam Suzanne&lt;/a&gt; demonstrated this brilliantly in &lt;a href=&quot;https://www.smashingmagazine.com/2019/07/css-custom-properties-cascade/&quot;&gt;Custom Properties in the Cascade&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;While useful, this technique has its limitations.&lt;/p&gt;
-&lt;p&gt;Thankfully &lt;a href=&quot;https://www.miriamsuzanne.com&quot;&gt;Miriam&lt;/a&gt; has proposed a new solution: &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/9350&quot;&gt;Custom CSS Functions and Mixins&lt;/a&gt;.
-The &lt;a href=&quot;https://drafts.csswg.org/css-mixins-1/&quot;&gt;editors draft&lt;/a&gt; is beginning to take shape,
-and introduces the ability to define custom functions with &lt;code&gt;@function&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Here&#39;s how it could look:&lt;/p&gt;
-&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token atrule&quot;&gt;&lt;span class=&quot;token rule&quot;&gt;@function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;--as-rem&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;--length &amp;lt;length&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;calc&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;--length&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; / 16px * 1rem&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;     
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;token selector&quot;&gt;h1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;--as-rem&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;22px&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;  
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Mixins might still be a long way off, so this holiday, I&#39;m wishing for a browser prototype of custom CSS functions, available behind a flag.&lt;/p&gt;
-&lt;p&gt;Relevant issues and PRs:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/9350&quot;&gt;Proposal: Custom CSS Functions &amp;amp; Mixins&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
