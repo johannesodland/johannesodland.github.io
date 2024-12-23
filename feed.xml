@@ -4,11 +4,46 @@
   <subtitle>Infrequent posts about CSS and other frontend stuff.</subtitle>
   <link href="https://johannesodland.github.io/feed.xml" rel="self" />
   <link href="https://johannesodland.github.io/" />
-  <updated>2024-12-22T15:00:00Z</updated>
+  <updated>2024-12-23T15:00:00Z</updated>
   <id>https://johannesodland.github.io/</id>
   <author>
     <name>Johannes Odland</name>
   </author>
+  <entry>
+    <title>Web Wish 23: Children Changed Callback</title>
+    <link href="https://johannesodland.github.io/2024/12/23/web-wish-23-children-changed-callback.html" />
+    <updated>2024-12-23T15:00:00Z</updated>
+    <id>https://johannesodland.github.io/2024/12/23/web-wish-23-children-changed-callback.html</id>
+    <content type="html">&lt;p&gt;Handling nested custom elements can be frustrating.&lt;/p&gt;
+&lt;p&gt;When the parent element is connected, it might have all, some or none of its children connected,
+depending on how the custom element is constructed.
+More children can be added later by the parser or a script.&lt;/p&gt;
+&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;script&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token script&quot;&gt;&lt;span class=&quot;token language-javascript&quot;&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ChildCountComponent&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;HTMLElement&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token function&quot;&gt;connectedCallback&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+            console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;localName&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt; has &lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;children&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;length&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt; children when connected&lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    customElements&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;define&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;component-a&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ComponentA&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ChildCountComponent&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;script&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;component-a&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;p&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;Child&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;p&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;component-a&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;component-b&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;p&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;Child&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;p&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;component-b&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;script&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token script&quot;&gt;&lt;span class=&quot;token language-javascript&quot;&gt;
+    customElements&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;define&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;component-b&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ComponentB&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ChildCountComponent&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;script&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the example above, &lt;code&gt;&amp;lt;component-a&amp;gt;&lt;/code&gt; will have 0 children when connected, as the element is already defined when the parser encounters the element.
+&lt;code&gt;&amp;lt;component-b&amp;gt;&lt;/code&gt; will have 1 child when connected, as the custom element is upgraded after the parser is done.&lt;/p&gt;
+&lt;p&gt;To handle all of these cases, you have to set up a &lt;code&gt;MutationObserver&lt;/code&gt; and react to the addition (and removals) of child nodes.
+You could set a timeout, and pray the browser is done parsing the component when it yields. Risky business 😅.&lt;/p&gt;
+&lt;p&gt;Even if you manage handle the addition and removal of children, there&#39;s a remaining issue.
+If the child is a custom-element itself, can you be sure it&#39;s upgraded?&lt;/p&gt;
+&lt;p&gt;You could wait for &lt;code&gt;customElements.whenDefined()&lt;/code&gt; if you control that child element yourself,
+but that doesn&#39;t work if the definition of that custom element is out of your control.&lt;/p&gt;
+&lt;p&gt;To make all of this a bit simpler, I wish for &lt;code&gt;childChangedCallback()&lt;/code&gt; and &lt;code&gt;childDefinedCallback()&lt;/code&gt; lifecycle callbacks.&lt;/p&gt;
+&lt;p&gt;Relevant issues and PRs:&lt;/p&gt;
+&lt;p&gt;– &lt;a href=&quot;https://github.com/WICG/webcomponents/issues/809&quot;&gt;Need a callback for when children changed or parser finished parsing children&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Web Wish 22: Flex-Wrap Balance</title>
     <link href="https://johannesodland.github.io/2024/12/22/web-wish-22-flex-wrap-balance.html" />
@@ -340,43 +375,6 @@ particularly in Safari.&lt;/p&gt;
 &lt;li&gt;&lt;a href=&quot;https://bugs.webkit.org/show_bug.cgi?id=251003&quot;&gt;Scroll-snap snaps to wrong element after VoiceOver navigation&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://bugs.webkit.org/show_bug.cgi?id=282386&quot;&gt;REGRESSION(?): Page with scroll-snap is stuck at the top when navigating with VoiceOver&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://bugs.webkit.org/show_bug.cgi?id=245722&quot;&gt;Smooth scroll in viewport with scroll-snap fails on iOS&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Web Wish 13: Progress Functions</title>
-    <link href="https://johannesodland.github.io/2024/12/13/web-wish-13-progress-functions.html" />
-    <updated>2024-12-13T15:00:00Z</updated>
-    <id>https://johannesodland.github.io/2024/12/13/web-wish-13-progress-functions.html</id>
-    <content type="html">&lt;p&gt;Continuing from yesterday&#39;s post,
-one of the declarations that often causes repetition is setting up fluid typography.&lt;/p&gt;
-&lt;p&gt;This is a two key steps.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Calculating the progress from a minimum to a maximum viewport size.&lt;/li&gt;
-&lt;li&gt;Interpolating between two (font-size) values based on that progress.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;While is possible to achieve this in browsers now, the setup is complex, hard to read,
-and can involve a lot of repetition when applying it to multiple values.&lt;/p&gt;
-&lt;p&gt;For a while the specs had a generic &lt;code&gt;mix()&lt;/code&gt; function that could be used at the property level,
-and has since gained additional separate &lt;code&gt;*-mix()&lt;/code&gt; functions that can be used as individual components,
-such as &lt;code&gt;calc-mix()&lt;/code&gt; that takes a &lt;code&gt;&amp;lt;progress&amp;gt;&lt;/code&gt; value and two calc sums.&lt;/p&gt;
-&lt;p&gt;What remained was a method to simplify progress calculation.
-With custom CSS functions, one could simplify the calculation and avoid repitition,
-but as this is a calculation many authors will have to set up, why not make it a native CSS feature?&lt;/p&gt;
-&lt;p&gt;Fortunately &lt;a href=&quot;https://drafts.csswg.org/css-values-5/#progress-func&quot;&gt;CSS Values and Units Module Level 5&lt;/a&gt; now defines such a general &lt;code&gt;progress()&lt;/code&gt; function,
-and additionally a &lt;code&gt;media-progress()&lt;/code&gt; and a &lt;code&gt;container-progress()&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;It the future, they can be used as below:&lt;/p&gt;
-&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token selector&quot;&gt;h1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;mix&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;progress&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;100vw&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 375px&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 1600px&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 22px&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 26px&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; 
-  &lt;span class=&quot;token comment&quot;&gt;/* Alternatively */&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;calc-mix&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;progress&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;100vw&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 375px&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 1600px&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 22px&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 26px&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;calc-mix&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;media-progress&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;width&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 375px&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 1600px&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 22px&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 26px&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This Christmas, I&#39;m wishing for a browser prototype for both the &lt;code&gt;progress()&lt;/code&gt;, &lt;code&gt;*-progress()&lt;/code&gt; and &lt;code&gt;*-mix()&lt;/code&gt; functions
-to make progress towards a simpler and more readable setup of fluid typography.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/7268&quot;&gt;Proposal for a &#39;progress&#39; function to calculate progress between two &lt;length&gt; values&lt;/length&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/6245&quot;&gt;Interpolate values between breakpoints&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>

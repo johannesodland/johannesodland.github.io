@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset=utf-8>
+      <title>Web Wish 23: Children Changed Callback</title>
+      <style>@layer reset, default, layout;</style>
+      <link rel=stylesheet href=/assets/css/reset.css>
+      <link rel=stylesheet href=/assets/css/fonts.css>
+      <link rel=stylesheet href=/assets/css/default.css>
+      <link rel=stylesheet href=/assets/css/layout.css>
+      <link rel=stylesheet href=/assets/css/style.css>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel=canonical href="/2024/12/23/web-wish-23-children-changed-callback.html">
+      <link rel="me" href="https://front-end.social/@johannes">
+  </head>
+  <body>
+  
+   <header>
+      <a href="/" class="site-title">Johannes Odland</a>
+      <nav></nav>
+    </header>
+
+    <article role="main">
+      <header>
+        <time datetime="Mon Dec 23 2024 15:00:00 GMT+0000 (Coordinated Universal Time)" pubdate>
+          Dec 23, 2024
+        </time>
+        <h1>Web Wish 23: Children Changed Callback</h1>
+      </header>
+      <div class="content"><p>Handling nested custom elements can be frustrating.</p>
+<p>When the parent element is connected, it might have all, some or none of its children connected,
+depending on how the custom element is constructed.
+More children can be added later by the parser or a script.</p>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+    <span class="token keyword">class</span> <span class="token class-name">ChildCountComponent</span> <span class="token keyword">extends</span> <span class="token class-name">HTMLElement</span> <span class="token punctuation">{</span>
+        <span class="token function">connectedCallback</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>localName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> has </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>children<span class="token punctuation">.</span>length<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> children when connected</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    customElements<span class="token punctuation">.</span><span class="token function">define</span><span class="token punctuation">(</span><span class="token string">"component-a"</span><span class="token punctuation">,</span> <span class="token keyword">class</span> <span class="token class-name">ComponentA</span> <span class="token keyword">extends</span> <span class="token class-name">ChildCountComponent</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>component-a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>Child<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>component-a</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>component-b</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>Child<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>component-b</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+    customElements<span class="token punctuation">.</span><span class="token function">define</span><span class="token punctuation">(</span><span class="token string">"component-b"</span><span class="token punctuation">,</span> <span class="token keyword">class</span> <span class="token class-name">ComponentB</span> <span class="token keyword">extends</span> <span class="token class-name">ChildCountComponent</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre>
+<p>In the example above, <code>&lt;component-a&gt;</code> will have 0 children when connected, as the element is already defined when the parser encounters the element.
+<code>&lt;component-b&gt;</code> will have 1 child when connected, as the custom element is upgraded after the parser is done.</p>
+<p>To handle all of these cases, you have to set up a <code>MutationObserver</code> and react to the addition (and removals) of child nodes.
+You could set a timeout, and pray the browser is done parsing the component when it yields. Risky business 😅.</p>
+<p>Even if you manage handle the addition and removal of children, there's a remaining issue.
+If the child is a custom-element itself, can you be sure it's upgraded?</p>
+<p>You could wait for <code>customElements.whenDefined()</code> if you control that child element yourself,
+but that doesn't work if the definition of that custom element is out of your control.</p>
+<p>To make all of this a bit simpler, I wish for <code>childChangedCallback()</code> and <code>childDefinedCallback()</code> lifecycle callbacks.</p>
+<p>Relevant issues and PRs:</p>
+<p>– <a href="https://github.com/WICG/webcomponents/issues/809">Need a callback for when children changed or parser finished parsing children</a></p>
+</div>
+    </article>
+  
+    <footer>
+      <h2>Johannes Odland</h2>
+      <p>Infrequent posts about CSS and other frontend stuff.</p>
+      <ul>
+        <li><a href="https://front-end.social/@johannes">Mastodon</a></li>
+        <li><a href="https://github.com/johannesodland">Github</a></li>
+        <li><a href="/feed.xml">Atom feed</a></li>
+      </ul>
+      <p>Built with <a href="https://www.11ty.dev">Eleventy</a>.</p>
+    </footer>
+  </body>
+</html>
