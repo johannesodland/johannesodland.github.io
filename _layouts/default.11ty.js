@@ -13,7 +13,8 @@ export function render(data) {
       <link rel=stylesheet href=/assets/css/layout.css>
       <link rel=stylesheet href=/assets/css/style.css>
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel=canonical href="${data.site.github.url}${data.page.url}">
+      <link rel=canonical href="https://odland.dev${data.page.url}">
+      <meta http-equiv="refresh" content="0; url=https://odland.dev${data.page.url}" />
       <link rel="me" href="https://front-end.social/@johannes">
   </head>
   <body>
